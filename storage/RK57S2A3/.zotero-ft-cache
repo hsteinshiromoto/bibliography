@@ -1,0 +1,1654 @@
+arXiv:1502.03415v1 [math.OC] 11 Feb 2015
+
+Locally optimal controllers and globally inverse optimal controllers
+Soﬁane Benachour1, Humberto Stein Shiromoto2, and Vincent Andrieu1
+1Universit´e Lyon 1, Villeurbanne; CNRS, UMR 5007, LAGEP. 43 bd du 11 novembre, 69100 Villeurbanne, France
+https://sites.google.com/site/vincentandrieu/, ms.benachour@gmail.com 2GIPSA-lab, Grenoble Campus, 11 rue des Math´ematiques, BP 46, 38402 Saint
+Martin d’H`eres Cedex, France humberto.shiromoto@ieee.org
+May 3, 2022
+Abstract
+In this paper we consider the problem of global asymptotic stabilization with prescribed local behavior. We show that this problem can be formulated in terms of control Lyapunov functions. Moreover, we show that if the local control law has been synthesized employing a LQ approach, then the associated Lyapunov function can be seen as the value function of an optimal problem with some speciﬁc local properties. We illustrate these results on two speciﬁc classes of systems: backstepping and feedforward systems. Finally, we show how this framework can be employed when considering the orbital transfer problem.
+1 Introduction
+The synthesis of a stabilizing control law for systems described by nonlinear diﬀerential equations has been the subject of great interest by the nonlinear control community during the last three decades. Depending on the structure
+1
+
+of the model, some techniques are now available to synthesize control laws ensuring global and asymptotic stabilization of the equilibrium point.
+For instance, we can refer to the popular backstepping approach (see [11, 1] and the reference therein), or the forwarding approach (see [13, 8, 15]) and some others based on energy considerations or dissipativity properties (see [10] for a survey of the available approaches).
+Although the global asymptotic stability of the steady point can be achieved in some speciﬁc cases, it remains diﬃcult to address in the same control objective performance issues of a nonlinear system in a closed loop. However, when the ﬁrst order approximation of the non-linear model is considered, some performance aspects can be addressed by using linear optimal control techniques (using LQ controller for instance).
+Hence, it is interesting to raise the question of synthesizing a nonlinear control law which guarantees the global asymptotic stability of the origin while ensuring a prescribed local linear behavior. This problem has been addressed in [7]. In this paper local optimal control laws are designed for systems which admits the existence of a backstepping.
+In the present paper we consider this problem in a general manner. In a ﬁrst section we will motivate this control problem and we will consider a ﬁrst strategy based on the design of a uniting control Lyapunov function. We will show that this is related to an equivalent problem which is the design of a control Lyapunov function with a speciﬁc property on the quadratic approximation around the origin. In a second part of this paper, we will consider the case in which the prescribed local behavior is an optimal LQ controller. In this framework, we investigate what type of performances is achieved by the control solution to the stabilization with prescribed local behavior. In a third part we consider two speciﬁc classes of systems and show how the control with prescribed local behavior can be solved. With our new context we revisit partially results obtained in [7]. Finally in the fourth part of the paper, we consider a speciﬁc control problem which is the orbital transfer problem. Employing the Lyapunov approach of Kellet and Praly in [9] we will exhibit a class of costs for which the stabilization with local optimality can be achieved.
+2
+
+2 Stabilization with prescribed local behavior
+
+To present the problem under consideration, we introduce a general con-
+
+trolled nonlinear system described by the following ordinary diﬀerential equa-
+
+tion:
+
+X˙ = Φ(X , u) ,
+
+(1)
+
+with the state X in Rn and Φ : Rn × Rp → Rn is a C1 function such that
+
+Φ(0, 0) = 0 and u in Rp is a control input. For this system, we can introduce
+
+the two matrices A in Rn×n and B in Rn×p describing its ﬁrst order approx-
+
+imation
+
+:
+
+A :=
+
+∂ ∂
+
+Φ
+X
+
+(0,
+
+0)
+
+,
+
+B
+
+:=
+
+∂Φ ∂u
+
+(0,
+
+0)
+
+.
+
+All
+
+along
+
+the
+
+paper
+
+hidden
+
+in
+
+our
+
+assumptions, the couple (A, B) is assumed to be stabilizable.
+
+For system (1), the problem we intend to solve can be described as follows:
+
+Global asymptotic stabilization with prescribed local behavior: Let a linear state feedback law u = KoX with Ko in Rp×n which stabilizes the ﬁrst order approximation of system (1) (i.e. A + BKo is Hurwitz) be given. We are looking for a stabilizing control law u = αo(X ), with αo : Rn → Rp, a
+locally Lipschitz map diﬀerentiable at 0 such that:
+
+1. The origin of the closed-loop system X˙ = Φ(X , αo(X)) is globally and asymptotically stable ;
+
+2. The ﬁrst order approximation of the control law αo satisﬁes the follow-
+
+ing equality.
+
+∂αo ∂X
+
+(0)
+
+=
+
+Ko
+
+.
+
+(2)
+
+This problem has already been addressed in the literature. For instance, it is the topic of the papers [7, 17, 4]. Note moreover that this subject can be related to the problem of uniting a local and a global control laws as introduced in [20] (see also [16]).
+In this paper, we restrict our attention to the particular case in which the system is input aﬃne. More precisely we consider systems in the form
+
+X˙ = a(X ) + b(X )u ,
+
+(3)
+
+with the two C1 functions a : Rn → Rn and b : Rn → Rn×p. In this case we
+
+get
+
+A
+
+=
+
+∂a ∂X
+
+(0)
+
+and
+
+B
+
+=
+
+b(0).
+
+3
+
+Employing the tools developed in [2] it is possible to show that merging control Lyapunov function may solve the problem of stabilization with prescribed local behavior. In the following, we show that working with the control Lyapunov function is indeed equivalent to address this problem.
+
+Theorem 1. Given a linear state feedback law u = KoX with Ko in Rp×n which stabilizes the ﬁrst order approximation of system (3). The following two statements are equivalent.
+
+1. There exists a locally Lipschitz function αo : Rn → Rp solution to the global asymptotic stabilization with prescribed local behavior problem.
+
+2. There exists a C2 proper, positive deﬁnite function V : Rn → R+ such that the following two properties are satisﬁed.
+
+•
+
+If we denote1
+
+P
+
+:=
+
+1 2
+
+H
+
+(V
+
+)(0),
+
+then
+
+P
+
+is a positive deﬁnite matrix.
+
+Moreover this inequality holds.
+
+(A + BKo)′P + P (A + BKo) < 0 ;
+
+(4)
+
+• Artstein condition is satisﬁed. More precisely, this implication holds for all X in Rn \ {0},
+
+LbV (X ) = 0 ⇒ LaV (X ) < 0,
+
+(5)
+
+where LbV (·) = ∂V /∂X · b(·), and LaV is analogously deﬁned.
+
+Proof : 1) ⇒ 2) The proof of this part of the theorem is based on recent
+
+results obtained in [2]. Indeed, the design of the function V is obtained
+
+from the uniting of a quadratic local control Lyapunov function (denoted V0) and a global control Lyapunov function (denoted V∞) obtained employing a converse Lyapunov theorem.
+
+First of all, employing the converse Lyapunov theorem of Kurzweil in
+
+[12],
+
+there
+
+exists
+
+a
+
+C∞
+
+function
+
+V∞
+
+:
+
+Rn
+
+→
+
+R+
+
+such
+
+that
+
+∂V∞ ∂X
+
+(X )[a(X )
+
++
+
+b(X )αo(X )] < 0 , ∀ X = 0 . On the other hand, A + BKo being Hurwitz,
+
+there exists a matrix P such that the algebraic Lyapunov inequality (4)
+
+1In the following, given a C2 function V : Rn → R, the notation H(V )(X ) is the
+
+Hessian matrix in Rn×n evaluated at X of the function V . More precisely, it is the matrix
+
+(H(V ))i,j (X )
+
+=
+
+( ) ∂2V
+∂Xi∂Xj
+
+X
+
+.
+
+4
+
+is satisﬁed. Let V0 be the quadratic function V0(X ) = X ′P X. Due to the
+
+fact that Ko satisﬁes equation (2) it yields that the matrix A + BKo is the
+
+ﬁrst order approximation of the system (3) with the control law u = αo(x).
+
+Consequently, it implies that there exists a positive real number ǫ1 such that
+
+∂V0 ∂X
+
+(X )[a(X
+
+)
+
++
+
+b(X )αo(X )]
+
+<0,
+
+∀
+
+0
+
+<
+
+|X| ≤ ǫ1
+
+. This
+
+implies
+
+that
+
+the
+
+time
+
+derivative of the two control Lyapunov functions V0 and V∞ can be made
+
+negative deﬁnite with the same control law in a neighborhood of the origin.
+
+Employing [2, Theorem 2.1], it yields the existence of a function V : Rn → R+ which is C2 at the origin and a positive real number ǫ2 such that the following
+
+two properties hold.
+
+•
+
+For
+
+all
+
+X
+
+in
+
+Rn
+
+\ {0},
+
+∂V ∂X
+
+(X
+
+)[a(X
+
+)
+
++
+
+b(X
+
+)αo(X
+
+)]
+
+<
+
+0
+
+.
+
+Hence,
+
+Equation
+
+(5) is satisﬁed ;
+
+• For all X in Rn such that |X | ≤ ǫ2, we have V (X ) = V0(X ) . Consequently H(V )(0) = 2P .
+
+2) ⇒ 1) Let Q be the positive deﬁnite matrix deﬁned as, Q := −(A + BKo)′P + P (A + BKo) . Employing the local approximation of the Lyapunov function V , it is possible to ﬁnd r0 such that
+
+LaV (X ) + LbV (X )KoX < 0 , ∀X ∈ {0 < V (X ) ≤ r0} .
+
+This implies that the control Lyapunov function V satisﬁes the small control property (see [19]). Hence, we get the existence of a control law α∞ (given by Sontag’s universal formulae introduced in [19]) such that this one satisﬁes for all X = 0
+LaV (X ) + LbV (X)α∞(X ) < 0 .
+
+A solution to the stabilization with prescribed local problem can be given by
+
+the control law αo(X ) = ρ(V (X ))α∞(X) + (1 − ρ(V (X )))KoX where ρ : R+ →
+
+[0, 1] is any locally Lipschitz function such that ρ(s) =
+
+0, 1,
+
+s≤
+
+r0 2
+
+,
+
+s ≥ r0 .
+
+Note
+
+that with this selection, it yields that equality (2) holds. Moreover, we have
+
+along the solution of the system (3)
+
+V˙ (X )
+
+= ρ(V (X )) V˙ (X )
+
++ (1 − ρ(V (X ))) V˙ (X )
+
+<0
+
+u=αo(X )
+
+u=α∞
+
+u=KoX
+
+Hence, we get the result.
+
+✷
+
+5
+
+From this theorem, we see that looking for a global control Lyapunov function locally assigned by the prescribed local behavior and looking for the controller itself are equivalent problems.
+
+3 Locally optimal and globally inverse optimal control laws
+
+If one wants to guarantee a speciﬁc behavior on the closed loop system, one
+
+might want to ﬁnd a control law which minimizes a speciﬁc cost function.
+
+More precisely, we may look for a stabilizing control law which minimizes
+
+the criterium
+
++∞
+
+J(X ; u) =
+
+q(X(X , t; u)) + u(t)′r(X(X, t; u))u(t)dt,
+
+(6)
+
+0
+
+where X(X, t; u) is the solution of the system (3) initiated from X 0 = X at t = 0 and employing the control u : R+ → Rp, q : Rn → R+ is a continuous function and r is a continuous function which values r(X) are symmetric
+positive deﬁnite matrices.
+
+The control law which solves this minimization problem (see [18]) is given
+
+as a state feedback
+
+u
+
+=
+
+−
+
+1 2
+
+r(X
+
+)−1LbV
+
+(X )′
+
+,
+
+(7)
+
+where V : Rn → R+ is the solution with V (0) = 0 to the following Hamilton-
+
+Jacobi-Bellman equation for all X in Rn
+
+q(X )
+
++
+
+LaV
+
+(X )
+
+−
+
+1 4
+
+LbV
+
+(X )r(X )−1LbV
+
+(X )′
+
+=
+
+0
+
+.
+
+(8)
+
+Given a function q and a function r, it is in general diﬃcult or impossible
+
+to solve the so called HJB equation. However, for linear system, this might
+
+be solved easily. If we consider the ﬁrst order approximation of the system
+
+(3), and given a positive deﬁnite matrix R and a positive semi deﬁnite matrix
+
+Q we can introduce the quadratic cost:
+
++∞
+
+J(X ; u) =
+
+[X(X, t; u)′QX(X , t; u) + u(t)′Ru(t)] dt,
+
+(9)
+
+0
+
+In this context, solving the HJB equation can be rephrased in solving the
+
+algebraic Riccati equation given as
+
+P A + A′P − P BR−1B′P + Q = 0 .
+
+(10)
+
+6
+
+It is well known that provided, the couple (A, B) is controllable, it is possible to ﬁnd a solution to this equation. Hence, for the ﬁrst order approximation, it is possible to solve the optimal control problem when considering a cost in the form of (9).
+From this discussion, we see that an interesting control strategy is to solve the stabilization with prescribed local behavior with the local behavior obtained solving LQ control strategy. Note however that once we have solved this problem, one may wonder what type of performances has been achieved by this new control law. The following Theorem addresses this point and is inspired from [18] (see also [14]). Following Theorem 1, this one is given in terms of control Lyapunov functions.
+
+Theorem 2 (Local optimality and global inverse optimality). Given two positive deﬁnite matrices R and Q. Assume there exists a C2 proper positive deﬁnite function V : Rn → R+ such that the following two properties hold.
+• The matrix P := H(V )(0) is positive deﬁnite matrix and satisﬁes the following equality.
+
+P A + A′P − P BR−1B′P + Q = 0 ;
+
+(11)
+
+• Equation (5) is satisﬁed.
+Then there exist q : Rn → R+ a continuous function, C2 at zero and r a continuous function whose values r(X) are symmetric positive deﬁnite matrices such that the following properties are satisﬁed.
+• The function q and r satisfy
+
+H(q)(0) = 2Q , r(0) = R ;
+
+(12)
+
+• The function V is a value function associated to the cost (6). More precisely, V satisﬁes the HJB equation (8).
+
+Proof : This proof is inspired from some of the results of [14].
+
+First of all, there exists a positive real number r0 such that for all X such
+
+that
+
+0
+
+<
+
+V (X )
+
+≤
+
+r0
+
+we
+
+have
+
+−Lf V (X )
+
++
+
+1 4
+
+Lg
+
+V
+
+(X
+
+)R−1Lg
+
+V
+
+(X
+
+)′
+
+>
+
+0
+
+.
+
+Now,
+
+for all k in N, we consider Ck the subset of Rn deﬁned as Ck = {X , kr0 ≤
+
+V (X) ≤ (k + 1)r0} . Note that since the function V is proper, for all k the
+
+7
+
+set Ck is a compact subset. Assume for the time being that for all k there exists ℓk in R+ such that :
+
+LaV (X ) −
+
+ℓk 4
+
+LbV
+
+(X
+
+)R−1
+
+Lg
+
+V
+
+(X
+
+)′
+
+<0
+
+,
+
+∀X
+
+∈ Ck
+
+.
+
+(13)
+
+Let µ be any continuous function such that,
+
+ =1,  µ(s) ≥ 1 ,  ≥ ℓk ,
+
+s≤
+
+r0 2
+
+,
+
+r0 2
+
+≤
+
+s
+
+≤
+
+r0
+
+,
+
+kr0 ≤ s ≤ (k + 1)r0 .
+
+Moreover,
+
+let
+
+r(X )
+
+:=
+
+1 µ(V (X
+
+))
+
+R
+
+,
+
+and
+
+q(X )
+
+:=
+
+−LaV
+
+(X
+
+)+
+
+1 4
+
+LbV
+
+(X )r(X )−1LbV
+
+(X )′
+
+.
+
+With (13) and the deﬁnition of µ, it yields, q(X) > 0 , ∀X = 0 . Hence, V
+
+is solution to the associated HJB equation. Note moreover that we have
+
+r(0)
+
+=
+
+R
+
+and
+
+1 2
+
+H
+
+(q)(0)
+
+=
+
+A′P
+
++
+
+PA
+
+−
+
+P BR−1B′P
+
+=
+
+Q
+
+.
+
+Hence,
+
+the
+
+result.
+
+In conclusion, to get the result, we only need to show that for all k in N,
+
+there exists ℓk such that (13) is satisﬁed. Assume this is not the case for a
+
+speciﬁc k in N. This implies that for all j in N there exists xj in Ck such that
+
+LaV
+
+(X j) −
+
+j 4
+
+LbV
+
+(X j)R−1LbV
+
+(X j)′
+
+≥
+
+0
+
+.
+
+The
+
+sequence
+
+xj
+
+being
+
+in
+
+a
+
+compact
+
+set, we know there exists a converging subsequence denoted (X jℓ)ℓ∈N which converges toward a cluster point denoted X∗ in Ck. The previous inequality
+
+can be rewritten as:
+
+LaV (X jℓ ) jℓ
+
+≥
+
+1 4
+
+Lb
+
+V
+
+(X jℓ )R−1LbV
+
+(X jℓ)′
+
+≥
+
+0
+
+.
+
+Letting
+
+jℓ
+
+goes
+
+to inﬁnity yields LaV (X ∗) ≥ 0 and LbV (X ∗) = 0. With (5), this implies that
+
+LaV (X ∗) < 0 hence a contradiction. This ends the proof.
+
+✷
+
+This Theorem establishes that if we solve the stabilization with a prescribed local behavior, we may design a control law u = αo(X) such that this one is solution to an optimal control problem and such that the local approximation of the associated cost is exactly the one of the local system. This framework has already been studied in the literature in [7]. In this paper is addressed the design of a backstepping with a prescribed local optimal control law. In our context we get a Lyapunov suﬃcient condition to design a globally and asymptotically stabilizing optimal control law with prescribed local cost function.
+
+8
+
+4 Some suﬃcient conditions
+In this section we give some suﬃcient conditions allowing us to solve the stabilization with prescribed local behavior problem. The ﬁrst result is obtained from the tools developed in [2]. It assumes the existence of a global control Lyapunov function and a suﬃcient condition is given in terms of a matrix inequality. In the second and third results we give some structural conditions on the vector ﬁeld to avoid a matrix inequality.
+
+4.1 Based on matrix inequalities
+
+The ﬁrst solution to solve the stabilization with prescribed local behavior is to follow the result of [2] and to assume that there exists a global control Lyapunov function which can be modiﬁed locally in order to ﬁt in the context of Theorem 1.
+
+Assumption 1. There exists a positive deﬁnite and C2 function V∞ : Rn → R+ such that the following holds.
+
+1. The implication (5) is satisﬁed.
+
+2. The function V∞ is locally quadratic. i.e. P∞ = H(V )(0) is a positive deﬁnite matrix.
+
+In this context the result obtained from [2] may be formalized as follows.
+
+Theorem 3. ([2]) Let Assumption 1 be satisﬁed. Let Ko in Rp×n be a matrix such that A + BKo is Hurwitz with A and B deﬁned in (16). If there exists Ku in Rp×n and a positive deﬁnite matrix P in Rn×n such that these matrix
+inequalities are satisﬁed
+
+(A + BKo)′P + P (A + BKo) < 0 ,
+
+(A + BKu)′P + P (A + BKu) < 0 ,
+
+(14)
+
+(A + BKu)′P∞ + P∞(A + BKu) < 0 ,
+
+then there exists a smooth function αo : Rn → Rp which solves the global asymptotic stabilization with prescribed local behavior.
+
+Proof : The proof of this result is a direct consequence of the tools developed
+
+in [2].
+
+✷
+
+9
+
+In inequalities (14), P and Ku are the unknown. This implies that this inequality is not linear. However by introducing some new variables, it is possible to give a (conservative) linear relaxation which allows the use of the tools devoted to solve linear matrix inequalities (see [3] for instance).
+
+4.2 Strict feedback form
+Following the work of [7], consider the case in which system (3) with state X = (y, x) can be written in the following form
+
+y˙ = h1(y) + h2(y)x , x˙ = f (y, x) + g(y, x)u .
+
+(15)
+
+with y in Rny , x in R and g(y, x) = 0 for all (y, x). In this case, the ﬁrst order approximation of the system is
+
+A=
+
+H1 H2 F1 F2
+
+, B=
+
+0 G
+
+,
+
+(16)
+
+with
+
+H1
+
+=
+
+∂h1 ∂y
+
+(0),
+
+H2
+
+=
+
+h2(0),
+
+F1
+
+=
+
+∂f ∂y
+
+(0,
+
+0),
+
+F2
+
+=
+
+∂f ∂x
+
+(0,
+
+0),
+
+G
+
+=
+
+g(0, 0).
+
+For this class of system we make the following assumption.
+
+Assumption 2. For all couples (Ky, Py) with Ky in Rny and Py a positive deﬁnite matrix in Rny×ny such that Py(H1 + H2Ky) + (H1 + H2Ky)′Py < 0 , there exists a smooth function Vy : Rny → R+ such that H(Vy)(0) = 2Py and
+such that for all y = 0
+
+Lh2Vy(y) = 0 ⇒ Lh1Vy(y) < 0 .
+
+(17)
+
+With Theorem 1, this assumption establishes that the stabilization with prescribed local behavior is satisﬁed for the y subsystem seeing x as the control input.
+For this class of system, we have the following theorem which can already be found in [7] when restricted to locally optimal controllers.
+
+Theorem 4 (Backstepping Case). Let Assumption 2 be satisﬁed. Let Ko in Rp×n be a matrix such that A + BKo is Hurwitz with A and B deﬁned in (16). Then there exists a smooth function αo : Rn → Rp which solves the global
+asymptotic stabilization with prescribed local behavior.
+
+10
+
+Proof : Let P be a positive deﬁnite matrix such that the algebraic Lyapunov
+
+inequality (4) is satisﬁed. This matrix can be rewritten P =
+
+P11 P12 P1′2 P22
+
+with P22, P12, P22 matrices respectively in Rny×ny , Rny×n, R. Let T be the
+
+matrix in R(ny+1)×ny deﬁned as2 T =
+
+Idny − P1′2
+P22
+
+. Note that this matrix
+
+satisﬁes T ′P = Py 0 , T ′P B = 0 , where Py = P11 − P12P2−21P1′2 is the
+
+Schur complement of P .
+
+By pre and post multiplying inequality (4) respectively by T ′ and T it
+
+yields the following inequality.
+
+Py
+
+H1
+
+−
+
+H2
+
+P1′2 P22
+
++
+
+H1
+
+−
+
+H2
+
+P1′2 P22
+
+′
+Py < 0 .
+
+(18)
+
+The matrix P being positive deﬁnite, its Schur complement Py is also positive
+
+deﬁnite. Hence, inequality (18) can be seen as a Lyapunov inequality and
+
+x
+
+=
+
+− y P12 P22
+
+as
+
+a
+
+stabilizing
+
+local
+
+controller
+
+for
+
+the
+
+y
+
+subsystem
+
+with
+
+Py
+
+as associated Lyapunov matrix. With Assumption 2, and Theorem 1 we
+
+know there exist a smooth function αy : Rny → R and a smooth function Vy : Rny → R+ such that the following two properties hold.
+
+• The origin of the system y˙ = h1(y) + h2(y)αy(y) is globally and asymp-
+
+totically stable with associated Lyapunov function Vy. More precisely,
+
+we have
+
+∂Vy ∂y
+
+(y)
+
+[h1(y)
+
++
+
+h2(y)αy(y)]
+
+<
+
+0
+
+,
+
+∀y
+
+=0
+
+;
+
+(19)
+
+•
+
+We
+
+have
+
+the
+
+local
+
+properties
+
+∂αy ∂y
+
+(0)
+
+=
+
+− P12 P22
+
+,
+
+H(Vy)(0) =
+
+2Py
+
+.
+
+Consider now the function
+
+V (X ) = Vy(y) + P22(x − αy(y))2 .
+
+(20)
+
+Note that this function is proper and positive deﬁnite. Moreover, we have
+
+LbV (X ) = 2P22(x−αy(y))g(x, y) . Moreover, since it is assumed that g(x, y) =
+
+0, this implies LbV (X ) = 0, X = 0 ⇒ x = αy(y) . Note that when x = αy(y),
+
+with
+
+(19)
+
+we
+
+have
+
+for
+
+all
+
+y
+
+=
+
+0
+
+LaV (X )
+
+=
+
+∂Vy ∂y
+
+(y
+
+)h(y,
+
+αy
+
+(y
+
+))
+
+<
+
+0
+
+.
+
+Hence,
+
+Equation (5) is satisﬁed. Finally, we have the following equality. H(V )(0) =
+
+2Given a positive integer n, the notation Idn is the identity matrix in Rn×n.
+
+11
+
+2P . Hence, with Theorems 1 we get the result.
+
+✷
+
+Note that with Theorem 2, this theorem establishes that given Q, a positive deﬁnite matrix in Rny×ny, and R, a positive real number, then there exist q, r and αo which is solution to an optimal control problem with cost J(X, u) deﬁned in (6), with q and r which satisfy (12). In other words we can design a globally and asymptotically stabilizing optimal control law with prescribed local cost function as already seen in [7].
+
+4.3 Feedforward form
+Following our previous work in [4], consider the case in which the system with state X = (y, x) can be written in the form
+
+y˙ = h(x) , x˙ = f (x) + g(x)u ,
+
+(21)
+
+with y in R, x in Rnx. Note that to oppose to what has been done in the previous subsection, now the state component y is a scalar and x is a vector. Note moreover that the functions h, f and g do not depend of y. This restriction on h has been partially removed in our recent work in [5].
+The ﬁrst order approximation of the system is denoted by
+
+A=
+
+0H 0F
+
+, B=
+
+0 G
+
+,
+
+(22)
+
+with
+
+H
+
+=
+
+∂h ∂x
+
+(0),
+
+F
+
+=
+
+∂f ∂x
+
+(0),
+
+G
+
+=
+
+g(0).
+
+For this class of system we make the following assumption.
+
+Assumption 3. For all couples (Kx, Px) with Kx in Rp×nx and Px a positive deﬁnite matrix in Rnx×nx such that Px(F + GKx) + (F + GKx)′Px < 0 , there exists a smooth function Vx : Rnx → R+ such that H(Vx)(0) = 2Px and such
+that for all x = 0
+
+LgVx(x) = 0 ⇒ Lf Vx(x) < 0 .
+
+(23)
+
+This assumption establishes that the stabilization with prescribed local behavior is satisﬁed for the x subsystem. With this Assumption we have the following theorem whose proof can be found in [4].
+
+12
+
+Theorem 5 (Forwarding Case). Let Assumption 3 be satisﬁed. Let Ko in Rp×n be a vector such that the matrix A + BKo is Hurwitz with A and B deﬁned in (22). Then there exists a smooth function αo : Rn → Rp which solves the global asymptotic stabilization with prescribed local behavior.
+Similarly to the backstepping case this theorem with Theorem 2 establish that given Q, a positive deﬁnite matrix in Rn×n, and R, a positive real number, there exists q, r and αo which is solution to an optimal control problem with cost J(X, u) deﬁned in (6), with q and r which satisfy (12). Consequently, similarly to the backstepping case, we can design a globally and asymptotically stabilizing optimal control law with prescribed local cost function.
+
+5 Illustration on the orbital transfer problem
+
+As an illustration of the results described in the previous sections, we consider
+
+the problem of designing a control law which ensures the orbital transfer of a
+
+satellite from one orbit to another. In this section we consider the approach
+
+developed in [9] where a bounded stabilizing control law was developed. More
+
+precisely, we study the class of optimal control law (in the LQ sense) that
+
+can be synthesized. This may be of interest since, as mentioned in [6], it is
+
+diﬃcult to consider performance issues with this control law.
+
+Consider the example presented in [9]. Applying a suitable coordinate
+
+change it yields
+
+
+
+ 
+
+X˙ 1
+
+
+
+
+
+=
+
+η√X 4(1
+
++
+
+X 2)2
+
+−
+
+η
+
+−
+
+√ν p30
+
+√
+
+u X 6
+
+X
+
+3 4
+
+1+X 2 h
+
+   
+
+X˙ 2
+
+=
+
+−η(1 + X 2)2X 3
+
+
+
+
+
+
+
+ 
+
+X˙ 3
+
+=
+
+η[(1 + X 2)2 √
+
+X4
+p0
+
+(1
+
++
+
+X
+
+2)
+
+−
+
+1
+
++ νur
+
+   
+
+X˙ 4
+
+
+
+
+
+
+ 
+
+
+X˙ 5
+
+
+
+ 
+
+X˙ 6
+
+=
+= =
+
+η2−√√ην√Xp304X1(+41(XX+1542 u+Xθ2X)22
+
+X6 + ν )2X 5 +
+
+u 2√1+XX4(251−+XX262) h ν u √XX4(51X+6X 2) h
+
+,
+
+(24)
+
+where p0,
+
+ν ν
+
+= =
+
+ν√pµp0 0, ,
+
+η
+
+=
+
+1 p0ν
+
+,
+
+η = √ηp0 ,
+
+13
+
+are constants values. Concerning the states, in this new coordinate system, X1 is the true longitude, X 2 and X 3 are the x and y components of the eccentricity vector, X 4 is the parameter, X 5 and X 6 are the x and y components of the momentum vector.
+
+In compact form, the previous system is simply: X˙ = a(X ) + br(X )ur +
+
+bθ(X )uθ + bh(X)uh . The ﬁrst order approximation of this system around the
+
+0 2 0
+
+1 2
+
+0 0
+
+0 0 0
+
+0 0 1 0 0 0
+
+0 0 0
+
+equilibrium
+
+is given as A
+
+=
+
+
+
+η
+
+ 
+
+
+
+0 0
+
+1 0
+
+0 0
+
+1 p0
+0
+
+0 0
+
+0 0
+
+   
+
+
+
+and
+
+B
+
+=
+
+ν
+
+ 
+
+
+
+1 0
+
+0 2p0
+
+0 0
+
+
+
+ 
+
+.
+
+
+
+ 
+
+0
+
+0
+
+0
+
+0
+
+0
+
+1
+
+ 
+
+0 0 0 0 −1 0
+
+ 
+
+0
+
+0
+
+1 2
+
+000
+
+Note that these matrices can be rewritten as A = diag{A˜ , A1} , A˜ =
+
+A0 A2 013 0
+
+and B = diag{B˜, B2} , B˜ =
+
+B0 031
+
+0
+
+2 η
+
+0 2 0 where A0 = η  0 0 1  , A1 =
+010
+
+η
+
+01 −1 0
+
+1
+2
+
+0
+
+1
+
+, and, A2 = η  0  , B0 = ν  0  , B2 = ν
+
+1 p0
+
+1
+
+2
+0
+
+.
+
+The control strategy developed in [9] was to successively apply backstep-
+
+ping, forwarding and dissipativity properties.
+
+With the tools developed in the previous sections, we are able to solve
+
+the locally optimal control problem for a speciﬁc class of quadratic costs as
+
+described by the following theorem.
+
+Theorem 6 (Locally optimal stabilizing control law). Given Q0 a positive deﬁnite matrix in R3×3 and R0 in R+. Let P0 be the solution of the (partial)
+algebraic Riccati equation:
+
+A0P0 + P0A0 − P0B0R0−1B0′ P0 = −Q0 .
+
+(25)
+
+Then for all positive real numbers R0, R1, R2, ρ1, ρ2 such that the matrix Q =
+
+diag{Q˜, ρ22B2R2−1B2′ } , Q˜ =
+
+Q0
+
+P0A2
+
+A′2P0
+
+4 η2
+
+ρ21
+
+R1−1
+
+is positive, there exists q
+
+and r and a globally asymptotically stabilizing control law (ur, uθ, uh) = αo(X )
+
+which is solution to an optimal control problem with cost J(X; u) deﬁned in
+
+(6), with q and r which satisfy (12).
+
+14
+
+Proof : First of all, when uθ = uh = 0 and when X4 = p0, then the dynamics of the (X 1, X 2, X 3) subsystem satisﬁes
+
+ 
+
+X˙ 1
+
+=
+
+η [(1 + X 2)2 − 1]
+
+X˙ 2 = −η(1 + X 2)2X 3
+
+ X˙ 3 = η(1 + X 2)2X 2 + νur.
+
+(26)
+
+It can be noticed setting y := X 3 and x := X 2 the (X 2, X 3) subsystem is in the strict feedback form (15). Note that employing Theorem 4, it yields that for this system all locally stabilizing linear behaviors can be achieved.
+Moreover, setting y := X 1 and x := (X 2, X 3) the (X 1, X 2, X 3) subsystem is in the feedforward form (21). Note that employing Theorem 5, it yields that for this system all locally stabilizing linear behaviors can be achieved.
+Hence, with Theorem 1, it yields that given P0 which by (25) is a CLF for the ﬁrst order approximation of the system (26) there exists a smooth function V0 : R3 → R+ such that
+• V0 is a CLF for the (X1, X 2, X 3) subsystem when considering the control ur and when X 4 = p0, i.e. for the system (26) ;
+
+• V0 is locally quadratic and satisﬁes H(V0)(0) = 2P0 .
+Let V˜ : R4 → R+ be the function deﬁned by V˜ (X 1, X 2, X 3, X 4) = V0(X 1, X 2, X 3)+ V1(X 4) , with V1(X 4) = ρ1(p0 − X 4)2. Note that this function is such that H(V˜ )(0, 0, 0, p0) = 2P˜ , P˜ = diag {P0, ρ1} . Employing (25), it can be checked that P˜ satisﬁes the (partial) algebraic Ricatti P˜A˜ +A˜ ′P˜−P˜B˜R˜−1B˜′P˜+ Q˜ = 0 , with R˜ = diag{R1, R2}. We will show that this function is also a control Lyapunov function when considering the (X 1, X 2, X 3, X 4) subsystem in (24) with the control inputs ur and uθ. Consider the set of point in R4 such that Lbr V˜ (X ) = Lbθ V˜ (X ) = 0. Note that Lbθ V˜ (X ) = 0 implies that X4 = p0. With the CLF property for the system (26), it yields that in this set LaV0(X ) < 0 for all (X 1, X 2, X 3) = 0. Consequently, La(V˜ )(X ) < 0 for all (X 1, X2, X 3, X 4 − p0) = 0 such that Lbr V˜ (X ) = Lbθ V˜ (X) = 0. Hence with Theorem 2 we get the existence of q˜ : R4 → R+ a continuous function, C2 at zero and r˜ a continuous function which values r(X) are symmetric positive deﬁnite matrices such that:
+
+• The function q˜ and r˜ satisfy the following property
+
+H(q˜)(0, 0, 0, p0) = 2Q˜ , r(0, 0, 0, p0) = R˜ .
+
+(27)
+
+15
+
+• The function V˜ is a value function associated to the cost (6) with q˜ and r˜. More precisely, V˜ satisﬁes the HJB equation (8) when considering the (X 1, X 2, X 3, X 4) subsystem in (24).
+
+Finally, let V : R6 → R+ be deﬁned by V (X ) = V˜ (X 1, X 2, X 3, X4) +
+
+V2(X 5, X 6)
+
+,
+
+with
+
+V2(X 5, X 6)
+
+=
+
+ρ2(X
+
+2 5
+
++
+
+X
+
+26).
+
+Moreover,
+
+consider
+
+q
+
+the
+
+positive
+
+semi
+
+deﬁnite
+
+function
+
+q
+
+deﬁned
+
+as
+
+q(X )
+
+=
+
+q˜(X 1,
+
+X 2,
+
+X3,
+
+X4)+
+
+1 4
+
+(Lbr
+
+V
+
+(X ))2R2−1
+
+,
+
+and r deﬁned as r(X) = diag{r˜(X), R2} . Note that the following properties
+
+are satisﬁed.
+
+• The function q and r satisfy
+
+H(q˜)(0) = 2Q , r(0) = diag{R1, R2, R3} ;
+
+(28)
+
+• The function V is a value function associated to the cost (6) with q and r.
+
+Hence, the control law (7) makes the time derivative of the Lyapunov function
+
+V nondecreasing and is also optimal with respect to cost deﬁned from q and
+
+r. Note however that we get a weak Lyapunov function, i.e., a proper positive
+
+deﬁnite function whose derivative in direction of the vector ﬁeld describing
+
+(24) is negative semi-deﬁnite. Nevertheless, following [9], it can be shown that
+
+employing this Lyapunov function in combination with LaSalle invariance
+
+principle, global asymptotic stabilization of the origin of the system (24)
+
+with the control law (7) is obtained.
+
+✷
+
+6 Conclusion
+In this article we have developed a theory for constructing control laws having a predetermined local behavior. In a ﬁrst step, we showed that this problem can be rewritten as an equivalent problem in terms of control Lyapunov functions. In a second step we have demonstrated that when the local behavior comes from an (LQ) optimal approach, we can characterize a cost with speciﬁc local approximation that can be minimized. Finally, we have introduced two classes of system for which we know how to build these locally optimal control laws.
+All this theory has been illustrated on the problem of orbital transfer.
+16
+
+References
+[1] V. Andrieu and L. Praly. Global Asymptotic Stabilization for Nonminimum Phase Nonlinear Systems Admitting a Strict Normal Form. IEEE Transactions on Automatic Control, 53(5):1120–1132, 2008.
+[2] V. Andrieu and C. Prieur. Uniting two control Lyapunov functions for aﬃne Systems. IEEE Transactions on Automatic Control, 55(8):1923– 1927, 2010.
+[3] V. Andrieu, C. Prieur, S. Tarbouriech, and D. Arzelier. Global asymptotic stabilization of systems satisfying two diﬀerent sector conditions. Systems & Control Letters, 2011.
+[4] S. Benachour, V. Andrieu, L. Praly, and H. Hammouri. Adding an integration with prescribed local behavior. In Proc. of the 50th IEEE Conference on Decision and Control, 2011.
+[5] S. Benachour, V. Andrieu, L. Praly, and H. Hammouri. Forwarding design with prescribed local behavior. To appear in IEEE Trans. on Automt. Control., 2013.
+[6] A. Bombrun. Les transferts orbitaux `a faible pouss´ee: optimalit´e et stabilisation. PhD thesis, E´cole Nationale Sup´erieure des Mines de Paris, 2007.
+[7] K. Ezal, Z. Pan, and P.V. Kokotovic. Locally optimal and robust backstepping design. Automatic Control, IEEE Transactions on, 45(2):260– 271, 2000.
+[8] M. Jankovic, R. Sepulchre, and P.V. Kokotovic. Constructive Lyapunov stabilization of nonlinear cascade systems. IEEE Transactions on Automatic Control, 41(12):1723–1735, 1996.
+[9] C.M. Kellett and L. Praly. Nonlinear control tools for low thrust orbital transfer. In Proceedings of the 6th IFAC Symposium on Nonlinear Control Systems, 2004.
+[10] P.V. Kokotovi´c and M. Arcak. Constructive nonlinear control: a historical perspective. Automatica, 37(5):637–662, 2001.
+17
+
+[11] M. Krstic, I. Kanellakopoulos, and P.V. Kokotovic. Nonlinear and Adaptive Control Design. John Wiley & Sons, Inc. New York, NY, USA, 1995.
+[12] J Kurzweil. On the inversion of Lyapunov second theorem on stability of motion. Ann. Math. Soc. Trans. Ser., 2(24):19–77, 1956.
+[13] F. Mazenc and L. Praly. Adding integrations, saturated controls, and stabilization for feedforward systems. IEEE Transactions on Automatic Control, 41(11):1559–1578, 1996.
+[14] L. Praly. Fonctions de Lyapunov, Stabilit´e et Stabilisation. Ecole Nationale Sup´erieure des Mines de Paris, 2008.
+[15] L. Praly, R. Ortega, and G. Kaliora. Stabilization of nonlinear systems via forwarding mod LgV . Automatic Control, IEEE Transactions on, 46(9):1461–1466, 2002.
+[16] C. Prieur. Uniting local and global controllers with robustness to vanishing noise. Mathematics of Control, Signals, and Systems, 14(2):143–172, 2001.
+[17] M. Sahnoun, V. Andrieu, and M. Nadri. Nonlinear and locally optimal controllers design for input aﬃne locally controllable systems. International Journal of Control, 85(2):159–170, 2012.
+[18] R. Sepulchre, M. Jankovi´c, and P. V. Kokotovi´c. Constructive nonlinear control. Communications and Control Engineering Series. SpringerVerlag, 1997.
+[19] E.D. Sontag. A ”universal” construction of Artstein’s theorem on nonlinear stabilization. Systems & control letters, 13(2):117–123, 1989.
+[20] A. R. Teel and N. Kapoor. Uniting local and global controllers. In European Control Conference (ECC’97), volume 172, Brussels, Belgium, 1997.
+18
+

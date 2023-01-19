@@ -1,0 +1,990 @@
+arXiv:1503.02884v1 [math.OC] 10 Mar 2015
+
+Interconnecting a System Having a Single Input-to-State Gain With a System Having a
+Region-Dependent Input-to-State Gain
+Humberto Stein Shiromoto1, Vincent Andrieu2, Christophe Prieur1∗
+September 8, 2018
+Abstract
+For an ISS system, by analyzing local and non-local properties, it is obtained diﬀerent input-to-state gains. The interconnection of a system having two input-to-state gains with a system having a single ISS gain is analyzed. By employing the Small Gain Theorem for the local (resp. non-local) gains composition, it is concluded about the local (resp. global) stability of the origin (resp. of a compact set). Additionally, if the region of local stability of the origin strictly includes the region attraction of the compact set, then it is shown that the origin is globally asymptotically stable. An example illustrates the approach.
+1 Introduction
+The use of nonlinear input-output gains for the study of the stability of nonlinear was introduced in [22, 23] by considering a system as an input-output operator. The condition that ensures stability, called Small Gain Theorem, of the resulting interconnected system is based on the contraction principle ([23]).
+The works [15] and [16] introduce a new concept of gain relating the input to system states. This notion of stability, called Input-to-State Stability (ISS), combines Zames and Lyapunov approaches ([18, 19]). Characterizations in terms of dissipation and Lyapunov functions are given in [20] and [21].
+In [11], the contraction principle is used in the ISS notion to obtain an equivalent Small Gain Theorem. A formulation of this criteria in terms of Lyapunov functions may be found in [10] and [12].
+Besides stability analysis, the Small Gain Theorem may also be used for the design of dynamic feedback laws satisfying robustness constraints. The interested reader may see [5, 6, 7] and [14] and references therein.
+∗The authors are with 1 Control Systems Department, GIPSA-lab, Grenoble, France; 2 LAGEP, Universit´e de Lyon 1, France. E-mail: humberto.shiromoto@ieee.org. The works of the ﬁrst and the third authors are partly supported by HYCON2 Network of Excellence Highly-Complex and Networked Control Systems, grant agreement 257462.
+
+Other versions of the Small Gain theorem do exist in the literature, examples of which can be found in [3]. See also [2, 8] and [9] for the interconnection of possibly non-ISS systems.
+In order to apply the Small Gain Theorem, it is required that the composition of the nonlinear gains is smaller than the argument for all of its positive values ([10, 12]). Such a condition, called Small Gain Condition, restricts the application of the Small Gain Theorem to a composition of well chosen gains.
+In this work, it is made use of the Small Gain Theorem in a less conservative way. This new condition ensures the asymptotic stability of a system by showing that if there exist two diﬀerent gains compositions such that they satisfy the Small Gain Condition, not for all values of the arguments, but in two diﬀerent regions, and if these regions cover the set of all positive values, then the resulting interconnected system is globally asymptotically stable. Thus, this approach may be seen as a composition of two diﬀerent small gain conditions that hold in diﬀerent regions: a local and a global.
+The use of a unifying approach is well known in the literature, see [1] for the combination of control Lyapunov functions and [4] for a stability concept uniting ISS and the integral variant of ISS (namely, iISS [17]) properties.
+This paper is organized as follows. In Section 2, the basic concepts of Inputto-State Stability and the Dini derivative are presented. Also, the system under consideration, the problem statement and a motivational example are presented. In Section 3, the assumptions to solve the problem under consideration, as well as the main results are presented. Section 4 presents an example that illustrates the assumptions and main results. Section 5 contains the proofs of the main results. Concluding remarks are given in Section 6. Finally, in Section 7, auxiliary results are stated. Due to space limitations, some of the proofs were omitted.
+Notation. Let S be a subset of Rn containing the origin, the notation S=0 stands for S \ {0}. The closure of S is denoted by S. Let x ∈ Rn, the notation |x| stands for the Euclidean norm of x. A function f : S → R deﬁned in a subset S of Rn containing
+0 is positive deﬁnite if, ∀x ∈ S=0, f (x) > 0 and f (0) = 0. It is proper if f (|x|) → ∞ as |x| → ∞. By Ck it is denoted the class of k-times continuously diﬀerentiable
+functions, by K it is denoted the class of continuous and strictly increasing functions
+γ : R≥0 → R≥0 such that γ(0) = 0; it is denoted by K∞ if, in addition, they are unbounded. Let c ∈ R>0, the notation Ωc(f ) stands for the subset of Rn deﬁned by {x ∈ Rn : f (x) < c}. Let x, x¯ ∈ R≥0, the notation x ր x¯ (resp. x ց x¯) stands for
+x → x¯ with x < x¯ (resp. x > x¯).
+
+2 Background and problem statement
+
+Consider the system
+
+x˙ (t) = f (x(t), u(t)),
+
+(1)
+
+where, ∀t ∈ R≥0, x(t) ∈ Rn and u(t) ∈ Rm, for some positive integers n and m. The map f : Rn × Rm → Rn is assumed to be continuous, locally Lipschitz on x and uniformly in u on compact sets. A solution of (1) with initial condition
+
+x, and input u at time t is denoted by X(t, x, u). Assume that the origin is an equilibrium point for the system (1), i.e., f (0, 0) = 0.
+Deﬁnition 1. Consider the function ξ : [a, b) → R, the limit
+
+D+ξ(t)
+
+=
+
+lim sup
+τ ց0
+
+ξ(t+τ )−ξ(t) τ
+
+(if it exists) is called Dini derivative. Let k be a positive integer. Consider the functions ϕ : Rk → R and h : Rk → Rk, the limit
+
+Dh+ϕ(y)
+
+=
+
+lim sup
+τ ց0
+
+ϕ(y+τ
+
+h(y))−ϕ(y) τ
+
+.
+
+(if it exists) is called Dini derivative of ϕ in the h-direction at y.
+
+•
+
+Deﬁnition 2. A continuous locally Lipschitz function V : Rn → R is called an
+ISS-Lyapunov function for system (1) if • there exist class K∞ functions α and α such that, ∀x ∈ Rn, α(|x|) ≤ V (x) ≤ α(|x|);
+• there exist a class K function αx, called ISS gain, and a continuous positive deﬁnite function λx : Rn → R such that, ∀(x, u) ∈ Rn × Rm,
+
+|x| ≥ αx(|u|) ⇒ Df+V (x, u) ≤ −λx(x)
+
+(2)
+
+holds.
+
+•
+
+From now on, V will be assumed to be an ISS-Lyapunov function for (1).
+
+Consider the system
+
+z˙(t) = g(v(t), z(t)),
+
+(3)
+
+where, ∀t ∈ R≥0, v(t) ∈ Rn and z(t) ∈ Rm, for some positive integers n and m. The map g : Rn × Rm → Rn is assumed to be continuous, locally Lipschitz on z and uniformly in v on compact sets. A solution of (3) with initial condition z, and input v at time t is denoted by Z(t, z, v). Assume that the origin is an equilibrium point for the system (3), i.e., g(0, 0) = 0. Consider also the following
+
+Assumption 1. There exists a continuous locally Lipschitz function W : Rm →
+R that is an ISS-Lyapunov function for the z-subsystem. More precisely, there exist class K∞ functions β and β satisfying, ∀z ∈ Rm, β(|z|) ≤ W (z) ≤ β(|z|). Furthermore, there exist a class K function δ and a continuous positive deﬁnite function λz : Rm → R such that, ∀(x, z) ∈ Rn × Rm,
+
+W (z) ≥ δ(V (x)) ⇒ Dg+W (x, z) ≤ −λz(z),
+
+(4)
+
+where V is the ISS-Lyapunov function of x-subsystem.
+
+◦
+
+System under consideration. Interconnecting systems (1) and (3) by
+
+linking the state of (1) with the input of (3) and vice versa leads to the following
+
+system
+
+x˙ = f (x, z) z˙ = g(x, z).
+
+(5)
+
+Since f (0, 0) = 0 and g(0, 0) = 0, the origin is an equilibrium point for (5). Considering the ISS-Lyapunov inequalities, after the interconnection the following implications
+
+V (x) ≥ γ(W (z)) ⇒ Df+V (x, z) ≤ −λx(x), W (z) ≥ δ(V (x)) ⇒ Dg+W (x, z) ≤ −λz(z)
+
+are obtained with suitable class K functions γ and δ. A suﬃcient condition that ensures stability of (5) is given by the following
+
+Theorem 1. [10] If,
+
+∀s ∈ R>0, γ ◦ δ(s) < s.
+
+(6)
+
+Then, the origin is globally asymptotically stable for (5).
+
+Problem statement. At this point, it is possible to explain the problems that are dealt with, in this work. • ISS gains computation. Although the use of ISS gains renders the analysis of stability easy to work with, it is not a trivial task to compute those gains; • Small gain condition. Since the ISS gain is not unique, it might not be an easy task to ﬁnd two ISS gains: one for the x-subsystem of (5) and another for the z-subsystem of (5) such that their composition satisﬁes (6), for all positive values of the argument. An illustration of the problem that is dealt with is presented in the following
+Example 1. Let the functions f, g : R × R → R and consider the system
+
+x˙ = f (x, z) = −ρ(x) + z z˙ = g(x, z) = − sign(z)δ˜(|z|) + x,
+
+(7)
+
+where δ˜ will be deﬁned below. Let, ∀x ∈ R, V (x) = |x|, ρ(x) = 5x/4 − 2x2 + x3 and, ∀z ∈ R, W (z) = |z|.
+Taking the Dini derivative of V in the f -direction, ∀(x, z) ∈ R × R, it yields
+
+Df+V (x, z) ≤ −ρ(V (x)) + W (z).
+
+(8)
+
+This implies that ∃εx ∈ (0, 1) such that, ∀(x, z) ∈ R × R,
+
+ρ(V
+
+(x))
+
+≥
+
+W (z) 1−εx
+
+⇒
+
+Df+V
+
+(x, z)
+
+≤
+
+−λx(x),
+
+(9)
+
+where λx(·) := εxρ(V (·)). From now on, let εx = 0.05. Note also that, in the interval [1/2, 5/6], ρ is decreasing.
+
+Consider the piecewise continuous function Γ deﬁned by
+
+Γ(s) =
+
+ρ−1 ρ−+1
+
+s 0.95
+s 0.95
+
+, ,
+
+if if
+
+s∈
+
+0, 0.95ρ
+
+5 6
+
+,
+
+s∈
+
+0.95ρ
+
+5 6
+
+,∞
+
+,
+
+(10)
+
+where [5/6, ∞) ∋ s → ρ+(s) = ρ(s) ∈ [ρ(5/6), ∞).
+
+Remark 1. The function Γ can be viewed as a discontinuous input-to-state
+
+gain of the x-subsystem of (7). More preciselly, ∀(x, z) ∈ R × R, V (x) ≥ Γ(W (z)) ⇒ Df+V (x, z) ≤ −λx(x). Furthermore, the function Γ is “optimal”, in the sense that if there exist a function Γ∗ : R → R and a value s∗ ∈ R>0 such that Γ∗(s∗) < Γ(s∗), then ∃(x∗, z∗) = (0, 0) such that V (x∗) ≥ Γ∗(W (z∗)) and
+
+Df+V (x∗, z∗) > 0.
+
+◦
+
+It follows from Remark 1 that an ISS gain for the x-subsystem of (7) is any
+class K function γ such that, ∀s ∈ R>0, Γ(s) ≤ γ(s). A local gain. Consider the function [0, 1/2) ∋ s → ρ−(s) = ρ(s) ∈ [0, ρ(1/2)). Since ρ− is strictly increasing on its domain, it is invertible. Let γℓ be a class K function such that, ∀s ∈ [0, 0.95ρ(1/2)),
+
+γℓ(s) = ρ−−1
+
+s 0.95
+
+.
+
+(11)
+
+Note that, γℓ satisﬁes the following inequalities
+
+∀s ∈
+
+∀s ∈ 0, 0.95ρ
+
+0.95ρ
+
+5 6
+
+, 0.95ρ
+
+1 21 2
+
+, ,
+
+γℓ(s) ≤ Γ(s), γℓ(s) < Γ(s).
+
+Moreover, ∀(x, z) ∈ Ωρ(1/2)(V ) × R,
+
+V (x) ≥ γℓ(W (z)) ⇒ Df+V (x, z) ≤ −λx(x).
+
+(12)
+
+Let the constant values Mℓ = 0.236 and Mg = 0.245. At this point, it is possible to deﬁne the function δ˜ of the z-subsystem of (7). It is a function of class K∞ satisfying the following inequalities
+
+∀s ∈ (0, Mℓ], γℓ(s) < δ˜(s),
+
+(13)
+
+∀s ∈ [Mg, ∞), Γ(s) < δ˜(s),
+
+(14)
+
+∀s ∈
+
+ρ
+
+5 6
+
+, Mℓ
+
+,
+
+δ˜(s) < Γ(s).
+
+(15)
+
+Equations (13) and (14) correspond to two diﬀerent small gain conditions, the
+
+ﬁrst may be seen as a small gain condition for small values of the argument
+
+while the last as a small gain condition for large values of the argument. Note
+
+that (15) implies that Theorem 1 cannot be applied.1
+
+Fig. 1 shows a plot of the functions ρ, id, Γ, γℓ and δ˜.
+
+•
+
+∀s
+
+1To see this fact, note ∈ (0.95ρ(5/6), Mℓ), s <
+
+that Mℓ < δ˜−1 ◦ Γ(s).
+
+0.95ρ(1/2). Thus, there
+
+Since δ˜ exists no
+
+is of class
+
+class K∞ K function
+
+and from (15), γ such that (6)
+
+holds.
+
+1.4
+
+id Γ
+
+δ˜
+
+γℓ 1.2
+
+functions
+
+1
+
+0.8
+
+0.6
+
+0.4
+
+0.2
+
+0.225
+
+0.23
+
+0.235
+
+0.24
+
+0.245
+
+0.25
+
+s
+
+Figure 1: Plot of the functions id (dotted black line), Γ (dashed blue line), γℓ (dash dotted red line) and the continuous function δ˜ (solid blue line), in the interval [0.225, 0.25]. The vertical lines are the values Mℓ = 0.236 and Mg = 0.245, respectively.
+
+In this work, it will be shown that, if • there exist two ISS gains γℓ and γg, for the x-subsystem of (5); • there exists one ISS gain δ, for the z-subsystem of (5); • the compositions γℓ ◦ δ and γg ◦ δ satisfy the Small Gain Condition, not for all values of the arguments, but for two diﬀerent intervals (Iℓ, Ig ⊂ R≥0). In other words,
+∀s ∈ Iℓ \ {0}, γℓ ◦ δ(s) < s and, ∀s ∈ Ig \ {0}, γg ◦ δ(s) < s;
+• these intervals are such that Iℓ ∩ Ig = ∅ and Iℓ ∪ Ig = R≥0; then, the origin is globally asymptotically stable for (5). See Theorem 2 below for a precise statement of this result.
+
+3 Assumptions and main results
+In this section, it is speciﬁed the assumptions on the system (5) necessary to solve the problem under consideration. The proof of the stabilization results are provided from Section 5.1 to Section 5.3.
+
+3.1 Local set of assumptions on the x-subsystem
+
+In this section, it is introduced the set of assumptions to ensure that the origin is locally asymptotically stable for (5).
+
+Assumption 2. There exist a class K function γℓ and a strictly positive constant
+
+Mℓ such that,
+
+Mℓ
+
+<
+
+lim
+s→∞
+
+γℓ(s)
+
+=
+
+bℓ.
+
+(16)
+
+Moreover, ∀(x, z) ∈ ΩMℓ (V ) × Rm,
+
+V (x) ≥ γℓ(W (z)) ⇒ Df+V (x, z) ≤ −λx(x).
+
+(17)
+
+◦
+
+Assumption 3. The composition of the functions γℓ and δ is such that,
+
+∀s ∈ (0, Mℓ], γℓ ◦ δ(s) < s.
+
+(18)
+
+◦
+
+Proposition 1. Under Assumptions 1, 2 and 3 the origin is locally asymptotically stable for system (5).
+
+3.2 Non-local set of assumptions on the x-subsystem
+
+In this section, it is introduced the set of assumptions to ensure that a neighborhood of the origin is globally attractive for (5).
+
+Assumption 4. There exist a class K function γg and a strictly positive con-
+
+stant Mg such that
+
+Mg
+
+<
+
+lim
+s→∞
+
+γg (s)
+
+=
+
+bg .
+
+(19)
+
+Moreover, ∀(x, z) ∈ (Rn \ ΩMg (V )) × Rm,
+
+V (x) ≥ γg(W (z)) ⇒ Df+V (x, z) ≤ −λx(x).
+
+(20)
+
+◦
+
+Assumption 5. The composition of the functions γg and δ is such that,
+
+∀s ∈ [Mg, ∞), γg ◦ δ(s) < s.
+
+(21)
+
+◦
+
+Proposition 2. Under Assumptions 1, 4 and 5, there exist a proper deﬁnite positive function Ug and a positive constant M˜ g such that the set ΩM˜g (Ug) is globally asymptotically stable for system (5).
+
+3.3 Main result
+
+In this section, it is introduced the assumption to ensure that the origin is globally asymptotically stable for (5).
+
+Assumption 6. The positive constants Mℓ and Mg given, respectively, by As-
+
+sumptions 2 and 4 satisfy Mg < Mℓ.
+
+◦
+
+Theorem 2. Under Assumptions 1-6, the origin is globally asymptotically stable for system (5).
+
+4 Illustration
+Example 2. [Example 1 revisited.] Verifying Assumption 1. Let the function δ be given by the inverse of δ˜. It follows that, ∀(x, z) ∈ R × R, W (z) ≥ δ(V (x)) ⇒ Dg+W (z) ≤ −λz(z), where for a given εz ∈ (0, 1) and ∀z ∈ R, λz(z) = εzW (z). Thus, Assumption 1 holds. Verifying Assumption 2. The function γℓ is given by (11) and Mℓ = 0.236. Moreover, it follows from (12) that Assumption 2 holds.
+
+Verifying Assumption 3. It follows from inequality (13) that Assumption 3
+
+holds.
+
+From Proposition 1, it follows that the origin is locally asymptotically stable
+
+for (7). Figure 2 shows some solutions of (7).
+
+•
+
+z z
+
+0.2
+
+4
+
+0.15
+
+3
+
+0.1
+
+2
+
+0.05
+
+1
+
+0
+
+0
+
+-0.05
+
+-1
+
+-0.1
+
+-2
+
+-0.15
+
+-3
+
+-0.2
+
+-4
+
+-0.2
+
+-0.1
+
+0
+
+0.1
+
+0.2
+
+x
+
+-4
+
+-2
+
+0x
+
+2
+
+4
+
+Figure 2: Solutions to (7) for initial condition starting at a ball centered at the origin with radius, respectively, given by Mℓ and 5.
+
+Example 3. [Example 1 revisited.]
+
+Verifying Assumption 4. Let a class K∞ function γg be such that, ∀s ∈ [0.95ρ(5/6), ∞), γg(s) = Γ(s). Moreover, Mg = 0.245. It follows from Remark 1 that, ∀(x, z) ∈ (R \ ΩMg (V )) × R, V (x) ≥ γg (W (z)) ⇒ Df+V (x, z) ≤ −λx(x). Thus, Assumption 4 holds.
+
+Verifying Assumption 5. It follows from inequality (14) that Assumption 5
+
+holds.
+
+From Proposition 2, it follows that a neighborhood of the origin is globally
+
+asymptotically stable for (7). Figure 2 shows some solutions of (7).
+
+•
+
+5 Proofs
+5.1 Proof of Proposition 1
+Proof. This proof is divided into three parts. In the ﬁrst one, it is obtained a function σℓ that is class K∞ and C1 with strictly positive derivative. This function is used in the second part, where a class C0 proper positive deﬁnite function Uℓ is deﬁned and its Dini derivative is studied. In the last part, it is shown that Uℓ is locally Lipschitz and the local asymptotical stability of the origin is concluded by using Lemma 2.
+First part. Consider the class K functions δ and γℓ from Assumptions 1 and 2. Under Assumption 3, δ and γℓ are such that, ∀s ∈ (0, Mℓ], δ(s) < γℓ−1(s).
+
+Since γℓ is class of K, from Lemma 1, there exists a class K∞ function γ˜ℓ
+
+such that, ∀s ∈ R>0,
+
+δ(s) < γ˜ℓ(s)
+
+(22)
+
+and, ∀s ∈ (0, Mℓ],
+
+γ˜ℓ(s) < γℓ−1(s).
+
+(23)
+
+Since δ is of class K and γ˜ℓ is of class K∞ satisfying, ∀s ∈ R>0, inequality (22), from Lemma [10, Lemma A.1], there exists a class K∞ and C1 function σℓ whose derivative is strictly positive and satisﬁes, ∀s ∈ R>0,
+
+δ(s) < σℓ(s) < γ˜ℓ(s).
+
+(24)
+
+Second part. Let, ∀(x, z) ∈ Rn × Rm, Uℓ(x, z) := max{σℓ(V (x)), W (z)}. Note that the function Uℓ is proper positive deﬁnite. Pick (x, z) ∈ Rn × Rm,
+
+one of three cases is possible: σℓ(V (x)) < W (z), W (z) < σℓ(V (x)) or W (z) =
+σℓ(V (x)). The proof follows by showing that the Dini derivative of Uℓ is negative. For each case, assume that (x, z) ∈ ΩMℓ (V ) × Rm.
+Case 1. Suppose that σℓ(V (x)) < W (z). This implies that Uℓ(x, z) = W (z) and Df+,gUℓ(x, z) = Dg+W (x, z).
+From (24), the following inequality δ(V (x)) < σℓ(V (x)) < W (z) holds. Together with (4), it follows that Dg+W (x, z) ≤ −λz(z). This concludes Case 1.
+
+Case 2. Suppose that W (z) < σℓ(V (x)). This implies that Uℓ(x, z) = σℓ(V (x)) and Df+,gUℓ(x, z) = σℓ′ (V (x))Df+V (x, z). From (24), the following inequality W (z) < σℓ(V (x)) < γ˜ℓ(V (x)) holds. Since V (x) ≤ Mℓ, it follows that
+
+W (z) < σℓ(V (x)) < γ˜ℓ(V (x)) < γℓ−1(V (x)),
+
+(25)
+
+where the last inequality follows from (23). Equation (17) together with (25) yields Df+V (x, z) ≤ −λx(x).
+Since, ∀s ∈ R>0, σℓ′ (s) > 0, it follows that Df+,gUℓ(x, z) = σℓ′ (V (x))Df+V (x, z) ≤ −σℓ′ (V (x))λx(x). This concludes Case 2.
+Case 3. Let W (z) = σℓ(V (x)) := Uℓ∗(x, z). This implies
+
+Df+,g
+
+Uℓ∗(x,
+
+z)
+
+=
+
+lim sup
+tց0
+
+1 t
+
+(max{σℓ(V
+
+(X
+
+(x,
+
+z,
+
+t))),
+
+W (Z(z, x, t))} − Uℓ∗(x, z))
+
+= lim sup max
+
+σℓ (V
+
+(X (x,z ,t)))−σℓ (V t
+
+(x)) ,
+
+W (Z(z,x,t))−W (z) t
+
+tց0
+
+= max{σℓ′ (V (x))Df+V (x, z), Dg+W (x, z)}.
+
+The analysis of Df+,gUℓ∗ is divided in two sub cases. In the ﬁrst one, the function Dg+W is analyzed while in the last, the function Df+V is analyzed.
+Case 3.a. The analysis of Dg+W . From (24), the following inequality δ(V (x)) < σℓ(V (x)) = W (z) holds. Together with Equation (4), it yields Dg+W (x, z) ≤ −λz (z ).
+
+Case 3.b. The analysis of Df+V . From (24), the following inequality W (z) = σℓ(V (x)) < γ˜ℓ(V (x)) holds. Since V (x) ≤ Mℓ, it follows that
+
+W (z) = σℓ(V (x)) < γ˜ℓ(V (x)) < γℓ−1(V (x)),
+
+(26)
+
+where the last inequality is due to (23). Equation (17) together with (26) yields Df+V (x, z) ≤ −λx(x). To conclude Case 3, W (z) = σℓ(V (x)) ⇒ Df+,gUℓ∗(x, z) ≤ − min{σℓ′ (V (x))λx(x), λz(z)}
+holds, since (x, z) ∈ ΩMℓ (V ) × Rm. Let M˜ ℓ := max{c ∈ R>0 : Ωc(Uℓ) ⊂ ΩMℓ (V )×{0} and Ωc(Uℓ) is connected}.
+To sum up all the above cases, ∀(x, z) ∈ ΩM˜ℓ (Uℓ),
+
+Uℓ(x, z) ≤ M˜ ℓ ⇒ Df+,gUℓ(x, z) ≤ −Eℓ(x, z),
+
+(27)
+
+where E(·, ·) := min{σℓ′ (V (·))λx(·), λz(·)} is continuous and positive deﬁnite. Third part. To conclude local asymptotical stability of the origin, it re-
+mains to show that Uℓ is locally Lipschitz. Since σℓ(V (·)) (resp. W ) is locally Lipschitz, Uℓ is locally Lipschitz in the region W (·) ≤ σℓ(V (·)) (resp. σℓ(V (·)) ≤ W (·)). Since the hypotheses of Lemma 2 (in Section 7) below are veriﬁed with U (·) = Uℓ(·) and E(·) = Eℓ(·), the origin is locally asymptotically stable for (5). This concludes the proof of Proposition 1.
+
+5.2 Proof of Proposition 2
+
+Proof. This proof is analogous to the proof of Proposition 1 and divided into
+
+three parts. In the ﬁrst one, it is obtained a function σg that is class K∞ and C1 with strictly positive derivative. This function is used in the second part,
+
+where a class C0 proper and positive deﬁnite function Ug is deﬁned and its Dini
+
+derivative is studied. In the last part, it is used Lemma 4 to show that the set
+
+ΩMg (V ) × {0} is globally asymptotically stable.
+
+First part. Consider the class K functions δ and γg from Assumptions 1
+
+and 4. The function γg−1 is deﬁned on [0, bg) and satisﬁes limsրbg γg−1(s) = ∞. Assumption 5 implies that, ∀s ∈ [Mg, bg), δ(s) < γg−1(s). Since γg is of class
+
+K, from Lemma 1 (in Section 7), there exists a class K∞ function γ˜g such that,
+
+∀s ∈ R>0,
+
+δ(s) < γ˜g(s)
+
+(28)
+
+and, ∀s ∈ [Mg, bg),
+
+γ˜g(s) < γg−1(s).
+
+(29)
+
+Since δ is of class K and γ˜g is of class K∞ satisfying, ∀s ∈ R>0, the inequality (28), from Lemma [10, Lemma A.1], there exists a function σg that is of class K∞ and C1 whose derivative is strictly positive and satisﬁes, ∀s ∈ R>0,
+
+δ(s) < σg(s) < γ˜g(s).
+
+(30)
+
+Second part. Let, ∀(x, z) ∈ Rn × Rm, Ug(x, z) := max{σg(V (x)), W (z)}. Note that the function Ug is proper positive deﬁnite. Pick (x, z) ∈ Rn × Rm, one of three cases is possible: σg(V (x)) < W (z), W (z) < σg(V (x)) or W (z) =
+
+σg(V (x)). The proof follows by showing that the Dini derivative of Ug is negative. For each case, assume that (x, z) ∈ (Rn \ ΩMg (V )) × Rm.
+Case 1. Suppose that σg(V (x)) < W (z). Analogously to the Case 1 of proof of Proposition 1, σg(V (x)) < W (z) ⇒ Df+,gUg(x, z) ≤ −λz(z). This concludes Case 1.
+
+Case 2. Suppose that W (z) < σg(V (x)). This implies that Ug(x, z) = σg(V (x)) and Df+,gUg(x, z) = σg′ (V (x))Df+V (x, z). From (30), the following inequality
+
+W (z) < σg(V (x)) < γ˜g(V (x))
+
+(31)
+
+holds. At this point, two regions of x will be analyzed: bg ≤ V (x) and Mg ≤ V (x) < bg.
+Case 2.a. In the region where bg ≤ V (x), Equation (20) together with (19) yields Df+V (x, z) ≤ −λx(x).
+Case 2.b. In the region where Mg ≤ V (x) < bg, from (29) and (31), it yields
+
+W (z) < σg(V (x)) < γ˜g(V (x)) < γg−1(V (x)).
+
+(32)
+
+Equation (20) together with (32) yields Df+V (x, z) ≤ −λx(x). Since, ∀s ∈ R>0, σg′ (s) > 0, it follows that Df+,gUg(x, z) = σg′ (V (x))Df+V (x, z) ≤
+−σg′ (s)λx(x). This concludes Case 2. Case 3. Let W (z) = σg(V (x)) := Ug∗(x, z). Analogously to the Case 3 of
+proof Proposition 1 and together with the analysis of Cases 1 and 2, the implication W (z) = σg(V (x)) ⇒ Df+,gUg(x, z) ≤ − min{σg′ (s)λx(x), λz(z)} holds, since (x, z) ∈ (Rn \ ΩMg (V )) × Rm.
+Let M˜ g = min{c ∈ R>0 : ΩMg (V ) × {0} ⊂ Ωc(Ug) and Ωc(Ug) is connected}.
+To sum up all the above cases, ∀(x, z) ∈ (Rn × Rm) \ ΩM˜g (Ug),
+
+M˜ g < Ug(x, z) ⇒ Df+,gUg(x, z) ≤ −Eg(x, z),
+
+(33)
+
+where Eg(·, ·) = min{σg′ (V (·))λx(·), λz(·)} is continuous and positive deﬁnite. Third part. Analogously to the third part of the proof of Proposition 1, it
+follows that Ug is locally Lipschitz. From Lemma 3 and (33), it follows that, ∀(x, z) ∈ Rn × Rm and ∀t ∈ R≥0, along solutions of (5),
+
+D+Ug(X(t, x, z), Z(t, z, x))=Df+,gUg(X(t, x, z), Z(t, z, x)).
+
+Since solutions of (5) are absolutely continuous functions and, along solutions of (5), Eg is a continuous positive deﬁnite function, from Lemma 4, ∀(x, z) ∈ (Rn × Rm) \ ΩM˜g (Ug) and ∀t ∈ R≥0, the function
+
+t → Ug(X(t, x, z), Z(t, z, x))
+
+(34)
+
+is strictly decreasing. Pick (x, z) ∈ (Rn × Rm) \ ΩM˜g (Ug), it will be proven that
+
+Ug∞
+
+:=
+
+lim
+t→∞
+
+Ug (X (t,
+
+x,
+
+z),
+
+Z (t,
+
+z,
+
+x))
+
+≤
+
+M˜ g.
+
+To see the above suppose, by contradiction, that Ug∞ > M˜ g. From the continuity of Ug, ∃ε > 0 such that Ug∞ −ε > M˜ g and Ug∞ −ε ≤ Ug(x, z) ≤ Ug∞ +ε. Since Ug is proper, the constant ξ = min{Eg(x, z) > 0 : (x, z) ∈ Ug(x, z) and Ug∞ − ε ≤ Ug(x, z) ≤ Ug∞ + ε} exists. Recalling the deﬁnition of Ug, ∃T > 0 such that, ∀t ≥ T , Ug(X(t, x, z), Z(t, z, x)) − Ug∞ < ε. Moreover, from the deﬁnition of the constant ξ,
+
+Then,
+
+Ug(X(t, x, z), Z(t, z, x)) − Ug(X(T, x, z), Z(T, z, x)) =
+
+t T
+
+D+ Ug (X (s,
+
+x,
+
+z),
+
+Z (s,
+
+z,
+
+x))
+
+ds
+
+≤
+
+−ξ
+
+·
+
+(t
+
+−
+
+T
+
+).
+
+Ug∞
+
+=
+
+lim
+t→∞
+
+Ug (X (t,
+
+x,
+
+z),
+
+Z (t,
+
+z,
+
+x))
+
+= Ug(X(T, x, z), Z(T, z, x))
+
++ lim
+t→∞
+
+t T
+
+D+ Ug (X (s,
+
+x,
+
+z),
+
+Z (s,
+
+z,
+
+x))
+
+ds
+
+≤
+
+−∞
+
+which contradicts the fact that Ug is positive deﬁnite. Therefore, Ug∞ ≤ M˜ ℓ. In summary, the following facts hold for the function Ug: 1) Ug is a proper
+positive deﬁnite function; 2) Ug decreases along solutions of (5) having initial conditions in (Rn × Rm) \ ΩM˜g (Ug). From facts 1) and 2), the set ΩM˜g (Ug) is globally asymptotically stable for (5). This concludes the proof of Proposition
+2.
+
+5.3 Proof of Theorem 2
+
+Proof. Under Assumption 6, ∃M > 0 such that Mg < M < Mℓ. Under Assumptions 1, 2, 3 and Proposition 1, it follows that the origin is locally asymp-
+totically stable. From the proof of Proposition 1, there exists a proper positive deﬁnite function given, ∀(x, z) ∈ Rn × Rm, by Uℓ(x, z) = max{σℓ(V (x), W (z)}, where σℓ is of class K∞ and C1 satisfying (24). Moreover, letting Mˆ ℓ := max{c ∈ R>0 : c > M, Ωc(Uℓ) ⊂ ΩMℓ (V ) × {0} with Ωc(Uℓ) connected} every solution
+starting in ΩMˆℓ (Uℓ) converges to the origin. Together with Assumptions 1, 4, 5 and the proof of Proposition 2, it is
+possible to deﬁne, ∀s ∈ R≥0, a class K∞ function γˆg(s) = min{γ˜g(s), σℓ(s)} satisfying (28) and (29). Then, it is obtained a class K∞ and C1 function σˆg whose derivative is strictly positive and satisﬁes, ∀s ∈ R>0,
+
+δ(s) < σˆg(s) < γˆg(s).
+
+(30.new)
+
+Deﬁning a proper positive deﬁnite function given, ∀(x, z) ∈ Rn × Rm, by Uˆg(x, z) = max{σˆg(V (x)), W (z)} and the constant Mˆ g = min{c ∈ R>0 : c < M, ΩMg (V ) × {0} ⊂ Ωc(Uˆg) with Ωc(Uˆg) connected}, it follows from the proof of Proposition 2 that the set ΩMˆg (Uˆg) is globally asymptotically stable.
+Since, ∀s ∈ R>0, σˆg(s) < σℓ(s), it follows that, ∀(x, z) ∈ (Rn ×Rm)\{(0, 0)}, Uˆg(x, z) < Uℓ(x, z). This inequality implies that, ∀c ∈ R>0, Ωc(Uˆg) ⊂ Ωc(Uℓ). Then, the following inclusion holds
+
+ΩMˆg (Uˆg) ⊂ ΩM (Uˆg) ⊂ ΩM (Uℓ) ⊂ ΩMˆℓ (Uℓ).
+
+(35)
+
+Thus, every solution of (5) starting in (Rn × Rm) \ ΩMˆℓ (Uℓ) converges to ΩMˆg (Uˆg), in ﬁnite time. Then, due to (35), ΩMˆg (Uˆg) ⊂ ΩMˆℓ (Uℓ) holds, and thus solutions will converge to the origin, as t → ∞.
+From the above, combining the local asymptotical stability of the origin with
+its global attractivitty it is concluded that the origin is globally asymptotically
+stable for (5).
+
+6 Conclusion and perspectives
+In this work, the authors shown that it is possible to make use of local and nonlocal input-to-state properties of an ISS system, in order to derive an “optimal” ISS gain. As a result of such approach, it is possible to apply the Small Gain Theorem in a less conservative way by deriving local and non-local small gain conditions to ensure the stability of an interconnected system.
+In a future work, the authors will generalize the above results for the case in which there exist four ISS gains: two for each subsystem. Moreover, the authors also intend to use the region-dependent gain condition to develop a methodology for the design of feedback laws under diﬀerent gains constraints.
+
+7 Auxiliary results
+
+Lemma 1. Let β be a class K function with
+
+b = lim β(s).
+
+(36)
+
+s→∞
+
+Let also p, q be two constants and α be a class K function such that, 0 < p < q
+
+and, ∀s ∈ [p, q],
+
+β ◦ α(s) < s.
+
+(37)
+
+Then, the class K∞ function β˜ given by
+
+ α(s) + min{s, K}, if p = 0 and s ∈ [0, p),
+
+
+
+
+
+  
+
+α(s) + min
+
+β˜(s) := 
+
+s,
+
+β−1(s)−α(s) 2
+
+, if q + ε < b and s ∈ [p, q],
+
+(38)
+
+  
+
+A + B(s − q), if
+
+q+ε
+
+<
+
+b
+
+and
+
+s ∈ [q, q + ε),
+
+
+
+ 
+
+α(s) + s, if
+
+q+ε≥b
+
+or
+
+s ∈ [q + ε, ∞),
+
+is such that, ∀s ∈ R>0,
+
+α(s) < β˜(s).
+
+(39)
+
+Moreover, ∀s ∈ [p, q], it also satisﬁes
+
+β˜(s) < β−1(s).
+
+(40)
+
+Due to space constraints, the proof of Lemma 1 is not provided in this paper.
+Lemma 2. [13, Th´eor`eme 2.133] Let S ⊂ Rk be a be a neighborhood of the origin. Let also the class C0 function h : Rk → Rk and consider the system y˙ = h(y). If there exist a positive deﬁnite and locally Lipschitz function U : S → R and a positive deﬁnite function E : S → R such that, ∀y ∈ S, Dh+U (y) ≤ −E(y). Then, the origin is locally asymptotically stable for y˙ = h(y).
+
+Lemma 3. [13, Lemme 1.28] Let the measurable and essentially bounded function d : R → Rp and the class C0 function h : Rk × Rp → Rk. If U : Rk → R
+is locally Lipschitz, then, for all maximal solutions Y (t, y, d) of the system
+y˙ = h(y, d(t)) deﬁned in the interval (t−, t+), the function t → U (Y (t, y, d)), deﬁned over (t−, t+), is locally Lipschitz and, for almost every t ∈ (t−, t+),
+
+∂ U (Y ∂t
+
+)
+
+(t,
+
+y,
+
+d)
+
+=
+
+D+U
+
+(Y
+
+(t,
+
+y,
+
+d))
+
+=
+
+Dh+ U
+
+(Y
+
+(t,
+
+y,
+
+d)).
+
+Moreover, if d is continuous, the above equality holds, ∀t ∈ (t−, t+).
+
+Lemma 4. Let Y : R → Rk be an absolutely continuous function, U : Rk → R be a locally Lipschitz proper positive deﬁnite function and E : Rk → R be a continuous positive deﬁnite function. Deﬁne, ∀t ∈ R, U (t) = U ◦ Y (t) and E(t) = E ◦ Y (t). If, ∀t ∈ R, D+U (t) ≤ −E(t), then, ∀t ∈ R, U (t) is strictly decreasing.
+Due to space constraints, the proof of Lemma 4 is not provided in this paper.
+
+References
+[1] V. Andrieu and C. Prieur. Uniting two control Lyapunov functions for aﬃne systems. IEEE Trans. Autom. Control, 55(8):1923–1927, 2010.
+
+[2] D. Angeli and A. Astolﬁ. A tight small-gain theorem for not necessarily ISS systems. Syst. & Contr. Lett., 56(1):87–91, 2007.
+[3] A. Astolﬁ and L. Praly. A weak version of the small-gain theorem. In IEEE 51st Conference on Decision and Control (CDC), 2012, pages 4586–4590, 2012.
+[4] A. Chaillet, D. Angeli, and H. Ito. Strong iISS: combination of iISS and ISS with respect to small inputs. In Proceedings of the 51st IEEE Conference on Decision and Control, pages 2256–2261, 2012.
+[5] J. C. Doyle, B. A. Francis, and A. R. Tannenbaum. Feedback Control Theory. Macmillan Coll Div, 1992.
+[6] R. A. Freeman and P. V. Kokotovi´c. Robust Nonlinear Control Design: State-Space and Lyapunov Techniques. Birkh¨auser, 2008.
+[7] A. Isidori. Nonlinear Control Systems II. Communications and Control Engineering. Springer, 1999.
+[8] H. Ito. State-dependent scaling problems and stability of interconnected iISS and ISS systems. IEEE Trans. Autom. Control, 51(10):1626–1643, 2006.
+[9] H. Ito and Z.-P. Jiang. Necessary and suﬃcient small gain conditions for integral input-to-state stable systems: A Lyapunov perspective. IEEE Trans. Autom. Control, 54(10):2389–2404, 2009.
+[10] Z.-P. Jiang, I. M. Y. Mareels, and Y. Wang. A Lyapunov formulation of the nonlinear small-gain theorem for interconnected ISS systems. Automatica, 32(8):1211–1215, 1996.
+[11] Z.-P. Jiang, A. R. Teel, and L. Praly. Small-gain theorem for ISS systems and applications. Mathematics of Control, Signals and Systems, 7:95–120, 1994.
+[12] D. Liberzon, D. Neˇsi´c, and A. R. Teel. Small-gain theorem of LaSalle type for hybrid systems. In Proceedings of the 51st IEEE Conference on Decision and Control, pages 6825–6830, Maui, Hawaii, 2012.
+[13] L. Praly. Fonctions de Lyapunov, Stabilit´e, Stabilisation et Att´enuation de Perturbations. E´cole Nationale Sup´erieure des Mines de Paris, oct. 2011.
+[14] S. Sastry. Nonlinear Systems, volume 10 of Interdisciplinary Applied Mathematics. Springer, 1999.
+[15] E. D. Sontag. Smooth stabilization implies coprime factorization. IEEE Trans. Autom. Control, 34(4):435–443, 1989.
+[16] E. D. Sontag. Further facts about input to state stabilization. IEEE Trans. Autom. Control, 35:473–476, 1990.
+
+[17] E. D. Sontag. Comments on integral variants of ISS. Syst. & Contr. Lett., 34(25):93–100, 1998.
+[18] E. D. Sontag. The ISS philosophy as a unifying framework for stabilitylike behavior. In Nonlinear control in the year 2000, volume 259, pages 443–467. Springer London, 2001.
+[19] E. D. Sontag. Input to state stability: Basic concepts and results. In Nonlinear and Optimal Control Theory, volume 1932 of Lecture Notes in Mathematics, pages 163–220. Springer, 2008.
+[20] E. D. Sontag and Y. Wang. On characterizations of the input-to-state stability property. Syst. & Contr. Lett., 24(5):351–359, 1995.
+[21] E. D. Sontag and Y. Wang. New characterizations of input-to-state stability. IEEE Trans. Autom. Control, 41(9):1283–1294, 1996.
+[22] G. Zames. Functional analysis applied to nonlinear feedback systems. IEEE Transactions on Circuit Theory, 10(3):392–404, 1963.
+[23] G. Zames. On the input-output stability of time-varying nonlinear feedback systems part I: Conditions derived using concepts of loop gain, conicity, and positivity. IEEE Trans. Autom. Control, 11(2):228–238, 1966.
+
+0.232
+
+0.2325
+
+0.233
+

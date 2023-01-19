@@ -1,0 +1,1091 @@
+IEEE TRANSACTIONS ON CONTROL OF NETWORK SYSTEMS, VOL. 6, NO. 4, DECEMBER 2019
+
+1281
+
+Distributed Nonlinear Control Design Using Separable Control Contraction Metrics
+Humberto Stein Shiromoto , Max Revay , and Ian R. Manchester
+
+Abstract—This paper gives convex conditions for the synthesis of a distributed control system for large-scale networked nonlinear dynamic systems. It is shown that the technique of control contraction metrics can be extended to this problem by utilizing separable metric structures, resulting in controllers that only depend on information from local sensors and communications from immediate neighbors. The conditions given are pointwise linear matrix inequalities, and are necessary and sufﬁcient for linear positive systems and certain monotone nonlinear systems. Distributed synthesis methods for systems on chordal graphs are also proposed based on semideﬁnite program decompositions. The results are illustrated on a problem of vehicle platooning with heterogeneous vehicles, and a network of nonlinear dynamic systems with over 1000 states that is not feedback linearizable and has an uncontrollable linearization.
+Index Terms—Contraction theory, distributed control, feedback design, network systems, nonlinear systems.
+I. INTRODUCTION
+I N RECENT years, rapid advances in communication and computation technology have enabled the development of large-scale engineered systems such as smart grids [1], sensor networks [2], smart manufacturing plants [3], and intelligent transportation networks [4]. Despite these advances, the systematic design of feedback controllers for such large systems remains challenging.
+When it is assumed that a system has linear dynamics and that all sensor information can be collected in a single location for control computation, well-developed synthesis methods such as LQG and H∞ can be applied [5], [6]. However, emerging applications motivate going beyond these assumptions.
+Firstly, for geographically distributed systems with hundreds or thousands of nodes, such as transportation and power networks, it is not practical to collect all sensor information in one location for control. In this case, there is a need for distributed methods that rely only on information available locally or communicated from nearby nodes.
+Manuscript received July 31, 2018; revised October 10, 2018; accepted November 13, 2018. Date of publication December 5, 2018; date of current version December 17, 2019. This work was supported by the Australian Research Council (DP150100577). Recommended by Associate Editor G. Russo. (Corresponding author: Ian R. Manchester.)
+The authors are with the Australian Centre for Field Robotics, The University of Sydney, Sydney, NSW 2006, Australia (e-mail:, h.stein. shiromoto@gmail.com; m.revay@acfr.usyd.edu.au; ian.manchester@ sydney.edu.au).
+Digital Object Identiﬁer 10.1109/TCNS.2018.2885270
+
+Secondly, most real systems exhibit nonlinear dynamics. When large excursions in operating conditions are expected, e.g., due to changing production demands in a ﬂexible manufacturing system, or recovery from a fault in a smart electrical grid, one must take into account the system nonlinearity.
+Decentralized and distributed control are long-standing problems in control theory, with important early work detailed in [7] and [8]. A key concept is the vector Lyapunov function, i.e., a Lyapunov function made up of individual storage functions for the nodes, a concept closely related to the separability property we use in this paper. Terminology is not completely uniform in the literature, but in this paper we take “decentralized” to mean that at each node the controller uses only local state information, and “distributed” to mean that some communication is allowed between nearby nodes.
+For linear-state feedback, information ﬂow can be encoded by a sparsity structure on the feedback gain matrix; however, in general this problem can be NP-hard [9]. It has been recognized by many authors that if the search is restricted to diagonal (or block diagonal) Lyapunov matrices, then the problem is convex (see, e.g., [10]–[12] and references therein). The main beneﬁt is that sparsity structure in the gain matrix is preserved under the standard change of variables for linear matrix inequality (LMI)-based design. In general, restricting the set of Lyapunov functions is conservative: it produces sufﬁcient conditions for stabilizability, but not necessary conditions. However, for the important subclass of systems for which internal states are always nonnegative, known as positive systems, existence of a diagonal Lyapunov function is actually necessary and sufﬁcient (see, e.g., [13] and references therein). This result has been extended to H∞ design [11], scalable algorithms for control design [12], and identiﬁcation [14] of networked positive systems.
+Design of controllers for nonlinear systems has also been a major topic of research for many years, see e.g. [15]–[17] for established approaches. Most methods require (at least implicitly) the construction of a control Lyapunov function. While for certain structured systems, constructive methods such as backstepping and energy-based control can be used [16], no general methodology exists. Indeed, the set of control Lyapunov functions can be nonconvex and disconnected [18], which poses a challenge for synthesis.
+A drawback of standard Lyapunov functions is the fact that they are deﬁned with respect to a particular set point or limit set, which must be known a priori. When the target trajectory may change in real time, a common situation in robotics or ﬂexible manufacturing, it is more appropriate to deﬁne a function
+
+2325-5870 © 2018 IEEE. Translations and content mining are permitted for academic research only. Personal use is also permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications standards/publications/rights/index.html for more information.
+
+1282
+
+IEEE TRANSACTIONS ON CONTROL OF NETWORK SYSTEMS, VOL. 6, NO. 4, DECEMBER 2019
+
+depending on the distance between pairs of points. Tools such as contraction metrics [19] and incremental Lyapunov functions [20] provide such a capability for stability analysis. Contraction concepts have proven useful in the analysis of networked systems, in particular oscillation synchronization and entrainment [21]–[24], and techniques for contraction analysis based on sum-separability properties of metrics [25]–[28]. Extensions to reaction-diffusion partial differential equation (PDE) systems have appeared in [29], where again a metric is constructed that integrates over space, generalizing the notion of sum separability to continuous spaces.
+The concept of a control contraction metric (CCM) was introduced in [30] and [31] and extends contraction analysis to constructive control design. The main advantages this method offers over the Lyapunov approach are that the synthesis conditions are convex, and it provides a stabilizing controller for all forward-complete solutions, not just a single set point. It was shown in [31] that the CCM conditions are necessary and sufﬁcient for feedback-linearizable nonlinear systems.
+The main contributions of this paper are the following. 1) We extend the results of [31] to show that by imposing
+a separable structure on a CCM, a distributed nonlinear feedback controller can be obtained via convex optimization, with the property that all on-line computations can be performed with prescribed information sharing between nodes. 2) We provide necessary conditions for the existence of a separable metric for certain classes of monotone systems. 3) We show that the off-line convex search for a CCM can scale to large-scale systems with chordal graph interaction structure. The conference paper [32] presented preliminary results related to, but less general than, the results of this paper. In particular, it considered completely decentralized design, and did not address scalability of the resulting computations. The main result of [32] is Corollary 1 in this paper.
+
+II. PRELIMINARIES AND PROBLEM FORMULATION
+
+A. Notation
+
+We use the notation R≥0 for the nonnegative reals, and N[a,b] with a < b for natural numbers between a and b. Let n > 0 be any integer, the vector ei denotes the vector with
+zeros in all entries except the ith where it is 1. Given N matrices M1 , . . . , MN ∈ Rp×q , the notation diag(M1 , . . . , MN ) denotes the block matrix M ∈ RN p×N q with the Mi matrices
+
+on the main (block) diagonal, and zeros elsewhere. The nota-
+
+tion M 0 (resp. M 0) stands for M being positive (resp.
+
+semi) deﬁnite. The sets of (semi) deﬁnite symmetric matrices
+
+are denoted as Sn0 = {M ∈ Rn×n : M 0, M = M T }, where ∈ { , , ≺, }. The notation L∞loc(R≥0 , Rm ) stands for the class of functions
+u : R≥0 → Rm that are locally essentially bounded. Given differentiable functions M : Rn → Rn×n and f : Rn → Rn , the
+
+notation ∂f M stands for matrix with dimension n × n and with
+
+(i, j)
+
+element
+
+given
+
+by
+
+∂mij ∂x
+
+(x)f (x).
+
+The
+
+notation
+
+f˙
+
+always
+
+stands for the total derivative with respect to time t.
+
+Fig. 1. Illustration of the directed graphs representing the physical interaction between nodes Gp , and the communication network Gc . These may or may not be identical.
+Let N > 0 be an integer, a graph consists of a set of nodes V ⊂ N[1,N ] and a set of edges E ⊂ V × V and it is denoted by the pair (V , E ) = G . A node i ∈ V is said to be adjacent to a node j ∈ V if (i, j) ∈ E , the set of nodes that are adjacent to j is deﬁned as N (j) = {i ∈ V : i = j, (i, j) ∈ E }. A graph is said to be undirected if, for every edge (i, j) ∈ E , there exists (j, i) ∈ E . It is said to be directed if otherwise. For a directed graph G = (V , E ), we deﬁne an undirected graph G u = (V , E u ) with (i, j) ∈ E u (and hence also (j, i) ∈ E u ) if either (i, j) ∈ E or (j, i) ∈ E , or both. Given two graphs with the same vertex set G1 = (V , E1 ), G2 = (V , E2 ), we deﬁne their union G1 ∪ G2 to be the graph (V , E1 ∪ E2), i.e., the graph that contains all edges appearing in either graph.
+Given two nodes i and j ∈ V , an ordered sequence of vertices vk , k = 1, ..., n with v1 = i, vn = j, and (vk , vk+1 ) ∈ E ∀k is said to be a path from node i to node j. A path is said to be a cycle if node i equals node j, no edges are repeated, and the nodes i and j − 1 are distinct.
+For an undirected graph, the following concepts are recalled from [33] and [34]. A graph is said to be a tree if it is connected and does not contain cycles. A clique C ⊂ V of the graph G is a maximal set of nodes that induces a complete (fully connected) subgraph on G . A chord of a cycle is any edge joining two nonconsecutive nodes. A graph is said to be chordal if every cycle of length greater than three has a chord. The importance of a graph being chordal is that it has a tree decomposition into cliques [35, Proposition 12.3.11]; such a tree is said to be a clique tree and it is denoted as T (G ).
+B. Networked System Deﬁnition
+In this paper, we consider systems made up of a network of N ∈ N nodes. Interconnection between the nodes is deﬁned by two directed graphs: a physical interaction network graph Gp and a communication network graph Gc . Both graphs have the same vertex set V = N[1,N ] corresponding to system nodes, but may have different edge sets, as illustrated in Fig. 1. We assume both graphs have self-loops at each node, i.e., (i, i) is in the edge set for all i ∈ V .
+
+SHIROMOTO et al.: DISTRIBUTED NONLINEAR CONTROL DESIGN USING SEPARABLE CONTROL CONTRACTION METRICS
+
+1283
+
+The physical graph Gp = (V , Ep ) deﬁnes the dynamical interaction between individual nodes. At each node i ∈ V , there is local state vector xi ∈ Rni and control input ui ∈ Rm i . We deﬁne x˘i ∈ Rn˘i as a stacked vector of node states xj for which (j, i) ∈ Ep , i.e., all nodes that inﬂuence xi. Each node’s dynam-
+ics are governed by the differential equation
+
+x˙ i(t) = fi(xi(t), x˘i(t)) + bi(xi(t), x˘i(t))ui(t). (1a)
+We allow the case that for some nodes i ∈ V , bi(xi, x˘i) = 0 and mi = 0, i.e., node i has no direct control input. For the complete networked system we will also use the notation
+
+x˙ (t) = f (x(t)) + B(x(t))u(t)
+
+(1b)
+
+with stacked vectors and functions
+
+⎡⎤
+
+⎡⎤
+
+⎡⎤
+
+x1
+
+u1
+
+f1
+
+x = ⎢⎣ ... ⎥⎦ ∈ Rn , u = ⎢⎣ ... ⎥⎦ ∈ Rm , f = ⎢⎣ ... ⎥⎦
+
+xN
+
+uN
+
+fN
+
+and input matrix B = diag(b1 , . . . , bN ). The functions f : Rn → Rn and B : Rn → Rm ×n are assumed to be smooth,
+i.e., inﬁnitely differentiable.
+Similarly, the graph Gc = (N[1,N ], Ec ) speciﬁes a communication network, in that (j, i) ∈ Ec if node j can send instantaneous measurements of its state to node i for control computation, and xi ∈ Rni is a stacked vector of node states xj ∈ Rnj such that (j, i) ∈ Ec .
+
+C. Universal Exponential Stabilizability
+A function u ∈ L∞loc(R≥0 , Rm ) is said to be an input signal or control for (1). For such a control for (1), and for every initial condition x (0), there exists a unique solution to (1) ([36]) that is denoted by X(t, x (0), u ), when evaluated at time t. This solution is deﬁned over an open interval (t, t), and it is said to be forward complete if t = +∞. We deﬁne a target trajectory as a pair (x , u ), where x = X(·, x (0), u ) is a forwardcomplete solution of (1). Given a communication graph Gc we deﬁne xi analogously to xi above.
+Following [30] and [31], the system (1) is said to be universally exponentially stabilizable with rate λ > 0 if there exists a feedback controller k : Rn × Rn × Rm → Rm and a constant value C > 0 such that for every target trajectory (x , u ), solutions x(t) of the closed-loop system
+
+x˙ (t) = f (x(t)) + B(x(t))k(x(t), x (t), u (t)))
+
+exist for all t ≥ 0 and satisfy
+
+|x (t) − x(t)| ≤ Ce−λt |x (0) − x(0)|
+
+(2)
+
+for every initial condition x(0) ∈ Rn . Note that this is a stronger condition than global exponential stabilizability of a particular target trajectory, such as the origin.
+
+D. Problem Statement
+The main objective of this paper is to ﬁnd a distributed controller that can stabilize any trajectory of a particular system. To formalize this, we make the following deﬁnition:
+
+Deﬁnition 1: A state feedback controller u(t) = k(x(t), t) for the system (1) is said to be to be Gc -admissable if it decomposes into N local feedback laws of the form
+ui(t) = ki (xi, xi , xi , xi , ui )
+for i ∈ N[1,N ]. That is, each local control signal depends only on local state and target trajectory information and neighbor information communicated in accordance with G c .
+We are now ready to state formally the distributed control problem we consider in this paper.
+Problem 1: For the system (1), ﬁnd a Gc -admissable statefeedback controller such that for any target trajectory (x , u ), the closed-loop system satisﬁes (2) for almost all x(0) ∈ Rn .
+The “almost all x(0) ∈ Rn ” condition simpliﬁes the resulting CCM control construction; however, the result can be extended to “all x(0) ∈ Rn ” by the sampled-data controller constructed in [31].
+
+E. Differential Dynamics and CCMs
+
+We recall some standard facts from Riemannian geometry
+(see, e.g., [37] for a complete development). A Riemannian metric on Rn is a symmetric positive-deﬁnite bilinear form that depends smoothly on x ∈ Rn . In a particular coordinate system, for any pair of vectors δ0 and δ1 of Rn the metric is deﬁned as the inner product δ0 , δ1 x = δ0T M (x)δ1 , where M : Rn → Rn×n is a smooth function. Consequently, “local” notions of norm |δ0 |2x = δ0 , δ0 x =: V (x, δ0 ) and orthogonality δ0 , δ1 x = 0 can be deﬁned on the tangent space. The metric is said to be
+bounded if there exists constants m > 0 and m > 0 such that, for all x ∈ Rn , mIn ≤ M (x) ≤ mIn , where In ∈ Rn×n is the
+identity matrix.
+Let Γ(x0 , x1 ) be the set of piecewise-smooth curves c : [0, 1] → Rn connecting x0 = c(0) to x1 = c(1). The Rieman-
+nian energy of c is
+
+1
+
+1
+
+e(c) =
+
+|cs (s)|2c(s) ds = V (c(s), cs (s)) ds
+
+0
+
+0
+
+where
+
+the
+
+notation
+
+cs
+
+stands
+
+for
+
+the
+
+derivative
+
+∂c ∂s
+
+.
+
+The
+
+Rieman-
+
+nian energy between x0 and x1 , denoted as e(x0 , x1 ), is deﬁned
+
+as the minimal energy of a curve connecting them as follows:
+
+e(x0 , x1 ) = inf e(c) .
+
+(3)
+
+c∈Γ(x0 ,x1 )
+
+This curve is smooth and is referred to as a geodesic. Along each solution of (1), one can deﬁne the differential
+(a.k.a. variational or prolonged) dynamics
+
+δ˙x = A(x, u)δx + B(x)δu
+
+(4)
+
+where δx (resp. δu ) is a vector of the Euclidean space Rn (resp. Rm ) and the matrix A ∈ Rn×n has components given by
+
+Ajk (x, u)
+
+=
+
+∂ ∂xk
+
+m
+fj + Bji ui
+i=1
+
+for indices j, k ∈ N[1,n]. The differential dynamics (4) describe the behavior of tangent vectors to curves of solutions of (1).
+
+1284
+
+IEEE TRANSACTIONS ON CONTROL OF NETWORK SYSTEMS, VOL. 6, NO. 4, DECEMBER 2019
+
+Similar to (1), given a control δu for system (4), the solution to (4) computed at time t ≥ 0, along solutions (x(t), u(t)) of (1), and issuing from the initial condition δx ∈ Rn is denoted by Δx (t, x(0), δx (0), u, δu ).
+A sufﬁcient condition for the stability of (4) is provided by an-
+alyzing the derivative of a particular function along the solutions
+of systems (1) and (4) [19]. Deﬁnition 2: A bounded metric V : Rn × Rn → R≥0 is
+called a contraction metric for (1) if, for any control u for system (1), there exists a scalar λ > 0 such that the inequality
+
+d dt
+
+V
+
+(x(t),
+
+δx
+
+(t))
+
+≤
+
+−2λV
+
+(x(t),
+
+δx
+
+(t))
+
+(5)
+
+holds, where x(t) := X(t, x(0), u) and δx (t) := Δx (t, x(0), δx (0), u, 0), for every pair (x, δx ) ∈ Rn × Rn .
+In particular, a metric V (x, δx ) = δxT M (x)δx is a contraction
+metric for (1) if the following linear matrix inequality
+
+M˙ (x) + A(x, u)M (x) + M (x)A(x, u) −2λM (x) (6)
+
+holds for all x, u [19]. Since M˙ = ∂f (x)+B (x)u M (x) and A(x, u) are afﬁne in each control input ui, this implies that the corresponding coefﬁcient matrices must be zero, shown as
+
+follows:
+
+∂bi M (x)
+
++
+
+∂bi ∂x
+
+T
+
+M (x)
+
++
+
+M (x) ∂bi(x) ∂x
+
+=
+
+0
+
+(7)
+
+for each i ∈ N[1,m], which means bi are Killing vectors for the metric M . In that case, the inequality (6) is equivalent to
+
+∂f
+
+M (x)
+
++
+
+∂f T ∂x
+
+M (x)
+
++
+
+M
+
+(x)
+
+∂f ∂x
+
+−2λM (x).
+
+(8)
+
+In the remainder of the paper, we will often drop explicit dependence on x of M (x) and other matrices for brevity, but these matrices are always state dependent unless explicitly stated oth-
+
+erwise. The existence of a contraction metric for system (1) implies
+
+that every two solutions to this system converge to each other exponentially with rate λ. To the authors knowledge, this was ﬁrst proven in [38] using Finsler metrics, a more general class than Riemannian metrics. The paper [39] introduced the concept of
+
+a Finsler–Lyapunov function to further investigate relationships
+
+between Finsler structures and differential notions of stability and contraction.
+
+Contraction analysis was extended to constructive control
+
+design in [31] by introducing the concept of a CCM. Deﬁnition 3 ([31]): A bounded metric is said to be a CCM
+for system (1) if (7) holds and there exists a constant value λ > 0 such that for δx = 0 we have the implication
+
+δxT M B = 0 ⇒ δxT
+
+∂f
+
+M
+
++
+
+∂f T ∂x
+
+M
+
++
+
+M
+
+∂f ∂x
+
++
+
+2λM
+
+δx < 0.
+
+(9)
+
+Condition (9) can be interpreted as the requirement that the
+
+system be contracting in all directions orthogonal to the span of
+
+the control inputs. It was shown in [31] that this is equivalent to the existence of a differential feedback gain δu = K(x)δx for which
+
+M˙ + (A + BK)T M + M (A + BK) + 2λM ≺ 0 (10)
+
+for all x, u, which leads to the following control design method. Step 1: (Ofﬂine LMI computation) The inequality (10) is
+equivalent (see [31]) to the existence of a bounded “dual metric” W : Rn → Rn×n such that W (·) = W (·)T 0 and a function Y : Rn → Rm×n satisfying the following linear matrix inequality:
+−W˙ + AW + W AT + BY + (BY )T + 2λW ≺ 0 (11)
+
+for all (x, u) ∈ Rn × Rm . Note that (11) is linear in the matrix
+
+functions W and Y . Consequently, for polynomial systems, the
+
+pointwise LMI (11) can be solved via sum of squares program-
+
+ming [40]. For nonpolynomial systems, these constraints could
+
+be approximately satisﬁed either via polynomial approxima-
+
+tion of dynamics, bounding of dynamics via linear differential
+
+inclusions [41], or via gridding the state/input space.
+
+Once a solution to LMI (11) has been computed, the function deﬁned, for every (x, δx ) ∈ Rn × Rn , by
+
+δu = Y (x)W −1 (x)δx := K(x)δx
+
+(12)
+
+is a differential feedback law that renders the origin globally exponentially stable for system (4) in closed loop with δu .
+Step 2: (Online controller computation). The feedback law for system (1) can be obtained by integration as follows.
+1) Compute a minimal geodesic
+
+γ = arg min e(c) .
+
+(13)
+
+c∈Γ(x (t),x(t))
+
+2) Integrate the differential controller
+
+u(t) = k(x(t), x (t), u (t))
+
+1
+= u (t) + K(γ(t, s))γs (t, s) ds. (14)
+0
+For a bounded metric, the Hopf–Rinow theorem (cf. [37, Theorem 7.7]) ensures that for every pair x(t), x (t), there exists a minimizing geodesic γ solving (13). Furthermore, for each x (t) this geodesic is unique and a smooth function of x(t) for almost all x(t).
+Remark 1: In the case that the metric M = W −1 is independent of x, the unique minimal geodesic is a straight line joining x to x . Furthermore in the case that Y and hence K are also independent of x, the above controller reduces to a linear feedback law
+
+u(t) = k(x(t), x (t), u (t)) = u (t) + K(x(t) − x (t))
+
+so (14) can be thought of as a natural generalization of linear
+feedback synthesis to nonlinear systems.
+Remark 2: For Theorem 1, we have assumed that (15) holds for all x ∈ Rn . If (15) holds only on a subset S ⊂ Rn , then it is necessary to ensure that γ(s) remains in this subset for all s ∈ [0, 1]. This is the case if both x and x are in S for all t, and S is geodesically convex. For constant metrics, geodesic convexity is the standard convexity in Rn , since geodesics are straight lines.
+
+III. CONVEX DESIGN OF DISTRIBUTED CONTROLLERS
+In this section, we present the main results of the paper, extending the CCM methodology described above to distributed
+
+SHIROMOTO et al.: DISTRIBUTED NONLINEAR CONTROL DESIGN USING SEPARABLE CONTROL CONTRACTION METRICS
+
+1285
+
+control design. Inspired by the notion of sum-separable Lyapunov functions (see e.g. [42]), we introduce the following class of CCMs:
+Deﬁnition 4: A CCM V for system (1a) is called sum separable if it can be decomposed as follows:
+
+N
+
+N
+
+V (x, δx ) = Vi (xi , δxi ) := δxTi Mi (xi )δxi
+
+i=1
+
+i=1
+
+where for each index i ∈ N[1,N ], and for every (xi, δxi ) ∈ Rni × Rni , the function Vi(xi , δxi ) is a metric on Rni .
+In other words, Deﬁnition 4 states that the metric V on Rn can
+be decomposed into a sum of smaller components, each of which
+depends only on the local information xi, δxi . Accordingly, we deﬁne the following class of matrix functions.
+Deﬁnition 5: For the system (1a), let Π denote the set of matrix functions Rn → Sn>0 with the following properties.
+1) Each M (x) ∈ Π is block diagonal with N blocks, and
+the ith block has dimension ni. 2) The ith block of M (x) is a function only of xi. That is, a sum separable CCM V (x) = δT M (x)δ has M (x) ∈ Π. Note that M (x) ∈ Π ⇔ M (x)−1 ∈ Π.
+To address the information constraints on k described in
+Problem 1, the structure of the feedback deﬁned by (14) is
+obtained by imposing a suitable constraint on the function Y to
+be satisﬁed together with the LMI (11). Deﬁnition 6: Let Ξ be the set of functions Y : Rn × Rm →
+Rm×n with components deﬁned by
+
+Yij
+
+= Yij (xi , xi ) ∈ Rm i ×ni , ≡ 0m i ×ni ,
+
+if (i, j) ∈ Ec otherwise
+
+for every i, j ∈ V . The set Ξ deﬁnes the topology of the differential feedback
+law to be designed for system (4) and the dependence of each element of the matrix Y on the state-space variables.
+Theorem 1: For the system (1) and differential dynamics (4), suppose there exist W (x) ∈ Π and Y (x) ∈ Ξ satisfying the following pointwise linear matrix inequality:
+
+−W˙ + AW + W AT + BY + (BY )T + 2λW ≺ 0 (15)
+
+for all x ∈ Rn , u ∈ Rm . Then, M (x) = W (x)−1 deﬁnes a separable CCM for system (1a) and the controller (14) with K(x) = Y (x)W (x)−1 solves Problem 1.
+Proof: To prove the theorem we ﬁrst establish the Gc admissability of the controller, and then that it achieves the
+desired form of stability. By assumption, W ∈ Π, so we also have M = W −1 ∈
+Π, and therefore M deﬁnes a sum-separable metric, as per
+Deﬁnition 4.
+At a particular time t, the ﬁrst stage of control calculation is to compute a minimum-energy geodesic from x(t) to x (t). Because M is sum separable, the energy of any curve c : [0, 1] → Rn satisﬁes the following equation
+
+1N
+
+e(c) =
+
+Vi
+
+0 i=1
+
+ci (s),
+
+∂ci ∂s
+
+(s)
+
+ds
+
+(16)
+
+where ci : [0, 1] → Rni denotes the ith component of the curve
+c, connecting xi(t) to xi (t). Deﬁning the energy of each component ci as
+
+1
+e(ci) = Vi
+0
+
+ci
+
+(s),
+
+∂ci ∂s
+
+(s)
+
+ds
+
+and exchanging the order of integration and summation we have
+
+e(c) =
+
+N i=1
+
+ei (ci ).
+
+Hence,
+
+computing
+
+the
+
+curve
+
+of
+
+minimal
+
+energy e(c) decomposes into computing the component curves
+
+ci of minimal energy ei(ci), each of which depends only on
+
+local information xi(t), xi (t). Hence, each local controller at node i, with knowledge of
+
+xi(t), xi(t), xi (t), xi (t), can compute the minimal geodesics
+γi(t) and γi(t), referring to the stacked vector function of geodesics γj (t) for j : (j, i) ∈ E c .
+
+The second stage of the control computation is integration
+
+of the differential control law. Since M ∈ Π, i.e., both block
+
+diagonal and with local state dependence of the blocks, the
+
+transformation K(x) = Y (x)W (x)−1 = Y (x)M (x) preserves
+
+the sparsity pattern and local dependence of Y (x), so K(x) ∈
+
+Ξ. This means that the i, j block of K(x) can be written as
+
+Kij (xi , xi ).
+
+Then, each local agent computes the control signal, where
+
+t dependence of signals has been dropped for simplicity as
+
+follows:
+
+ui = ui +
+j :(j,i)∈E c
+
+0
+
+1
+
+Ki
+
+j
+
+(γi
+
+(s),
+
+γi
+
+(s))
+
+∂γj ∂s
+
+(s)
+
+ds.
+
+(17)
+
+By construction, this control signal satisﬁes G c -admissability. The LMI (15) implies that the inequality
+
+δxT M˙ + (A + BK)M + M (A + BK)T + 2λM δx ≤ 0
+
+holds, for every (x, δx , u) ∈ Rn × Rn × Rm . Thus, M is a CCM for system (1) and, according to the main result of [31],
+
+(12) is a differential feedback rendering the equilibrium of the
+
+origin globally exponentially stable for system (4) in closed
+
+loop.
+
+Corollary 1 ([32]): Assume that the matrix B satisﬁes the
+
+identity ∂B W
+
+−
+
+∂B ∂x
+
+W
+
+−
+
+W
+
+∂B ∂x
+
+T
+
+≡ 0 and there exist N
+
+func-
+
+tions ρi : Rni +ni → R such that the matrix inequality
+
+−∂f W
+
++
+
+∂f ∂x W
+
+∂f T +W
+∂x
+
+− BRBT
+
++ 2λW
+
+≺
+
+0
+
+(18)
+
+holds for all (x, u) ∈ Rn × Rm , where R(x) = diag(ρ1 (x1 ) In1 , . . . , ρN (xN )InN ) for some scalar functions ρi(xi), i = 1, .., N . Then, W is a sum-separable CCM for system (1) and
+there exists a solution to Problem 1 with fully decentralized information structure, i.e., G c has no edges (i, j), i = j.
+To see that Corollary 1 is a particular case of Theorem 1, note that by choosing Y = −RBT /2, (18) is equivalent to (15).
+Furthermore, Y by construction is block diagonal and the ith block depends only on xi, hence Y ∈ Ξ.
+Remark 3: In the above we have assumed that each node
+consists of a node state xi and a colocated node control ui. However, the above strategy is easily extended to a communica-
+
+1286
+
+IEEE TRANSACTIONS ON CONTROL OF NETWORK SYSTEMS, VOL. 6, NO. 4, DECEMBER 2019
+
+tion structure based on separate “state measurement nodes” xi and “actuation nodes” uj , and communication networks from sensors to actuators deﬁned by a directed bipartite graph Gc , the adjacency matrix of which deﬁnes the sparsity structure of Y . For the online control computation, at each measurement node the state xi(t) is measured, and a minimal geodesic path to xi (t) is computed. Then this path is communicated to each control node j such that (i, j) is an edge of Gc . Then each control node can compute the control according to (14).
+Remark 4: As shown in [31], the Riemannian energy function then provides a useful control-Lyapunov function for any target trajectory. In particular, at each time it deﬁnes a convex set of control signals that achieve exponential contraction toward the target trajectory. This was used in [43] to guarantee stability in distributed economic model predictive control.
+
+A. Conditions for Existence of a Separable CCM
+
+The results we have presented so far give sufﬁcient conditions for existence of a distributed controller by way of a separable CCM. A natural question to ask is how conservative is the restriction to a separable CCM.
+For linear time-invariant positive systems, i.e., those leaving the positive orthant invariant, stability is equivalent to the existence of a separable quadratic Lyapunov function [13]. This leads to the following simple result.
+Theorem 2: Suppose ni = 1 and for a particular equilibrium condition xe , ue of (1), the local linearization z˙ = A(xe , ue )z + B(xe )v admits a stabilizing feedback gain K such that the closed-loop system matrix z˙ = (A(xe , ue ) + B(xe )K)z is positive. Then in a neighborhood of (xe , ue ) there exists a sum-separable contraction metric satisfying the conditions of Theorem 1.
+Proof: The linear closed-loop system has a diagonal quadratic Lyapunov function zT P z taking the metric with M = P and differential feedback δu = Kδx ; (15) therefore holds at xe , ue . Since it is a strict inequality and A, B are smooth functions of x, u, it holds in a neighborhood of (xe , ue ).
+The natural nonlinear analogue of a positive system is a monotone system [44], which preserves elementwise ordering between pairs of solutions, though for monotone systems the question of the existence of a separable Lyapunov function is more subtle [42]. In [28], global existence of separable contraction metrics was shown for certain classes of monotone contracting nonlinear systems. In addition, the utility of naturally separable l1-type metrics have been used by several authors in the analysis of monotone system [26], [27]. Beyond these results, to the authors’ knowledge the question of how restrictive it is to require M to be separable remains open.
+Theorem 3: Suppose ni = 1 for i ∈ N[1,N ] and suppose there exists a feedback controller u(t) = k(x(t), x (t), u (t)) solving Problem 1 such that the closed-loop system x˙ = f (x, k(x, x , u )) is:
+1) contracting with respect to a constant metric M > 0, i.e.,
+
+M (A + BK) + (A + BK)T M ≺ −2λM (19)
+
+for all x, x
+
+,u
+
+, where
+
+K
+
+=
+
+∂ ∂
+
+k x
+
+;
+
+2) monotone: (A + BK)ij ≥ 0 for i = j; 3) linearly coupled: (A + BK)ij is independent of x for
+i = j. Then there exists a sum-separable contraction metric satisfying the conditions of Theorem 1.
+Proof: Since the closed-loop system is contracting, monotone, and has linear coupling, by [28, Theorem 6] it has a separable contraction metric.
+Now, by assumption (19) holds for all x, x , u for the closedloop system, i.e., with A = A(x, k(x, x , u )). In particular, it holds when x = x , for which u = k(x, x , u ) = u , and the same for any x , u ,
+This implies that (10) holds for all x, u. Hence, M is a separable CCM for (1).
+
+IV. SCALABLE DESIGN OF DISTRIBUTED CONTROLLERS
+
+While the above developments give convex conditions for the
+design of distributed controllers, for large-scale systems they
+may still be impractical. The problem is that one must ﬁnd W and Y that satisfy (15), which is a matrix inequality of the same dimension of the total number of states in the full network.
+Despite its sparsity, this can still be very challenging to solve.
+In this section, we show that when the combined communi-
+cation/physical interconnection graph is chordal, the problem
+of solving (15) is dramatically simpliﬁed. Many engineering
+systems naturally have chordal graph structures, and this has
+motivated research in efﬁcient methods for semideﬁnite and
+sum-of-squares programming [33], [34], [45]. Theorem 4: Let G := Gp ∪ Gc and suppose G u is chordal.
+Let l ∈ N be the number of nodes of the clique tree T (G u ). Then, the pointwise LMI (15) can be decomposed into l pointwise LMIs of smaller dimension, each corresponding to a clique. Furthermore, each pointwise LMI depends only on the xi, x˘i, and xi for each node i contained in the corresponding clique.
+Proof: Using the Algorithm 3.1 from [34], it is possible to decompose the graph G into the clique tree T (G ). Let the integer l > 0 be the number of cliques in T (G ). Our proof follows similar arguments to Section II of [33].
+Let the sets C1 , . . . , Cl be the nodes of T (G ), and cardk be the cardinality (number of elements) of the set Ck , k ∈ N[1,l]. For each index k ∈ N[1,l], deﬁne the matrix Ek ∈ Rcardk ×n obtained from the n × n identity matrix with blocks of rows indexed by N[1,N ] \ Ck removed.
+Denote the left-hand side of the LMI (15) by T . The existence of l cliques implies that there exist matrices Fk : Rcardk → Rcardk ×cardk , where k ∈ N[1,l], satisfying
+
+l
+
+T = EkT Fk Ek .
+
+(20)
+
+k=1
+
+Then, if Fk ≺ 0, ∀k ∈ N[1,l], the matrix T is negative deﬁnite. Thus, the LMI (15) holds.
+For each node i ∈ V contained in the clique Ck . The corresponding matrix Fk has arguments xi, x˘i, and xi. In other words, Fk depends on how strongly the nodes of the system (deﬁned by Gc ) and communication network (deﬁned by Gp ) are connected among each other.
+
+SHIROMOTO et al.: DISTRIBUTED NONLINEAR CONTROL DESIGN USING SEPARABLE CONTROL CONTRACTION METRICS
+
+1287
+
+TABLE I RANGE OF PARAMETERS USED FOR VEHICLES IN PLATOON
+
+Fig. 2. Variation of drag force and drivetrain gain over velocity for each vehicle.
+
+If a graph is not chordal, it is possible to make it chordal by adding “fake” edges to form new cliques in the graph. This is referred to as a chordal embedding, chordal extension, or a triangulation. Algorithms for ﬁnding such triangulations are well developed and widely used for solving large sparse linear equations and semideﬁnite programs [34], [46].
+We note here that these “fake” edges are only used to deﬁne the l cliques used in the decomposition (20), in order to speed up the computational veriﬁcation of (15). The fake edges do not appear in the communication graph and do not have any impact on the resulting structure of the metric M or differential controller K, and hence do not effect the theoretical results on stabilization or distributed communication structure.
+
+V. ILLUSTRATIVE EXAMPLES
+
+A. Distributed Control of a Vehicle Platoon
+
+We ﬁrst illustrate the proposed method through the design of a distributed nonlinear platoon controller. Platooning provides a means for improving road safety, throughput, and vehicle efﬁciency. The control objective is for groups of vehicles to cooperatively maintain a group reference velocity with small intervehicle spacing.
+Each vehicle is assumed to be equipped with a radar measuring intervehicle distance and a wireless communication device to communicate with surrounding vehicles. Limitations in range and delay in the communication device mean that all-toall communication within a platoon is generally impossible, i.e., the platoon must operate with communication limited to nearby vehicles. Several authors have proposed distributed controllers achieving stability and string stability subject to communication constraints, e.g., [47]–[49] and references therein. In [50], the use of a nonlinear protocol leads to signiﬁcant improvements in string stability.
+Adapting the model used in [51, Sec 3.1], we design decentralized controllers for platoons of heterogenous vehicles with dynamics
+
+s˙i = vi,
+
+v˙i
+
+=
+
+1 mi Ti (vi )ui
+
+−
+
+kd i 2mi
+
+vi2
+
++ ωi
+
+(21)
+
+where si, vi, ui, and ωi are the ith vehicles position, velocity, control input, and a disturbance. The term Ti(vi) represents the dynamics of the drive chain dynamics of the drive train,
+
+illustrated in Fig. 2
+
+Ti (vi ) = αi Tm i
+
+1 − βi
+
+αi vi − 1 2 ωm i
+
+.
+
+The parameters used are randomly selected from the range
+
+shown in Table I. Choosing a state vector of x = (s1 , v1 , s1 − s2 , v2 , ..., sN −1 − sN , vN )T allows for the problem of platoon-
+ing at a constant velocity with constant spacing to be formulated as tracking a trajectory x(t) = (v∗t, v∗, d∗, v∗, ..., d∗, v∗) where v∗ is the desired nominal platoon velocity and d∗ is the in-
+
+tervehicular spacing. The dynamics of the platoon are written
+
+concisely in the form (1b).
+
+We consider a balanced communication graph with a horizon
+
+h. That is, each agent i has access to the state of agents j ∈
+
+N[i−h,i+h] with 1 ≤ j ≤ N . One advantage of the convexity of CCM synthesis is the ease
+
+of adding additional constraints. In this paper, we constrain the nonlinear controller to match a prescribed linear H∞ controller
+
+near a particular operating point.
+
+1) Distributed Linear H∞ Control Design: Choosing a
+
+nominal
+
+operating
+
+point
+
+of
+
+v∗
+
+=
+
+25
+
+ms−1 ,
+
+u∗i
+
+=
+
+, kd i v ∗2
+2T (v∗)
+
+we
+
+de-
+
+ﬁne the linearized system
+
+x˙ = A˜x + B˜u + Hw
+
+y = C˜x + D˜ u
+
+(22)
+
+where
+
+A˜
+
+=
+
+∂ ∂
+
+f x
+
+|v
+
+∗
+
+,
+
+u
+
+∗
+
+,
+
+B˜
+
+=
+
+∂ ∂
+
+f u
+
+|v
+
+∗,u
+
+∗
+
+,
+
+Bw
+
+=
+
+(0, 1, 0, ...0)T ,
+
+and
+
+C˜, D˜ specify the performance output which are chosen to be
+
+yv1 = qv1 (v1 ),
+
+ys1 = qs1 (s1 ), yu1 = qu1 (u1 )
+
+ysi = qs (si−1 − si ), yui = qu (ui )
+
+for i = 2, ..., N where qs , qv , and qu are weights used to tune
+the controller. The values used for the examples in this paper were (qv1 , qs1 , qu1 , qs , qu ) = (10−2 , 1, 3 × 105 , 103 , 5 × 104 ).
+We assume the existence of a block diagonal storage func-
+
+tion V (x) = xT P x rendering the structured controller design
+
+problem convex. While the restriction to a block diagonal P is
+
+generally conservative, we ﬁnd the same resulting gain bound
+
+for the cases when P is full and P is block diagonal.
+
+We solve a state-feedback H∞ control problem by searching
+
+for a storage function P = Q−1 and feedback gain K = ZQ ∈
+
+Ξ that minimizes a performance bound supw
+
+||y ||L2 ||w ||L2
+
+≤ α via the
+
+following semideﬁnite program [52]:
+
+minimize α
+Q,Z,α
+
+subject to Q > 0, Z ∈ Ξ,
+
+⎡ A˜Q + B˜Z + (A˜Q + B˜Z)T H (C˜Q + D˜ Z)T ⎤
+
+⎢⎣
+
+HT
+
+−αI
+
+0
+
+⎥⎦ < 0.
+
+C˜Q + D˜ Z
+
+0
+
+−αI
+
+(23)
+
+In general, there are many controllers that can satisfy the same gain bound in problem (23). As such, we can improve the
+
+1288
+
+IEEE TRANSACTIONS ON CONTROL OF NETWORK SYSTEMS, VOL. 6, NO. 4, DECEMBER 2019
+
+performance by ﬁrst solving (23) and then ﬁxing α and maximizing the smallest eigenvalue of Q.
+2) Distributed CCM: The set of matrices W, Y satisfying LMIs (15) deﬁne a set of universally stabilizing control laws of the form (14). Note, however, that the model exhibits nonphysical behavior for negative or large vi, when the term Ti(vi) is zero or negative; hence, LMI (15) cannot be satisﬁed over all x. It can, however, be enforced over a convex set vi ∈ [0, 50 ms−1] using Lagrange multipliers, c.f. Remark 2 above. We utilize a dummy variable ν to help solve the following feasibility problem:
+
+W 0, Y (xnom) = KW (xnom) − νT AW + W AT + BY + (BY )T + 2λW ν
+
+− τivi(vi − 50) 0
+i
+
+where Y ∈ Ξ consists of degree 2 polynomials, W is a block
+
+diagonal, ﬂat metric, and τi is a Lagrangian multiplier consisting of degree 2 polynomials in x and ν. Solving this problem with
+
+N = 10 and λ = 0.02 using Yalmip [53], [54] and Mosek on
+
+an Intel i7 Processor with 8GB of RAM took 9 s for h = 0 and
+
+40 s for h = 1.
+
+We compare the resulting controllers for two communication
+
+patterns in three different situations. The ﬁrst situation looks at tracking a step change in reference velocity from 10 to 5 ms−1
+
+that occurs at time t = 5 s. We then study the platoon response
+
+to a temporary disturbance at time t = 10 and a worst-case step
+
+disturbance at time t = 20 as described by
+
+⎧
+
+⎪⎨20
+
+sin(
+
+2π 10
+
+(t
+
+−
+
+95)),
+
+95 ≤ t ≤ 100
+
+w1 (t) = ⎪⎩100
+
+t ≥ 180 . (24) otherwise
+
+Fig. 3. Velocity response of a ten-car platoon to step reference change and disturbance (24). The ﬁrst vehicle is in blue and the last is in red. (a) h = 0. (b) h = 1.
+
+The platoon velocity response can be seen in Fig. 3 and the platoon’s position response can be seen in Fig. 4. Figs. 3 and 4 show the well-known, desirable effects that increasing communication has on the rate of synchronization and propagation of disturbances down the vehicle chain. Fig. 4 also shows an overall reduction in the magnitude of the disturbance response. Note that the nonlinear system is operating far from the linearization point of 25 ms−1. The use of separable CCMs allows for controllers with different communication patterns to be easily developed with guaranteed stability across an operating range.
+
+B. Scalability and Flexibility: Large-Scale System With Uncontrollable Linearization
+
+In this section, we consider a more academic example to illustrate the ﬂexibility and scalability of the CCM approach. Consider a system of N agents with local dynamics
+
+x˙ i = −xi − x3i + yi2 + 0.01 x3i−1 − 2x3i + x3i+1 y˙i = ui
+
+(25)
+
+for i ∈ N[1,N ] and for convenience deﬁne the boundary states x0 = x1 and xN = xN +1 . For each index i ∈ N[1,N ], deﬁne the vectors qi = (xi, yi), q˘i = (xi−1 , xi+1 ) and let q =
+
+Fig. 4. Response of a ten-car platoon to step reference change and disturbance (24). The ﬁrst vehicle is in blue and the last is in red. The position error is taken as si−1 − si − d∗i for i = 2, ..., N . (a) h = 0. (b) h = 1.
+
+(q1 , . . . , qN ), and
+
+fi(qi , q˘i ) =
+
+−xi − x3i + yi2 + 0.01 x3i−1 − 2x3i + x3i+1 0
+
+Bi = 0, 1 T .
+
+Note that system (25) is not controllable when linearized about the origin, since the x and y dynamics are decoupled, and furthermore is not feedback linearizable in the sense of [55],
+
+SHIROMOTO et al.: DISTRIBUTED NONLINEAR CONTROL DESIGN USING SEPARABLE CONTROL CONTRACTION METRICS
+
+1289
+
+Fig. 6. Computation time required to solve for a CCM for the three communication structures considered in Section V-B.
+
+Fig. 5. Simulation of network (25) with N = 4 and the target trajectory being the origin and under the controller obtained according to different constrains for the computation of Y : diagonal, neighbor, and unconstrained.
+
+because the vector ﬁelds
+
+B = diag (B1 , . . . , BN )
+
+∂f B −
+
+∂B f
+
+=
+
+diag
+
+∂q ∂q
+
+2y1 0
+
+,...,
+
+2yN 0
+
+are not linearly independent at the origin. Furthermore, due to the quadratic term on y, the only possible action by the controller on the x-subsystem is to move the x-component of solution to (25) toward the positive semiaxis. In other words, the controller cannot reduce the value of the x-component.
+To show the advantages of the method proposed in this paper, a benchmark composed of three scenarios, according to the constraints imposed on the matrix Y , has been created, namely the unconstrained case, in which Gc is a complete graph, the “neighbor” case, in which Gc = Gp , and the fully decentralized case, in which Gc has no edges (i, j) with i = j.
+In each case, we searched for a constant dual metric W and a matrix function Y with second-order polynomial terms in the variables as described by Ξ. The numerical results were obtained using Yalmip [53], [54] and Mosek running on an Intel Core i7 with 32GB RAM.
+For the unconstrained case, the graph Gc describing the communication network is fully connected and the matrix Y was full, with each element able to depend on all state variables. For this case, the set of matrix inequalities (15) could not be solved
+
+due to memory constraints when N > 8, i.e., state dimension n > 16.
+For the two latter cases, it was possible to solve (15) for up to N = 512 systems, i.e., a full-state dimension of n = 1024, using the chordal decomposition of Section IV, since the string topology is chordal, and the LMI (15) can be decomposed into N − 1 cliques each with two nodes.
+Fig. 5 shows simulations of the network (25) with N = 4. All controller structures achieve exponential convergence, whereas the open-loop simulation (performed with u ≡ 0) does not converge to the origin.
+Fig. 6 shows a plot of the time taken to solve (15) for the three cases considered in this topology: unconstrained, “neighbor,” and fully decentralized. According to this graph, for N = 1, 2, the time taken for each of the three cases is comparable. However, as the number of systems increases, the unconstrained quickly becomes infeasible, whereas in the neighbor and decentralized cases, the computation time is approximately linear in the number of nodes.
+VI. CONCLUSION
+In this paper, we have developed a method for control design using separable CCMs, building upon [31]. The main advantage in using a separable CCM is that it allows a convex (semidefinite programming) search for nonlinear feedback controllers with speciﬁed communication structure in the controller. Furthermore, we have shown that the search for a CCM can be made scalable for certain interaction structures deﬁned by chordal graphs.
+REFERENCES
+[1] D. J. Hill, T. Liu, and G. Verbic, “Smart grids as distributed learning control,” in Proc. IEEE Power Energy Soc. General Meeting, Jul. 2012, pp. 1–8.
+[2] M. Pajic, S. Sundaram, G. J. Pappas, and R. Mangharam, “The wireless control network: A new approach for control over networks,” IEEE Trans. Autom. Control, vol. 56, no. 10, pp. 2305–2318, Oct. 2011.
+
+1290
+
+IEEE TRANSACTIONS ON CONTROL OF NETWORK SYSTEMS, VOL. 6, NO. 4, DECEMBER 2019
+
+[3] S. Wang, J. Wan, D. Li, and C. Zhang, “Implementing smart factory of industrie 4.0: An outlook,” Int. J. Distrib. Sensor Netw., vol. 12, no. 1, Jan. 2016, Art. no. 3159805.
+[4] C. Canudas de Wit, F. Morbidi, L. Leon Ojeda, A. Y. Kibangou, I. Bellicot, and P. Bellemain, “Grenoble trafﬁc lab: An experimental platform for advanced trafﬁc monitoring and forecasting,” IEEE Control Syst. Mag., vol. 35, no. 3, pp. 23–39, Jun. 2015.
+[5] B. D. O. Anderson and J. B. Moore, Optimal Control: Linear Quadratic Methods. Englewood Cliffs, NJ, USA: Prentice-Hall, 1990.
+[6] G. Dullerud and F. Paganini, A Course in Robust Control Theory: A Convex Approach. New York, NY, USA: Springer-Verlag, 2000.
+[7] N. Sandell, P. Varaiya, M. Athans, and M. Safonov, “Survey of decentralized control methods for large scale systems,” IEEE Trans. Autom. Control, vol. 23, no. 2, pp. 108–128, Apr. 1978.
+[8] D. D. Sˇ iljak, Large-scale Dynamic Systems: Stability and Structure. Amsterdam, The Netherlands: North Holland, 1978.
+[9] V. Blondel and J. N. Tsitsiklis, “NP-Hardness of some linear control design problems,” SIAM J. Control Optim., vol. 35, no. 6, pp. 2118–2127, Nov. 1997.
+[10] A. Zecevic and D. D. Siljak, Control of Complex Systems: Structural Constraints and Uncertainty. New York, NY, USA: Springer, Jan. 2010.
+[11] T. Tanaka and C. Langbort, “The bounded real lemma for internally positive systems and h-inﬁnity structured static state feedback,” IEEE Trans. Autom. Control, vol. 56, no. 9, pp. 2218–2223, Sep. 2011.
+[12] A. Rantzer, “Scalable control of positive systems,” Euro. J. Control, vol. 24, pp. 72–80, Jul. 2015.
+[13] A. Berman and R. J. Plemmons, Nonnegative Matrices in the Mathematical Sciences. Philadelphia, PA, USA: SIAM, 1994.
+[14] J. Umenberger and I. R. Manchester, “Scalable identiﬁcation of positive linear systems,” in Proc. 55th IEEE Conf. Decis. Control, Dec. 2016, pp. 4630–4635.
+[15] J. Slotine and W. Li, Applied Nonlinear Control. Englewood Cliffs, NJ, USA: Prentice-Hall, 1991.
+[16] M. Krstic´, I. Kanellakopoulos, and P. V. Kokotovic´, Nonlinear and Adaptive Control Design. Hoboken, NJ, USA: Wiley, 1995.
+[17] H. K. Khalil, Nonlinear Systems, 3rd ed. Englewood Cliffs, NJ, USA: Prentice-Hall, 2001.
+[18] A. Rantzer, “A dual to Lyapunov’s stability theorem,” Syst. Control Lett., vol. 42, pp. 161–168, 2001.
+[19] W. Lohmiller and J.-J. Slotine, “On contraction analysis for nonlinear systems,” Automatica, vol. 34, no. 6, pp. 683–696, 1998.
+[20] D. Angeli, “A Lyapunov approach to incremental stability properties,” IEEE Trans. Autom. Control, vol. 47, no. 3, pp. 410–421, Mar. 2002.
+[21] W. Wang and J.-J. E. Slotine, “On partial contraction analysis for coupled nonlinear oscillators,” Biol. Cybern., vol. 92, no. 1, pp. 38–53, Dec. 2004.
+[22] Q. Pham and J. Slotine, “Stable concurrent synchronization in dynamic system networks,” Neural Netw., vol. 20, no. 1, pp. 62–77, Jan. 2007.
+[23] G. Russo, M. Di Bernardo, and E. D. Sontag, “Global entrainment of transcriptional systems to periodic inputs,” PLoS Comput. Biol., vol. 6, no. 4, 2010, Art. no. e1000739.
+[24] Z. Aminzare and E. D. Sontag, “Synchronization of diffusively-connected nonlinear systems: Results based on contractions with respect to general norms,” IEEE Trans. Netw. Sci. Eng., vol. 1, no. 2, pp. 91–106, Jul.–Dec. 2014.
+[25] G. Russo, M. di Bernardo, and E. D. Sontag, “A contraction approach to the hierarchical analysis and design of networked systems,” IEEE Trans. Autom. Control, vol. 58, no. 5, pp. 1328–1331, May 2013.
+[26] G. Como, E. Lovisari, and K. Savla, “Throughput optimality and overload behavior of dynamical ﬂow networks under monotone distributed routing,” IEEE Trans. Control Netw. Syst., vol. 2, no. 1, pp. 57–67, Mar. 2015.
+[27] S. Coogan, “Separability of Lyapunov functions for contractive monotone systems,” in Proc. IEEE 55th Conf. Decis. Control, 2016, pp. 2184–2189.
+[28] I. R. Manchester and J. Slotine, “On existence of separable contraction metrics for monotone nonlinear systems,” in Proc. 18th IFAC World Congr., Jul. 2017, pp. 8226–8231.
+[29] M. Arcak, “Certifying spatially uniform behavior in reaction–diffusion PDE and compartmental ODE systems,” Automatica, vol. 47, no. 6, pp. 1219–1229, 2011.
+[30] I. R. Manchester and J.-J. E. Slotine, “Control contraction metrics and universal stabilizability,” in Proc. 19th IFAC World Congr., Aug. 2014, pp. 8223–8228.
+[31] I. R. Manchester and J. J. E. Slotine, “Control contraction metrics: Convex and intrinsic criteria for nonlinear feedback design,” IEEE Trans. Autom. Control, vol. 62, no. 6, pp. 3046–3053, Jun. 2017.
+
+[32] H. Stein Shiromoto and I. R. Manchester, “Decentralized nonlinear feedback design with separable control contraction metrics,” in Proc. 55th Conf. Decis. Control, Dec. 2016, pp. 5551–5556.
+[33] S. K. Pakazad, A. Hansson, M. S. Andersen, and A. Rantzer, “Distributed semideﬁnite programming with application to large-scale system analysis,” IEEE Trans. Autom. Control, vol. 63, no. 4, pp. 1045–1058, Apr. 2018.
+[34] L. Vandenberghe and M. S. Andersen, “Chordal graphs and semideﬁnite optimization,” Found. Trends Optim., vol. 1, no. 4, pp. 241–433, 2015.
+[35] R. Diestel, Graph Theory (Graduate Texts in Mathematics), vol. 173. Berlin, Germany: Springer, 2005.
+[36] G. Teschl, Ordinary Differential Equations and Dynamical Systems (Graduate Studies in Mathematics), vol. 140. Providence, RI, USA: American Mathematical Society, 2012.
+[37] W. M. Boothby, An Introduction to Differentiable Manifolds and Riemannian Geometry. New York, NY, USA: Academic, 1986.
+[38] D. C. Lewis, “Metric properties of differential equations,” Amer. J. Math., vol. 71, no. 2, pp. 294–312, Apr. 1949.
+[39] F. Forni and R. Sepulchre, “A differential Lyapunov framework for contraction analysis,” IEEE Trans. Autom. Control, vol. 59, no. 3, pp. 614–628, Mar. 2014.
+[40] P. A. Parrilo, “Semideﬁnite programming relaxations for semialgebraic problems,” Math. Program., vol. 96, no. 2, pp. 293–320, May 2003.
+[41] S. Boyd, L. El Ghaoui, E. Feron, and V. Balakrishnan, Linear Matrix Inequalities in System and Control Theory. Philadelphia, PA, USA: SIAM, 1994.
+[42] G. Dirr, H. Ito, A. Rantzer, and B. S. Ru¨ffer, “Separable Lyapunov functions for monotone systems: Constructions and limitations,” Discrete Continuous Dyn. Syst. Ser. B, vol. 20, no. 8, pp. 2497–2526, Aug. 2015.
+[43] R. Wang, I. R. Manchester, and J. Bao, “Distributed economic MPC With separable control contraction metrics,” IEEE Control Syst. Lett., vol. 1, no. 1, pp. 104–109, Jul. 2017.
+[44] H. L. Smith, Monotone Dynamical Systems (Mathematical Surveys and Monographs), vol. 41. Providence, RI, USA: American Mathematical Society, 1995.
+[45] H. Waki, S. Kim, M. Kojima, and M. Muramatsu, “Sums of squares and semideﬁnite program relaxations for polynomial optimization problems with structured sparsity,” SIAM J. Optim., vol. 17, no. 1, pp. 218–242, Jan. 2006.
+[46] P. Heggernes, “Minimal triangulations of graphs: A survey,” Discrete Math., vol. 306, no. 3, pp. 297–317, 2006.
+[47] J. Ploeg, D. P. Shukla, N. van de Wouw, and H. Nijmeijer, “Controller synthesis for string stability of vehicle platoons,” IEEE Trans. Intell. Transp. Syst., vol. 15, no. 2, pp. 854–865, Apr. 2014.
+[48] W. B. Dunbar and D. S. Caveney, “Distributed receding horizon control of vehicle platoons: Stability and string stability,” IEEE Trans. Autom. Control, vol. 57, no. 3, pp. 620–633, Mar. 2012.
+[49] Y. Zheng, S. E. Li, K. Li, F. Borrelli, and J. K. Hedrick, “Distributed model predictive control for heterogeneous vehicle platoons under unidirectional topologies,” IEEE Trans. Control Syst. Technol., vol. 25, no. 3, pp. 899– 910, May 2017.
+[50] J. Monteil and G. Russo, “On the design of nonlinear distributed control protocols for platooning systems,” IEEE Control Syst. Lett., vol. 1, no. 1, pp. 140–145, Jul. 2017.
+[51] K. J. Astro¨m and R. M. Murray, Feedback Systems: An Introduction for Scientists and Engineers. Princeton, NJ, USA: Princeton Univ. Press, 2010.
+[52] T. Tanaka and C. Langbort, “The bounded real lemma for internally positive systems and h-inﬁnity structured static state feedback,” IEEE Trans. Autom. Control, vol. 56, no. 9, pp. 2218–2223, Sep. 2011.
+[53] J. Lo¨fberg, “YALMIP: A toolbox for modeling and optimization in MATLAB,” in Proc. IEEE Int. Symp. Comput. Aided Control Syst. Design, Sep. 2004, pp. 284–289. [Online]. Available: http://dx.doi.org/10.1109/CACSD.2004.1393890
+[54] J. Lo¨fberg, “Pre- and post-processing sum-of-squares programs in practice,” IEEE Trans. Autom. Control, vol. 54, no. 5, pp. 1007–1011, May 2009.
+[55] A. Isidori, Nonlinear Control Systems (Communications and Control Engineering). London, U.K.: Springer, 1995.
+Authors’ photographs and biographies not available at the time of publication.
+

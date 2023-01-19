@@ -1,0 +1,347 @@
+arXiv:1610.02323v1 [math.DS] 7 Oct 2016
+
+Almost ISS property for feedback connected systems✩
+Petro Feketaa, Humberto Stein Shiromotob, Sergey Dashkovskiyc
+aDepartment of Civil Engineering, University of Applied Sciences Erfurt, Altonaer Str. 25, 99085 Erfurt, Germany
+bThe Australian Centre for Field Robotics, The Rose Street Building, J04, The University of Sydney, 2006, NSW, Australia
+cInstitute of Mathematics, University of Wu¨rzburg, Emil-Fischer-Str. 40, 97074 Wu¨rzburg, Germany
+Abstract
+Small-gain conditions used in analysis of feedback interconnections are contraction conditions which imply certain stability properties. Such conditions are applied to a ﬁnite or inﬁnite interval. In this paper we consider the case, when a small-gain condition is applied to several disjunct intervals and use the density propagation condition in the gaps between these intervals to derive global stability properties for an interconnection. This extends and improves recent results from [1].
+Keywords: input-to-state stability; interconnection; small-gain condition; density propagation inequality.
+1. Introduction
+Nonlinear systems are known for essentially more complex behavior compared to linear ones which makes the investigation of such vital properties as stability and robustness very challenging and requires essentially diﬀerent mathematical tools than in case of linear systems. In many applications nonlinear systems appear in form of interconnections. In this case the framework of input-to-state stability (ISS) provides useful tools for the stability analysis which includes small-gain theorems [2] and constructions of the ISSLyapunov functions [3]. The small-gain condition requires that the composition of both interconnection gains satisﬁes γ12 ◦ γ21(r) < r, r ∈ (0, ∞). The construction in [3] uses the equivalent statement of the latter condition, namely γ21(r) < γ1−21(r), r ∈ (0, ∞), which in particular implies that the origin is the only common point of the graphs of γ21 and γ1−21. See the left part of Fig. 1.
+✩Partially supported by the German Federal Ministry of Education and Research (BMBF), research project ”LadeRamProdukt”. Corresponding author P. Feketa.
+Email addresses: petro.feketa@fh-erfurt.de (Petro Feketa), humberto.shiromoto@ieee.org (Humberto Stein Shiromoto), sergey.dashkovskiy@uni-wuerzburg.de (Sergey Dashkovskiy)
+
+In this work we ask: how stability can be studied if the small-gain condition is
+
+γ1−21 γ21
+
+γ21 γ1−21
+
+r
+
+r
+
+M1 M1 M2 M2
+
+Figure 1: Graphs of γ21 and γ1−21.
+
+satisﬁed not on the whole semi-axis (0, ∞) but on its subset, or in other words, what can we do in case the graphs of γ21 and γ1−21 have several common points (see the right part of Fig. 1)?
+If the small-gain condition is satisﬁed on an interval of the form (0, r0) only, then the local ISS property can be established [4]. If the small-gain condition fails to hold on some interval (M , M ) ⊂ (0, ∞) the work [1] uses an additional
+condition to ﬁll this gap and to establish the almost global asymptotic stability
+of an interconnection. This condition, called density propagation inequality, is
+applied to derivatives of functions governing the dynamics of a system [5] and
+is a kind of dual to Lyapunov methods.
+In this work we are interested in a more general question: let the small-gain condition be satisﬁed on some pairwise disjunct intervals (M 1, M 1) ∪ · · · ∪ (M k, M k) ⊂ (0, ∞), how can we ”ﬁll the gaps” between these intervals by means of suitable density propagation inequalities to assure almost global stabil-
+ity properties for the whole interconnection? If the points M 1, M 1, . . . , M k, M k are chosen properly the question of stability can be resolved eﬀectively. It turns out that these points should be taken as points at which graphs of γ21 and γ1−21 coincide. In this work we also provide an algorithm to ﬁnd these points. Our
+work extends [1] to the case of systems with inputs and multiple regions where
+the small-gain condition does not hold. Moreover, due to the suitable choice of
+these regions we avoid additional restriction (12) in [1]. This condition requires the inequality γ1−21(M ) < γ21(M ) to hold along with the small-gain condition on (M , M ). However not any interval (M , M ) where small-gain condition holds
+satisﬁes this restriction. Using our new simple algorithm, we can make this
+interval larger so that (12) is satisﬁed automatically and hence becomes unnec-
+essary. This is another advantage of this note. An example motivating and
+illustrating our results is available in [6].
+
+2
+
+2. Preliminaries and notation
+
+The notation N (resp. R) stands for the set N ∪ {∞} (resp. R ∪ {∞}). For a given a, b ∈ R let N[a,b] = {s ∈ N : a ≤ s ≤ b}. Let S ⊂ Rn, its closure (resp. interior) is denoted as cl{S} (resp. int{S}). We recall the following standard deﬁnitions: a function α : [0, ∞) → [0, ∞) is of class K when α is continuous,
+strictly increasing, and α(0) = 0. If α is also unbounded, then we say it is of class
+K∞. A continuous function β : [0, ∞) × [0, ∞) → [0, ∞) is of class KL, when β(·, t) is of class K for each ﬁxed t ≥ 0, and β(r, t) decreases to 0 as t → ∞ for each ﬁxed r ≥ 0. By Cs we denote the class of s-times continuously diﬀerentiable functions, by Liploc the class of locally Lipschitz continuous functions, by L∞ loc the class of locally essentially bounded functions.
+Consider the interconnection of two systems Σ1 and Σ2
+
+Σi : x˙ i = fi(x1(t), x2(t), ui(t)), i = 1, 2
+
+(1)
+
+xi(t) ∈ Rni is the state of Σi and ui(t) ∈ Rmi is its external input, fi is assumed to be of class C1 and satisfy fi(0, 0, 0) = 0. This interconnection can be written
+as
+
+x˙ = f (x(t), u(t))
+
+(2)
+
+with the state x = (x1, x2) ∈ Rn, n = n1 + n2, dynamics f = (f1, f2) and input u = (u1, u2) ∈ Rm, m = m1 + m2.
+
+Deﬁnition 2.1. [7] The system (2) is called input-to-state stable (ISS) if there exist functions β ∈ KL and γ˜u ∈ K∞ such that, for each initial condition x(0) and each measurable essentially bounded input u(·), the solution x(·) to (2) satisﬁes
+
+|x(t)| ≤β(|x(0)|, t) + γ˜u(|u|∞) ∀t ≥ 0.
+
+ISS is equivalent to the existence of an ISS-Lyapunov function, which we deﬁne for each subsystem in (1):
+Deﬁnition 2.2. A function Vi ∈ Liploc(Rni , R≥0) is called storage function if for some αi, αi ∈ K∞ it holds that αi(|xi|) ≤ Vi(xi) ≤ αi(|xi|) ∀xi ∈ Rni .
+Deﬁnition 2.3. A storage function Vi is called ISS-Lyapunov function for (1) if for some γi,j, γi, αi ∈ K∞ the implication
+
+Vi(xi) ≥ max γi,j (Vj(xj )), γi(|ui|)
+
+(3a)
+
+⇒ ∇Vi(xi) · fi(xi, xj, ui) ≤ −αi(|xi|).
+
+(3b)
+
+holds for almost all xi ∈ Rni , xj ∈ Rnj , and ui ∈ Rmi . γi,j (resp. γi) is called interconnecting (resp. external) ISS-Lyapunov gain.
+
+3
+
+The stability of the resulting interconnected system (2) can be deduced from the small-gain theorem [3]: if the interconnecting ISS-Lyapunov gains satisfy
+
+γ12 ◦ γ21(s) < s ∀s > 0,
+
+(4)
+
+then system (2) is input-to-state stable. In this paper we assume that the graphs of γ1−21 and γ21 have several points of
+intersection. It means that small-gain condition does not hold globally and the
+previously known results cannot be utilized to verify global stability properties
+of the interconnection. To guarantee the desired stability properties of the
+interconnection, the dual to Lyapunov’s techniques [8, 5] is employed in speciﬁc
+domains of the state space. Our approach extends the results of [1] to the case of arbitrary number of intersection points of γ1−21 and γ21 and allows for the presence of non identically zero inputs. Moreover our stability conditions are
+less restrictive then in [1].
+
+3. Main Results
+
+Assumption 3.1 (Subsystems are ISS). For each i = 1, 2 there exists an ISS-Lyapunov function Vi for Σi from (1) with the corresponding gain functions γi,j , γi ∈ K∞, and αi ∈ K∞.
+Assumption 3.2 (Local SGC). The small-gain condition γ12 ◦ γ21(s) < s holds for any s ∈ Mk = (M k, M k), k ∈ N[1,ℓ], ℓ ∈ N, where M k, M k correspond to the intersection points of the graphs γ1−21 and γ21, i.e., γ12(γ21(M k)) = M k and γ12(γ21(M k)) = M k for any k ∈ N[1,ℓ]. Here M l can be a ﬁnite number or inﬁnity.
+Remark 3.1. The number of intersection points of the graphs of γ1−21 and γ21 can be either ﬁnite or inﬁnite, with or without accumulation points. It is not assumed that all of them are known, because it is not necessary in the following theorems. An algorithm to calculate some of these points M k, M k, k ∈ N[1,ℓ] is presented in Section 4. Having a ﬁnite number of the intervals as in the above assumption we ﬁll the gaps between them (and at inﬁnity if M l < ∞) using the density propagation inequality which needs to be satisﬁed in the corresponding domains of the state space (see Assumption 3.3 and Theorem 3.2).
+
+For a given δ ∈ R≥0 let Li(δ) = {xi ∈ Rni : Vi(xi) ≤ δ}.
+
+Theorem 3.1. Let Assumptions 3.1 and 3.2 hold. Then there exists γ ∈ K∞ such that almost all solutions to system (2) starting in the set Bk converge to a neighborhood of the set Ak with radius γ(|u|∞), where
+
+Ak = {x ∈ Rn : x1 ∈ L1(max{M k, γ12(M k)}),
+
+(5)
+
+x2 ∈ L2(max{γ21(M k), γ21 ◦ γ21(M k)})},
+
+Bk = {x ∈ Rn : x1 ∈ L1(M k), x2 ∈ L2(γ21(M k))}.
+
+(6)
+
+If M ℓ = ∞ then the above mentioned convergence holds only for some bounded inputs u.
+
+4
+
+Proof. Let us deﬁne V (x) = max {σ(V1(x1)), V2(x2)} for any x ∈ Rn and with
+
+σ
+
+=
+
+γ1−21
+
++ 2
+
+γ21
+
+.
+
+(7)
+
+We follow the ideas of the proof of Theorem 3.1 from [3]. Note that from the Assumption 3.2 and (7) it follows that
+
+γ21(r) < σ(r) < γ1−21(r) ∀r ∈ Mk, k ∈ N[1,ℓ].
+
+(8)
+
+Deﬁne the following sets:
+
+A = {(x1, x2) : V2(x2) < σ(V1(x1))}, B = {(x1, x2) : V2(x2) > σ(V1(x1))}, Γ = {(x1, x2) : V2(x2) = σ(V1(x1))}.
+
+Now ﬁx any point p = (p1, p2) = (0, 0), and an input value v = (v1, v2). There are three cases:
+Case 1: p ∈ A. From p ∈ A follows V2(p2) < σ(V1(p1)). From (8) it follows that V1(p1) > γ12(V2(p2)) if γ21(M k) ≤ V2(p2) ≤ γ21(M k). This then implies
+
+∇V1(p1)f1(p1, p2, v1) ≤ −α1(V1(p1))
+
+(9)
+
+whenever V1(p1) ≥ γ1(|v1|). It means (see [3]) that for p ∈ Ak = A ∩ {(p1, p2) : γ21(M k) ≤ V2(p2) ≤ γ21(M k)} the following implication holds
+
+V (p) ≥ γˆ1(|v1|) ⇒ ∇V (p)f (p, v) ≤ −αˆ(V (p))
+
+with αˆ(s) = σ′(σ−1(s))α1(σ−1(s)), γˆ1(r) = σ(γ1(r)). The cases of p ∈ B and p ∈ Γ can be treated analogously to [3]. Finally we
+get that for p ∈ Ak ∪ Bk ∪ Γk there exist α˜, γ˜ ∈ K∞ such that
+
+V (p) ≥ γ˜(|v|) ⇒ ∇V (p)f (p, v) ≤ −α˜(V (p))
+
+with Bk = B ∩ {(p1, p2) : V1(p1) ∈ Mk}, Γk = Γ ∩ {(p1, p2) : V1(p1) ∈ Mk}.
+It remains to check the points that do not fall into the sets Ak, Bk, and
+Γk, k ∈ N[1,ℓ]. For completeness we put M 0 = M 0 ≡ 0. Consider the case
+p ∈ A ∩ {(p1, p2) : γ21(M k−1) < V2(p2) < γ21(M k)}. For the points p such that V1(p1) > γ12(M k) it follows that V1(p1) > γ12(V2(x2)) which implies (9) whenever V1(p1) ≥ γ1(|v1|). The rest cases are treated similarly. Combining
+the previously proved results we conclude that there exist a storage function V : Rn → R≥0 and functions α, γ ∈ K∞ such that, for almost every x ∈ Bk (possibly excluding points {(x1, x2) ∈ Rn : V1(x1) = M k, V2(x2) = γ21(M k), k ∈ N[1,ℓ] or V1(x1) = M ℓ or V2(x2) = γ21(M ℓ)}), the implication
+
+V (x) ≥ γ(|u|) ⇒
+
+(10a)
+
+∇V (x) · f (x, u) ≤ −α (|x|Ak )
+
+(10b)
+
+5
+
+holds. In the case of M ℓ = ∞ for suﬃciently large inputs the corresponding trajectory may arrive outside the set Bℓ and then tend to inﬁnity. That is why in the case of M ℓ = ∞, the convergence stated in Theorem 3.1 holds only for bounded inputs |u|∞ ≤ δ, δ > 0.
+The ISS of (2) follows trivially when ℓ = 1, M 1 = 0, M 1 = ∞; then A1 = {0} and B1 = R2. However, when ℓ > 1, solutions to (2) starting in the set Ak may converge to an ω-limit set [9, Birkhoﬀ’s Theorem] that lies inside the set Ak and do not converge to a ball centred at the origin whose radius is proportional to the norm of the input. Due to this fact, the next assumption is needed to check the asymptotic behaviour of solutions inside the sets Ak. Let B0 = ∅ and Aℓ+1 = Rn.
+Assumption 3.3. For each k ∈ N[1,ℓ+1], there exist an open set Dk ⊂ Rn satisfying {Ak \ Bk−1} cl{Dk} and
+• A diﬀerentiable function ρk : Dk → R>0;
+• A continuous function qk : Dk → R≥0 such that, for almost every x ∈ Dk, qk(x) > 0;
+• A function γk ∈ K such that, for every x ∈ Dk and for every u ∈ Rm, the following implication holds
+
+max
+i=1,2
+
+Vi(xi)
+
+≥
+
+γk (|u|)
+
+⇒
+
+n
+
+÷ (ρkf )(x, u) :=
+
+∂
+
+(ρk fj ∂xj
+
+)
+
+(x,
+
+u)
+
+≥
+
+qk (x)
+
+j=1
+
+(11a) (11b)
+
+Deﬁnition 3.1. [8] The origin is called almost ISS for (2) if it is locally asymptotically stable and for some γ ∈ K∞
+lim sup |x(t, x(0), u)| ≤ γ(|u|∞)
+t→∞
+holds for every input u ∈ L∞ loc(R≥0, Rm) and for almost every initial condition x(0) ∈ Rn.
+
+Theorem 3.2. Under Assumptions 3.1, 3.2, and 3.3 system (2) is almost inputto-state stable.
+
+Proof. Under the imposed assumptions the whole state space is divided into the domains where dissipation implication (10a), (10b) holds (due to small-gain condition), and the domains where the density propagation inequality (11b) holds. These domains overlap due to Assumption 3.3. For any initial condition x(0) there exists k ∈ N[1,ℓ] such that either x(0) ∈ Bk or x(0) ∈ Ak. Assumptions 3.1, 3.2 imply that almost all solutions to system (2) starting in the set Bk converge to a neighbourhood of the set Ak with radius proportional to the norm of the input. Next we show that for almost every initial condition in Ak
+
+6
+
+and its neighbourhood Dk \ Ak, the corresponding solutions to (2) converge to some neighborhood of the set Bk−1 \Dk with radius proportional to the norm of the input. Let Zk ⊂ Dk be the set of initial conditions for solutions that remain outside the γk(|u|∞)-neighborhood of the set Bk−1 \ Dk. From [8] and the 2nd part of the proof of Theorem 1 from [1], Assumption 3.3 implies that the set Zk has a Legesgue measure zero. Hence for almost all initial values in Dk the corresponding solutions converge to a neighborhood of the set Bk−1 \ Dk with radius proportional to the norm of the input. Repeating the previous reasoning we conclude the almost ISS of the system (2).
+Remark 3.2. An overlap of ’small-gain’ and ’density propagation’ regions (namely {Ak \ Bk−1} cl{Dk}) is essential for the convergence of almost all solutions to a ball centered at the origin with radius γ(|u|∞), γ ∈ K∞. However properties of this gain function γ depend on how large the mentioned overlap is. Too tight overlap, i.e., when the size of the intersection of the mentioned regions is small, leads to a large gain function (i.e. rapidly increasing), and vice versa, a large overlap can lead to a smaller gain function.
+
+4. Algorithm to ﬁnd gains intersection points
+
+This section addresses the question of how to ﬁnd the intersection of gains γ1−21 and γ21 eﬃciently. If the gains are known we can deﬁne γ = γ12 ◦ γ21. For any s ≥ 0 one of the following γ(s) < s, γ(s) > s or γ(s) = s holds. In the
+latter case s is an intersection point we are looking for. Let for some s > 0 be γ(s) < s then γ2(s) = γ(γ(s)) < γ(s) < s, i.e., the sequence γn(s), n ∈ N is monotone, decreasing and bounded from below, hence it converges to some M ≥ 0. Similarly (γ−1)n is either unbounded or converges to some M . Moreover, it
+holds that γ(M ) = M and γ(M ) = M . Let for some s > 0 be γ(s) > s, then the sequence γn(s), n ∈ N is either
+unbounded or converges to some M ∗ for which γ(M ∗) = M ∗. The intersection
+points are those where the small-gain condition is violated. This leads to the following algorithm. Pick some constant ∆ ∈ R≥0 (the al-
+gorithm’s precision). If the sequence of intersection points have an accumulation
+point, constant ∆ allows to avoid looping the algorithm.
+
+Algorithm 4.1. Input ∆ > 0. Let s = 0, i = 1.
+
+Step 1. Let s∗ = s + ∆;
+
+Step 2. If γ(s∗) = s∗, go to step 3. If γ(s∗) < s∗, go to step 4. If γ(s∗) > s∗,
+
+go to step 7;
+
+Step 3. Let s = s∗ and go to step 1;
+
+Step 4.
+
+Let
+
+Mi
+
+=
+
+lim γn(s∗)
+n→∞
+
+and
+
+Mi
+
+=
+
+lim
+n→∞
+
+γ −1
+
+n (s∗).
+
+Go to step 5;
+
+Step 5. If M i < ∞ go to step 6. Else, go to step 10;
+
+Step 6. Let s = M i and i = i + 1, and go to step 1;
+
+Step 7. Let M ∗ = lim γn(s∗) and go to step 8;
+n→∞
+
+7
+
+s := 0, i := 1
+
+s∗ := s + ∆
+
+γ(s∗) < s∗
+
+si
+
+:=
+
+lim γn(s∗)
+n→∞
+
+Mi
+
+:=
+
+lim γ−1n(s∗)
+n→∞
+
+M i < ∞? no yes
+s := M i, i := i + 1
+
+γ(s∗) = s∗ s := s∗ stop
+
+γ(s∗) > s∗
+M ∗ := lim γn(s∗)
+n→∞
+no M ∗ < ∞? yes
+s := M ∗
+
+Figure 2: A scheme of the numerical-analytic algorithm for small-gain domains allocation
+Step 8. If M ∗ < ∞, go to step 9. Else, go to step 10; Step 9. Let s = M ∗ and go to step 1; Step 10. ℓ := i. Stop algorithm. Leave.
+Output: ℓ, and the sets {M 1, . . . , M ℓ} and {M 1, . . . , M ℓ}.
+The proposed algorithm may have inﬁnitely many iterations (by iteration we mean returning to Step 1) in some cases, as for example in the case of inﬁnitely many points Mi of intersection of gain functions such that Mi → ∞ as i → ∞. Then a reasonable running time should be allowed before termination. A longer running time of the algorithm leads to a smaller domain where the density propagation inequality (11b) needs to be satisﬁed. Hence the algorithm should be interrupted as soon as the density propagation region is small enough to satisfy (11b).
+The algorithm ends up in a ﬁnite number of iterations for some wide classes of systems: for the systems which gains have either a ﬁnite number of intersection points or an inﬁnite number but with ﬁnite accumulation points.
+5. Concluding remarks and open problems
+In this paper we have proposed the method of how to verify global stability properties of two feedback connected systems when small-gain condition is not
+8
+
+globally satisﬁed. It was made by imposing additional density propagation inequality in the appropriate state space subsets. The properties of the resulting ISS gain function depend on the overlaps of small-gain and density propagation regions. This dependance is an interesting problem to be investigated in the future.
+Another challenging problem is to extend the proposed approach to the case of n ∈ N interconnected systems. This leads to multidimensional small-gain and density propagation regions and related topological and geometrical problems, in particular how to built the corresponding sets Ak and Bk. A ﬁrst step to tackle these problems is presented in [10].
+References
+[1] H. Stein Shiromoto, V. Andrieu, C. Prieur, A region-dependent gain condition for asymptotic stability, Automatica 52 (2015) 309–316. arXiv:1502.02851, doi:10.1016/j.automatica.2014.12.017.
+[2] Z.-P. Jiang, A. R. Teel, L. Praly, Small-gain theorem for ISS systems and applications, Math. Control Signals Systems 7 (2) (1994) 95–120.
+[3] Z.-P. Jiang, I. M. Y. Mareels, Y. Wang, A Lyapunov formulation of the nonlinear small-gain theorem for interconnected ISS systems, Automatica 32 (8) (1996) 1211–1215.
+[4] S. Dashkovskiy, B. S. Ruﬀer, Local ISS of large-scale interconnections and estimates for stability regions, Syst. & Contr. Lett. 59 (2010) 241–247. doi:10.1016/j.sysconle.2010.02.001.
+[5] A. Rantzer, A dual to Lyapunov’s stability theorem, Syst. & Contr. Lett. 42 (2001) 161–168. doi:10.1016/S0167-6911(00)00087-6.
+[6] H. Stein Shiromoto, P. Feketa, S. Dashkovskiy, Example demostrating the application of small-gain and density propagation conditions for interconnections, arXiv preprint, arXiv:1606.02360 [cs.SY].
+[7] E. D. Sontag, Smooth stabilization implies coprime factorization, IEEE Trans. Autom. Control 34 (4) (1989) 435–443. doi:10.1109/9.28018.
+[8] D. Angeli, An Almost Global Notion of Input-to-State Stability, IEEE Trans. Autom. Control 49 (6) (2004) 866–874. doi:10.1109/TAC.2004.829594.
+[9] A. Isidori, Nonlinear Control Systems, Communications and Control Engineering, Springer, 1995. doi:10.1007/978-1-84628-615-5.
+[10] H. Stein Shiromoto, P. Feketa, S. Dashkovskiy, A combination of smallgain and density propagation inequalities for stability analysis of networked systems, arXiv preprint, arXiv:1508.06018 [cs.SY].
+9
+

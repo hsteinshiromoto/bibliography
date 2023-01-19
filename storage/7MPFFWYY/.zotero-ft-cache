@@ -1,0 +1,87 @@
+SpringerBriefs in Applied Sciences and Technology
+
+More information about this series at http://www.springer.com/series/8884
+
+Humberto Stein Shiromoto
+Design and Analysis of Control Systems
+Case Studies
+123
+
+Humberto Stein Shiromoto The Australian Centre for Field Robotics The University of Sydney Sydney Australia
+
+ISSN 2191-530X
+
+ISSN 2191-5318 (electronic)
+
+SpringerBriefs in Applied Sciences and Technology
+
+ISBN 978-3-319-52011-7
+
+ISBN 978-3-319-52012-4 (eBook)
+
+DOI 10.1007/978-3-319-52012-4
+
+Library of Congress Control Number: 2016963332
+
+© The Author(s) 2017 This work is subject to copyright. All rights are reserved by the Publisher, whether the whole or part of the material is concerned, speciﬁcally the rights of translation, reprinting, reuse of illustrations, recitation, broadcasting, reproduction on microﬁlms or in any other physical way, and transmission or information storage and retrieval, electronic adaptation, computer software, or by similar or dissimilar methodology now known or hereafter developed. The use of general descriptive names, registered names, trademarks, service marks, etc. in this publication does not imply, even in the absence of a speciﬁc statement, that such names are exempt from the relevant protective laws and regulations and therefore free for general use. The publisher, the authors and the editors are safe to assume that the advice and information in this book are believed to be true and accurate at the date of publication. Neither the publisher nor the authors or the editors give a warranty, express or implied, with respect to the material contained herein or for any errors or omissions that may have been made. The publisher remains neutral with regard to jurisdictional claims in published maps and institutional afﬁliations.
+
+Printed on acid-free paper
+
+This Springer imprint is published by Springer Nature The registered company is Springer International Publishing AG The registered company address is: Gewerbestrasse 11, 6330 Cham, Switzerland
+
+To Carolina Pereira Gomes, my parents, and friends
+
+Preface
+Bold ideas, unjustiﬁed anticipations, and speculative thought, are our only means for interpreting nature: our only organon, our only instrument, for grasping her. And we must hazard them to win our prize. Those among us who are unwilling to expose their ideas to the hazard of refutation do not take part in the scientiﬁc game.
+K. Popper, The Logic of Scientiﬁc Discover.
+Over the years, technology and society have become more dependent on autonomous systems. In this book, two methodologies for the analysis and design of autonomous systems are considered: the interaction of two subsystems and controller design, i.e., the algorithm that will govern the behavior of these systems. In general, techniques for analysis and design of systems depend on the structure of the equation that describes the system dynamics which, in many cases, is nonlinear. Moreover, the presence of unknown terms such as disturbances or modeling errors may lead to a system lacking the appropriate structures.
+The purpose of this book is to provide a methodology to merge different known techniques for the design and analysis of systems lacking those structures. This monograph has been written for readers varying from undergraduate students to Ph.D. candidates/researchers in the ﬁelds of sciences and engineering. Since another objective of this book is to be accessible to the largest variety of readers, I provide only sketches of proofs, making the idea behind the proofs accessible for the unfamiliar reader. In Chap. 2, the design and blending of two nonlinear controllers is presented. In Chap. 3, the analysis of two interconnected systems is considered. The Appendix A recalls fundamental results and concepts employed along the other chapters.
+This monograph has mostly been adapted from my Ph.D. dissertation [1] and based on a few subsequent articles. The English translation of the title my Ph.D. manuscript is Stabilization under local and global constraints. This thesis was supervised by Christophe Prieur (senior researcher at the CNRS/GIPSA-lab, Grenoble) and co-supervised by Vincent Andrieu (junior researcher at the
+vii
+
+viii
+
+Preface
+
+CNRS/LAGEP, Lyon). I thank them for advising me in this project which made me one of the recipients of the GdR MACS best theses award. This is a French national prize awarded to up to four Ph.D. candidates every 2 years. I also thank the examiners and opponents: Antoine Chaillet, Andrew Teel, Andrea Bacciotti, Laurent Praly, Sophie Tarbouriech, and Luca Zaccarian. They enriched not only my thesis but also my work as a researcher with their comments.
+
+Sydney, Australia October 2016
+
+Humberto Stein Shiromoto
+
+Reference
+1. Stein Shiromoto H (2014) Stabilisation sous contraintes locales et globales. PhD thesis, Université Grenoble Alpes
+
+Contents
+1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1.1 Outline and Contributions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+2 Blending Two Feedback Laws . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 2.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 2.1.1 Motivation and Problem Formulation . . . . . . . . . . . . . . . . . . 6 2.2 Global Practical Stabilizability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 2.3 Hybrid Systems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 2.4 Blending Feedback Laws . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 2.5 Semiglobal Stabilization. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 2.6 Illustration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 2.7 Sketches of the Proofs of Chap. 2 . . . . . . . . . . . . . . . . . . . . . . . . . . 25 2.7.1 Sketch of the Proof of Proposition 2.4 . . . . . . . . . . . . . . . . . 25 2.7.2 Sketch of the Proof of Theorem 2.14 . . . . . . . . . . . . . . . . . . 30 2.8 Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 Appendix of Chap. 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+3 Analysis Under Nested Criteria . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 3.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 3.2 Background, Motivation, and Problem Statement . . . . . . . . . . . . . . 38 3.2.1 Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38 3.2.2 Motivation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39 3.3 Standing Assumptions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41 3.4 Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42 3.5 Illustration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45 3.6 Sketches of the Proofs of Chap. 3 . . . . . . . . . . . . . . . . . . . . . . . . . . 49 3.6.1 Sketch of the Proof of Proposition 3.6 . . . . . . . . . . . . . . . . . 49 3.6.2 Sketch of the Proof of Theorem 3.11 . . . . . . . . . . . . . . . . . . 53
+ix
+
+x
+
+Contents
+
+3.6.3 Sketch of the Proof of Theorem 3.12 . . . . . . . . . . . . . . . . . . 56 3.6.4 Sketch of the Proof of Proposition 3.13 . . . . . . . . . . . . . . . . 60 3.6.5 Sketch of the Proof of Proposition 3.14 . . . . . . . . . . . . . . . . 60 3.7 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61 Appendix of Chap. 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61 References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+Appendix. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71
+Index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 89
+
+Acronyms and Notations
+
+Ck K K1 P L1loc R R[0 R!0 B\r ðKÞ B rðKÞ S6¼0 clfSg cofSg KL
+XðV Þ}c
+suppðfÞ Dvþ V
+LhV M10 M<0 xÁy UGAS
+
+Denotes the class of k-times continuously differentiable functions;
+Denotes the class of continuous strictly increasing functions; Denotes class of functions belonging to K and that are unbounded; Denotes the class of positive deﬁnite functions;
+Denotes the class of locally essentially bounded functions;
+Denotes the set of real values;
+Denotes the set of strictly positive real values;
+Denotes the set of positive real values; Denotes the open ball centered at the set K and with radius r [ 0; Denotes the closed ball centered at the set K and with radius r [ 0; Denotes the set Snf0g;
+Denotes the closure of the set S;
+Denotes the convex closure of the set S; Denotes the class of functions b : R ! 0 Â R ! 0 ! R ! 0 such that, for a ﬁxed t ! 0, the function s 7! bðs; tÞ is of class K and, for a ﬁxed s ! 0, the function t 7! bðs; tÞ 2 R ! 0 is strictly decreasing and satisﬁes bðs; tÞ ! 0, as t tends to inﬁnity; Denotes the set fx 2 Rn : VðxÞ Å cg, where Å is a binary comparison operator (i.e., Å 2 f ! ; \; 6¼; etcg; Denotes the set fx 2 Rn : f ðxÞ 6¼ 0g; is the Dini derivative of a function V : Rn ! R in along the vector v 2 Rn; Lie derivative of V in along the vector ﬁeld h Stands for the matrix M 2 RnÂn being positive deﬁnite; Stands for the matrix M 2 RnÂn being positive semideﬁnite; Denotes the inner product between the vectors x and y 2 Rn;
+Uniformly Globally Asymptotically Stable
+
+xi
+

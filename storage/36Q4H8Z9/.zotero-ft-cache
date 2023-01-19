@@ -1,0 +1,1107 @@
+arXiv:1503.02892v1 [math.OC] 10 Mar 2015
+
+Combining a backstepping controller with a local stabilizer
+Humberto Stein Shiromoto, Vincent Andrieu, Christophe Prieur ∗
+August 20, 2018
+Abstract We consider nonlinear control systems for which there exist some structural obstacles to the design of classical continuous stabilizing feedback laws. More precisely, it is studied systems for which the backstepping tool for the design of stabilizers can not be applied. On the contrary, it leads to feedback laws such that the origin of the closed-loop system is not globally asymptotically stable, but a suitable attractor (strictly containing the origin) is practically asymptotically stable. Then, a design method is suggested to build a hybrid feedback law combining a backstepping controller with a locally stabilizing controller. The results are illustrated for a nonlinear system which, due to the structure of the system, does not have a priori any globally stabilizing backstepping controller.
+1 Introduction
+Over the years, research in control of nonlinear dynamical systems has lead to many diﬀerent tools to design (globally) asymptotically stabilizing feedbacks, see e.g. [8, 18, 19]. Usually these techniques require to impose special
+∗Humberto Stein Shiromoto is student from Escola Polit´enica da Universidade de Sa˜o Paulo, Avenida Prof. Luciano Gualberto, travessa 3, n 380, CEP 05508970, Sa˜o Paulo, SP, Brazil and Politecnico di Torino, Corso Duca degli Abruzzi, 24, 10129 Turin, Italy humberto.shiromoto@gmail.com. Vincent Andrieu is with Universit´e de Lyon, F-69622, Lyon, France; Universit´e Lyon 1, Villeurbanne; CNRS, UMR 5007, LAGEP. 43 bd du 11 novembre, 69100 Villeurbanne, France. https://sites.google.com/site/vincentandrieu/. Christophe Prieur is with Gipsalab, Department of Automatic Control, 961 rue de la Houille Blanche, BP 46, 38402 Grenoble Cedex, France. christophe.prieur@gipsa-lab.grenoble-inp.fr. This work has been initiated during an internship of Humberto Stein Shiromoto at Gipsa-lab, Grenoble.
+1
+
+structure on the control systems. Depending on the assumptions made on the model, the designer may use high-gain approaches (as in [13]), a backstepping technique (see [8, 20, 24]) or a forwarding approach (consider e.g., [17, 21, 31]), among others design methods. Unfortunately, in presence of unknown parameters or unstructured dynamics, these classical design methods may fail and some structural obstacles to large regions of attraction may exist. Examples of such systems are the partially linear cascades systems, considered e.g. in [5, 28] and [32], for which the local stabilization is linear but a perturbation may cause ﬁnite escape time, if some parts are not properly controlled. This phenomenon, so-called slow-peaking, has been studied (e.g. in [29, 30]) to design global stabilizers.
+For such systems where the classical backstepping techniques can not be applied, the approach presented may solve the problem by combining a backstepping feedback law with a locally stabilizing controller. More precisely, it is designed a hybrid feedback law to blend both kinds of controllers. The backstepping controller renders a suitable compact set globally attractive, whereas the local one is assumed to have its basin of attraction containing the attractor of the system in closed-loop with the backstepping controller. The main result can thus be seen as a design techniques of hybrid feedback laws for systems, which a priori do not have classical nonlinear stabilizing controllers. The use of hybrid stabilizers for systems which do not have continuous stabilizers, is by now classical (see e.g., [14, 22, 25]). This approach has been particularly fruitful for control systems that do not satisfy the Brockett’s condition [6] that is a necessary topological condition for the existence of a continuous stabilizing feedback (see in particular [9, 10, 15, 16, 26]). The considered class of hybrid feedback laws has the advantage to guarantee a robustness property with respect to measurement noise, actuators errors (see [27] and also [12] for related issues).
+Best to our knowledge this is the ﬁrst work suggesting a design method to adapt the backstepping technique to a given local controller in the context of hybrid feedback laws. Other works do exist in the context of continuous controllers (e.g., see [23] where a backstepping controller is blent with an LQ controller, and consider [1] where, using control Lyapunov functions, a globally stabilizing controller is combined with a local optimal controller). In contrast to these works, for the class of systems considered in this paper, a priori no continuous stabilizing controller does exist.
+This paper is organized as follows. In Section 2, we introduce precisely the problem under consideration in this paper and the class of controllers that will be used to solve this problem. In Section 3 the main result is stated, that is the existence of a hybrid feedback law combining a backstepping controller with a local stabilizer. In Section 4, the main result is illustrated
+2
+
+on an example, and it is designed such a hybrid feedback law for a system for which the classical backstepping approach can not be applied. All technical proofs are collected in Section 5, and Section 6 contains some concluding remarks.
+The proof of some results has been removed due to space limitation.
+
+2 Problem statement
+
+Consider the nonlinear system
+
+x˙ 1 = f1(x1, x2) + h1(x1, x2, u) x˙ 2 = f2(x1, x2)u + h2(x1, x2, u),
+
+(1)
+
+where (x1, x2) ∈ Rn−1×R, u ∈ U is an admissible input. The functions f1, f2, h1 and h2 are locally Lipschitz continuous. Furthermore, the functions satisfy f1(0, 0) = h1(0, 0, 0) = h2(0, 0, 0) = 0 and f2(x1, x2) = 0, ∀(x1, x2) ∈ Rn.
+In a more compact notation, we denote system (1) by x˙ = fh(x, u). Furthermore, when h1 ≡ 0 and h2 ≡ 0 we write x˙ = f (x, u).
+
+2.1 Assumptions
+
+The ﬁrst assumption concerns the local stabilizability around the origin of system (1). More precisely,
+Assumption 1. (Local stabilizability) There exist a C1 positive deﬁnite and proper function Vℓ : Rn → R≥0, a continuous function ϕℓ : Rn → R and a positive constant vℓ such that,
+∂xVℓ(x) · fh(x, ϕℓ(x)) < 0 , ∀x ∈ {x : 0 < Vℓ(x) ≤ vℓ}.
+Note that, when the ﬁrst order approximation of system (1) is controllable, Assumption 1 is trivially satisﬁed. Indeed, if the couple of matrices (A, B), with A = ∂xfh(0, 0) and B = ∂ufh(0, 0) is controllable, then there exist matrices P > 0 and K such that Vℓ(x) = xT P x and ϕℓ(x) = Kx. Thus Assumption 1 holds with a suﬃciently small positive constant vℓ.
+The second hypothesis provides estimates on terms which prevents using the traditional backstepping method. More precisely, this assumption concerns the global stabilizability of the system
+
+x˙ 1 = f1(x1, x2)
+
+(2)
+
+with x2 as an input and bounds of functions h1 and h2. This assumption will be also useful to state a global practical stability property of (1) (see Proposition 3.1 below).
+
+3
+
+Assumption 2. There exist a C1 proper and positive deﬁnite function V1 : Rn−1 → R≥0, a C1 function ϕ1 : Rn−1 → R such that ϕ1(0) = 0, a locally Lipschitz K∞ function α : R≥0 → R≥0, a continuous function Ψ : Rn → R and two positive constants ε < 1 and M such that the following properties hold.
+1. (Stabilizing controller ϕ1 for (2)) ∀x1 ∈ Rn−1,
+∂x1V1(x1) · f1(x1, ϕ1(x1)) ≤ −α(V1(x1)).
+
+2. (Estimation on h1) ∀(x1, x2, u) ∈ Rn−1 × R × R,
+
+Lh1V1(x1, ϕ1(x1), u) ≤ (1 − ε)α(V1(x1))
+
++εα(M ),
+
+(3)
+
+|h1(x1, x2, u)| ≤ Ψ(x1, x2)
+
+(4)
+
+3. (Estimation on ∂x2h1) ∀(x1, x2, u) ∈ Rn−1 × R × R,
+
+|∂x2h1(x1, x2, u)| ≤ Ψ(x1, x2).
+
+(5)
+
+4. (Estimation on h2) ∀(x1, x2, u) ∈ Rn−1 × R × R,
+
+|h2(x1, x2, u)| ≤ Ψ(x1, x2).
+
+(6)
+
+As we will see in this work, it is not necessary that ϕ1 be C1 in a neighborhood of the origin because, in such a region, we use the local controller
+ϕℓ. Before introducing the third assumption, let us denote A the subset of
+Rn deﬁned by
+
+A = {(x1, x2) ∈ Rn : V1(x1) ≤ M, x2 = ϕ1(x1)}.
+
+(7)
+
+Note that since, by Assumption 2, the function V1 is proper, this set is compact. Moreover, it will be proven below (see Proposition 3.1) that with the other items of Assumption 2 a controller to (1) can be designed such that A is globally practically stable to the system in closed-loop with this controller.
+The last assumption describes that A is included in the basin of attraction of the controller ϕℓ.
+Assumption 3. (Inclusion assumption)
+
+max x∈AVℓ(x) < vℓ .
+
+(8)
+
+4
+
+The problem under consideration in this paper is the design of a controller such that the origin is globally asymptotically stable for (1). Due to the presence of the functions h1 and h2 and their dependence with respect to u, a classical backstepping can not be achieved to compute a global stabilizer.1
+However we succeed to design a controller rendering a compact set globally asymptotically stable to (1) in closed-loop. Then a natural approach is to combine this controller with a local feedback law given by Assumption 1. Global asymptotical stabilization of the origin of Rn can be achieved by considering a hybrid controller which blends the diﬀerent controllers according to each basin of attraction. The strategy is similar to that one developed in [25], namely, we divide the continuous state space in two open sets introducing a region with hysteresis. This asks to make precise the class of controllers under consideration in this paper.
+
+2.2 Class of controllers
+
+Deﬁnition 2.1. A hybrid feedback law to (1), denoted by IK, consists of
+
+• a totally ordered countable set Q;
+
+• for each q ∈ Q,
+
+– closed sets Cq ⊂ Rn and Dq ⊂ Rn such that Cq ∪ Dq = Rn; – a continuous function ϕq : Cq → R;
+
+1 More precisely, following the classical basckstepping approach, let us assume that item
+
+1 of Assumption 2 holds and let us consider the Lyapunov function candidate V (x1, x2) =
+
+V1(x1)
+
++
+
+1 2
+
+(x2
+
+−
+
+ϕ1(x1))2.
+
+We compute along the solutions of (1), for all (x1, x2, u) in
+
+Rn−1 × R × R,
+
+V˙ ≤ −α(V1(x1)) + [x2 − ϕ1(x1)] [f2(x1, x2)u + h2(x1, x2, u)
+
+−
+
+∂ϕ1 ∂x1
+
+(x1
+
+)
+
+·
+
+(f1
+
+(x1
+
+,
+
+x2
+
+)
+
++
+
+h1
+
+(x1
+
+,
+
+x2
+
+,
+
+u))
+
++
+
+∂V1 ∂x1
+
+(x1
+
+)
+
+·
+
+1 0
+
+f1(x1,
+
+sx2
+
+−
+
+(1
+
+−
+
+s)ϕ1(x1))ds
+
++
+
+∂ ∂
+
+V1 x1
+
+(x1
+
+)
+
+·
+
+h1(x1,
+
+x2,
+
+u)
+
+.
+
+And thus to get an term (x2 − ϕ1(x1))2 in the right-hand side of this inequality, it is
+natural to look for a control u = u(x1, x2) satisfying the following identity, for all (x1, x2) in Rn−1 × R,
+
+f2(x1, x2)u
+
++
+
+∂V1 ∂x1
+
+(x1)
+
+·
+
++01hf21((xx11,,xs2x,2u−) −(1∂∂−ϕx11
+
+(x1) s)ϕ1
+
+· (f1(x1 (x1))ds
+
+, x2) + h1 = −k (x2
+
+(x1, x2, u)) − ϕ1(x1))
+
+for some positive value k. However this equation is implicit in the variable u due to dependance of h1 and of h2 with respect to u. Therefore it seems to us that the classical backstepping cannot be achieved to compute a stabilizer for (1).
+
+5
+
+– an outer semi-continuous2, and locally bounded3, uniformly in q, set-valued mapping Gq : Dq ⇒ Q with non-empty images,
+such that the family {Cq}q∈Q is locally ﬁnite and covers Rn.
+System (1) in closed loop with IK lies in the class of hybrid systems as considered in e.g., [3]. It is deﬁned as the hybrid system
+
+IH :
+
+x˙ = fh(x, ϕq(x)), x ∈ Cq
+
+q+ ∈ Gq(x),
+
+x ∈ Dq.
+
+(9)
+
+Note that the state space of IH is Rn × Q.
+
+Deﬁnition 2.2. A hybrid time domain S ⊂ R≥0 × N, is the union of ﬁnitely of inﬁnitely many time intervals [tj, tj+1] × {j}, where the sequence {tj}j≥0 in nondecreasing, with the last interval, if it exists, possibly of the form [t, T )
+with T ﬁnite or T = ∞.
+
+Deﬁnition 2.3. A solution to IH with initial condition (x(0, 0), q(0, 0)) = (x0, q0) consists of
+• A hybrid time domain S = ∅;
+• A function x : S → Rn, where t → x(t, j) is absolutely continuous, for a ﬁxed j, and constant in j for a ﬁxed t over (t, j) ∈ S;
+
+• A function q : S → Q such that q(t, j) is constant in t, for a ﬁxed j over (t, j) ∈ S;
+
+meeting the conditions
+
+S1) x(0, 0) ∈ Cq(0,0) ∪ Dq(0,0);
+S2) ∀j ∈ N and æ t such that (t, j) ∈ S,
+q˙(t, j) = 0, x˙ (t, j) ∈ Fq(t,j)(x(t, j)), x(t, j) ∈ Cq(t,j);
+2a set-valued mapping F : Rm ⇒ Rn is said to be outer semicontinuous if each sequence (xi, fi) in Rm × Rn that satisﬁes fi ∈ F (xi) for each i, and converges to a point (x, f ) in Rm × Rn has the property that f ∈ F (x).
+3a set-valued mapping F : Rm ⇒ Rn is said to be locally bounded if, for each compact set K1 ⊂ Rn, there exists a compact set K2 ⊂ Rn such that F (K1) := x∈K1 ⊂ K2. The boundedness is said to be uniform with respect to a parameter if the set K2 can be selected uniformly with respect to this parameter.
+
+6
+
+S3) ∀(t, j) ∈ S such that (t, j + 1) ∈ S
+x(t, j + 1) = x(t, j), q(t, j + 1) ∈ Gq(t,j)(x(t, j)), x(t, j) ∈ Dq(t,j).
+From now on, we will refer to the domain of a solution (x, q) to IH as dom(x, q). A solution (x, q) to IH is called maximal if it cannot be extended, i.e., does not exists any solution deﬁned on a larger domain of deﬁnition and equal to (x, q) on dom(x, q). A solution is complete if its domain is unbounded.
+During ﬂows, x evolves according to the diﬀerential equation x˙ = fh(x, ϕq(x)), x ∈ Cq while q remains constant. During jumps, q evolves according to the diﬀerence inclusion q+ ∈ Gq(x), x ∈ Dq while x remains constant.
+Remark 2.4. Note that a suﬃcient condition for the existence of a hybrid stabilizer for (1) is the global asymptotic controllability (see [27], Theorem 3.7 for more details).
+Together with locally Lipschitz continuity assumption, we consider the Filippov regularization of (1) which assures existence, uniqueness and bounded dependence on the initial condition for solutions of IH. Moreover, IH is robust and its solution behaves as follows: it is either complete or blows in a ﬁnite hybrid domain time or eventually jumps out of Cq ∪ Dq, q ∈ Q. For further information, see [2], [4], [7], [11] and [12].
+We can now deﬁne the notion of stability needed to design the controller for the hybrid closed loop system.
+Deﬁnition 2.5.
+• A set A ⊂ Rn is stable for IH if ∀ε > 0, ∃δ > 0 such that any solution (x, q) to (9) with |x0|A ≤ δ satisﬁes |x(t, j)|A ≤ ε, for all (t, j) ∈ dom(x, q);
+• A set A ⊂ Rn is attractive for IH if there exists δ > 0 such that
+– for all (x¯, q¯) ∈ Rn × Q with |x¯|A ≤ δ there exists a solution to IH with (x, q)(0, 0) = (x¯, q¯);
+– for any maximal solution (x, q) to IH with |x(0, 0)|A ≤ δ we have |x(t, j)|A → 0 as t → sup t(dom(x, q)).
+• The set A ⊂ Rn is asymptotically stable if it is stable and attractive;
+• The basin of attraction, denoted by IBIH(A), is the set of all x¯ ∈ Rn such that for all q¯ ∈ Q, there exists a solution to IH with x(0, 0) = x¯, q(0, 0) = q¯ and any such solution that is also maximal satisﬁes |x(t, j)|A → 0 as t → sup t dom(x, q);
+7
+
+• The set A ⊂ Rn is globally asymptotically stable if IBIH(A) = Rn.
+3 Main result
+Let us denote the unit closed ball in Rn by B. Before stating our main result, let us ﬁrst solve a preliminary design problem by adapting the backstepping technique:
+Proposition 3.1. Under Assumption 2, the set A deﬁned by (7) is globally practically stabilizable, i.e. for each a > 0 there exists a continuous controller ϕg such that the set A+aB contains a set that is globally asymptotically stable for system (1) in closed-loop with ϕg.
+We are now in position to state our main result.
+Theorem 1. Let vℓ and vℓ be two positive constants satisfying 0 < vℓ < vℓ. Under Assumptions 1, 2 and 3 there exists a > 0 such that the hybrid controller IK deﬁned by Q = {1, 2}, subsets
+C1 = {(x1, x2) ∈ Rn−1 × R : Vℓ(x1, x2) ≤ vℓ}, C2 = {(x1, x2) ∈ Rn−1 × R : Vℓ(x1, x2) ≥ vℓ}, Dq = (Rn−1 × R) \ Cq, ∀q = 1, 2,
+controllers C1 ∋ (x1, x2) → ϕ1(x1, x2) = ϕℓ(x1, x2) ∈ R and C2 ∋ (x1, x2) → ϕ2(x1, x2) = ϕg(x1, x2, a) ∈ R and set-valued mapping Dq ∋ (x1, x2) → Gq(x1, x2) = {3 − q}, q ∈ Q, renders the origin globally asymptotically stable for (1) in closed-loop with IK.
+Let us emphasize that this result is more than an existence result since its proof allows to design a suitable hybrid feedback law. Let us sketch the proof of Theorem 1. First, we use Assumption 2, and Proposition 3.1 is applied to design a controller, denoted ϕg, such that the set A is globally practically stable for the system (1) in closed-loop with ϕg. Using Assumptions 1 and 3, this set is shown to be included in the basin of attraction of the system (1) in closed-loop with ϕℓ. Then we design a hybrid feedback law based on an hysteresis of both controllers ϕℓ and ϕg on appropriate sets. This latter construction is adapted from other works like [11] or [25]. The complete proof of Theorem 1 is in Section 5 below.
+8
+
+4 Illustration
+
+Before applying the main result of this paper, let us ﬁrst consider the follow-
+
+ing example in R2
+
+x˙ 1 x˙ 2
+
+= x1 + θx21 + x2 =u
+
+,
+
+(10)
+
+where θ is a positive constant.
+
+This system is in backstepping form and many references on how to design
+
+a global stabilizer are presented in the literature, for instance, the reader may
+
+see [8, 18], and [19]. Following this approach, in a ﬁrst step, we consider the
+
+two
+
+smooth
+
+functions
+
+ϕ1(x1)
+
+=
+
+−(1 + c1)x1
+
+− θx21
+
+and
+
+V1(x1)
+
+=
+
+1 2
+
+x21
+
+where
+
+c1
+
+is a positive constant. It can be checked that this function is such that, for
+
+all x1 in R,
+
+∂x1V1(x1) x1 + θx21 + ϕ1(x1) = −2c1V1(x1) .
+
+(11)
+
+This gives the control law, for all (x1, x2) in R2,
+
+ϕb(x1, x2) = −(1 + c1 + 2θx1)(x1 + θx21 + x2) −x1 − c2 (x2 + (1 + c1)x1 + θx21)
+
+which is such that along the solutions of (10),
+
+V˙b(x1, x2) = −c1x21 − c2 (x2 + (1 + c1)x1 + θx21)2
+
+where
+
+Vb(x1,
+
+x2)
+
+=
+
+V1(x1)
+
++
+
+1 2
+
+(x2
+
++
+
+(1
+
++
+
+c1)x1
+
++
+
+θx21)2.
+
+However the backstepping technique cannot be applied to the following
+
+system:
+
+x˙ 1 = x1 + x2 + θ[x21 + (1 + x1)sin (u)] x˙ 2 = u
+
+(12)
+
+due to the presence of the term (1 + x1)sin (u) in the time-derivative of x1 (recall the discussion in Footnote 1). Therefore, it is necessary to revise the controller design for (1) and to apply Theorem 1. With obvious deﬁnitions of the functions f1, f2, h1 and h2, system (12) may be rewritten as system (1) and system (10) may be rewritten as x˙ = f (x, u). There exists θ > 0 suﬃciently small such that we may apply Theorem 1. Indeed we have the following result.
+
+Lemma 4.1. Let θ be a positive constant. If θ is suﬃciently small, then Assumptions 1, 2, and 3 hold for system (12).
+
+The proof has been removed due to space limitation.
+
+9
+
+Combining this result with Theorem 1, we may design a hybrid feedback law IK such that the origin is globally asymptotically stable to (12) in closed-
+
+loop with IK.
+
+Let
+
+us
+
+consider
+
+the
+
+following
+
+parameters
+
+θ
+
+=
+
+10−3,
+
+ρ
+
+=
+
+2,
+
+c1
+
+=
+
+(2+ρ)θ 2
+
++1
+
+=
+
+1.0020, a = 10 and c = 10. Item 1 of Assumption 2 is satisﬁed with α(s) =
+
+2c1s,
+
+∀s
+
+≥
+
+0.
+
+Item
+
+2
+
+is
+
+satisﬁed
+
+with
+
+positive
+
+constants
+
+ε
+
+=
+
+1
+
+−
+
+θ
+
+2+ρ 2c1
+
+=
+
+0.998
+
+and M =
+
+θ 2ρ(2c1−θ(2+ρ))
+
+=
+
+1.25 × 10−4
+
+.
+
+Items 3 and 4 are satisﬁed with
+
+Ψ(x1, x2) = θ(1 + |x1|).
+
+Since the pair of matrices (A, B) = (∂xfh(0, 0), ∂ufh(0, 0)) is controllable,
+
+Assumption 1 holds with ϕℓ(x) = k1x1 + k2x2, where k1 = −5 − θ and
+
+k2
+
+=
+
+−3 + 3θ + θ2,
+
+Vℓ(x)
+
+=
+
+1 2
+
+(x1
+
+−
+
+θx2)2
+
++
+
+1 2
+
+(2x1
+
++
+
+(1
+
+−
+
+2θ)x2)2
+
+and
+
+vℓ
+
+=
+
+2
+
+2 θp(θ)
+
+= 0.1042. Moreover, in the set deﬁned by
+
+√ A = {(x1, x2) ∈ R2 : |x1| ≤ 2.5 × 10−4, x2 = ϕ1(x1)}.
+
+we may check that
+
+max x∈AVℓ(x1, x2) = 0.0001 < vℓ,
+
+and thus Assumption 3 holds. Following Proposition 3.1 and Theorem 1, we
+
+may
+
+deﬁne
+
+a
+
+hybrid
+
+controller.
+
+More
+
+precisely,
+
+computing
+
+k
+
+=
+
+2
+
+M +a a2
+
+= 0.2,
+
+we deﬁne the global controller
+
+ϕg(x1, x2)
+
+=
+
+u k
+
+−
+
+(1
+
++
+
+c1
+
++
+
+2θx1)(x1
+
++
+
+θx21
+
++
+
+x2)
+
++
+
+x1 2k
+
+,
+
+where u = (x1 − ϕ1(x1))
+
+−c
+
+−
+
+c 4
+
+∆(x1
+
+,
+
+x2)2
+
+and
+
+∆(x1, x2) = |x1|θ(1 + |x1|) + θ(1 + |x1|)
+
+·k(1 + |(1 + c1)x1 + θx21|) Then, letting vℓ = 0.05, the origin is globally asymptotically stable for (12) in closed-loop with the hybrid controller IK deﬁned as in Theorem 1.
+Let us check this property on numerical simulations. To do that, we
+consider the initial condition x1(0, 0) = 0.5, x2(0, 0) = 0.1 and q(0, 0) = 1. See Fig. 1 for the time evolution of the x1, x2 and q components of the solution of (12) in closed-loop with IK. First the system (12) is in closed-
+loop with the controller ϕg (for continuous time between 0 and 0.5314). Then the system (12) is in closed-loop with the controller ϕℓ, and the solution converges to the origin.
+
+10
+
+x
+1
+
+x2
+
+0.4
+0.2
+0 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 flows [t]
+0 −0.2 −0.4 −0.6 −0.8
+0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 flows [t]
+2
+1.5
+1 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 flows [t]
+
+q
+
+Figure 1: At top, time evolution of x1, at middle, time evolution of x2 and, at bottom, time evolution of q.
+
+5 Proof of Theorem 1
+
+5.1 Proof of Proposition 3.1
+
+Proof. Let a be a positive value. We wish to show that there exists a con-
+tinuous controller ϕg such that A + aB contains a set that is globally and asymptotically stable.
+First of all, note that if we introduce the function r1(x1, x2, u) = f1(x1, x2)+ h1(x1, x2, u), we get with Item 1 and Item 2 of Assumption 2 that along the solutions of (1), we have for all (x1, x2) in Rn and u in R,
+
+V˙1(x1) ≤ ε[α(M ) − α(V1(x1))] +∂x1V1(x1) · [r1(x1, x2, u) − r1(x1, ϕ1(x1), u)]
+
+(13)
+
+Moreover, with the C1 function ηx1,x2(s) = sx2 + (1 − s)ϕ1(x1), it yields
+
+∂sr1(x1, ηx1,x2(s), u) = ∂x2r1(x1, ηx1,x2(s), u)(x2 − ϕ1(x1)) ,
+
+11
+
+which implies
+
+r1(x1, x2, u) − r1(x1, ϕ1(x1), u) = (x2 − ϕ1(x1))
+
+1 0
+
+∂x2
+
+r1
+
+(x1,
+
+ηx1,x2
+
+(s),
+
+u)
+
+ds.
+
+Hence, Equation (13) becomes,
+
+V˙1(x1) ≤ ε[α(M ) − α(V1(x1))]
+
++(x2 − ϕ1(x1))∂x1V1(x1) ·
+
+1 0
+
+∂x2
+
+r1(x1,
+
+ηx1,x2
+
+(s),
+
+u)
+
+ds.
+
+Let
+
+V
+
+(x)
+
+=
+
+V1(x1) +
+
+k 2
+
+(x2
+
+− ϕ1(x1))2
+
+for
+
+all
+
+(x1,
+
+x2)
+
+in
+
+Rn
+
+with
+
+k
+
+=
+
+2
+
+M +a a2
+
+.
+
+Let a′ be a positive value such that V1(x1) ≤ a′ implies x1 ∈ {x′1 : V1(x′1) ≤
+
+a′} + aB, in other words, a′ is such that
+
+V1(x1) ≤ a′ ⇒ ∃x′1 s.t. V1(x′1) ≤ a′ and |x1 − x′1| ≤ a .
+Such positive value a′ exists since V1 is assumed to be a proper function. Let a = min {a, a′}. With these deﬁnitions of k and a′, we get
+
+{x : V (x) ≤ M + a} ⊂ A + aB
+
+(14)
+
+Consider now the control ϕg deﬁned for all u in R as in Proposition 3.1.
+Along the solutions of (1) with u = ϕg(x1, x2, u), it yields for all (x1, x2) in Rn and u in R,
+
+V˙ (x) ≤ ε[α(M ) − α(V1(x1))] + (x2 − ϕ1(x1))[u
+
++Υ(x1, x2, u)],
+
+where
+
+Υ(x1, x2, u) = ∂x1V1(x1) ·
+
+1 0
+
+∂x2
+
+h1
+
+(x1
+
+,
+
+ηx1,x2
+
+(s),
+
+u)
+
+ds
+
++kh2(x1, x2, u) − k∂x1ϕ1(x1)h1(x1, x2, u).
+
+With Item 2, 3 and 4 of Assumption 2, the function Υ satisﬁes |Υ(x1, x2, u)| ≤ ∆(x1, x2) with
+
+∆(x1, x2) = |∂x1V1(x1)|
+
+1 0
+
+Ψ(x1,
+
+ηx1,x2
+
+(s))
+
+ds
+
+(15)
+
++Ψ(x1, x2)k(1 + |∂x1ϕ1(x1)|)
+
+Using
+
+a
+
+particular
+
+case
+
+of
+
+the
+
+Cauchy-Schwartz
+
+inequality
+
+(i.e.
+
+α
+
+≤
+
+1 c
+
++
+
+c 4
+
+α2),
+
+we get, for all c > 0
+
+(x2
+
+−
+
+ϕ1(x1))Υ(x1, x2, u)
+
+≤
+
+1 c
+
++
+
+c 4
+
+(x2
+
+−
+
+ϕ1(x1))2∆(x1,
+
+x2)2.
+
+12
+
+Consequently, it implies, that by taking
+
+u = (x2 − ϕ1(x1))
+
+−c
+
+−
+
+c 4
+
+∆(x1,
+
+x2)2
+
+,
+
+(16)
+
+it yields along the solutions of
+
+x˙ = f (x, ϕg(x1, x2, u)) .
+
+(17)
+
+and for all (x1, x2) in Rn,
+
+V˙
+
+(x)
+
+≤
+
+ε[α(M )
+
+−
+
+α(V1(x1))]
+
++
+
+1 c
+
+−
+
+c(x2
+
+−
+
+ϕ1(x1))2
+
+.
+
+(18)
+
+Note that for all c ≥ 1, it gives,
+
+V˙ (x) ≤ ε[α(M ) − α(V1(x1))] + 1 − (x2 − ϕ1(x1))2 .
+
+The function V1 being proper, the set A1 ⊂ Rn deﬁned by
+
+A1 = {x, εα(V1(x1)) + (x2 − ϕ1(x1))2 ≤ εα(M ) + 1} ,
+
+is compact. Moreover, selecting c > 1, we get, along the solutions of (17), V˙ (x) < 0, for all x such that V (x) ≥ ζ, where ζ is the positive value deﬁned as ζ = max x∈A1{V (x)}. Consequently, for all c > 1, the set {x, V (x) ≤ ζ} is globally asymptotically stable for (17).
+The function α being locally Lipschitz, we can deﬁne Kα its Lipschitz constant in the compact set {x, V (x) ≤ ζ}. Hence, for all x in {x, V (x) ≤ ζ}, it yields,
+
+|α(V1(x1))
+
+−
+
+α(V
+
+(x))|
+
+≤
+
+kKα 2
+
+(x2
+
+−
+
+ϕ1(x1))2
+
+.
+
+Consequently, with (18) and c > 1, we get along the solutions of (17), for all
+
+x such that V (x) ≤ ζ,
+
+V˙
+
+(x)
+
+≤
+
+ε[α(M )
+
+−
+
+α(V
+
+(x))]
+
++
+
+1 c
+
+Finally, taking c > cg where
+
+−
+
+c
+
+−
+
+ε
+
+kKα 2
+
+(x2 − ϕ1(x1))2 .
+
+cg = max
+
+ε[α(M
+
+1 +a)−α(M
+
+)]
+
+,
+
+ε
+
+kKα 2
+
+,
+
+1
+
+,
+
+it gives, along the trajectories of (17), for all x such that V (x) ≤ ζ, V˙ (x) ≤ ε [α(M + a) − α(V (x))].
+Therefore, with c > cg, for all x such that ζ ≥ V (x) > M + a, we get along the solutions of (17), V˙ (x) < 0. Since cg > 1 the same control gives also V˙ (x) < 0 for all x such that V (x) ≥ ζ. Therefore the set {x, V (x) ≤ M + a} in an attractor for system (1) in closed-loop with u = ϕg(x1, x2, u). Consequently, with (14), the set A + aB contains a set that is globally and
+
+13
+
+asymptotically stabilizable with the control law ϕg(x1, x2) = ϕg(x1, x2, u) where u is deﬁned in (16) and c > cg. This concludes the proof of Proposition 3.1.
+
+5.2 Proof of Theorem 1
+Proof. Since Assumption 2 holds, Proposition 3.1 applies. Let us choose the positive real number 0 < a such that
+
+max x∈A+aBVℓ(x) < vℓ .
+
+(19)
+
+Such values exist since Assumption 3 holds, and since Vℓ is a proper function. Let us consider the controller ϕg given by Proposition 3.1 with this value
+of a. Let us design a hybrid feedback law IK deﬁning it as in Theorem 1, i.e.,
+building an hysteresis of ϕℓ and ϕg on appropriate domains (see also [11] or [25] for similar concepts applied to diﬀerent control problems).
+Consider an initial condition (x(0, 0), q(0, 0)) in Rn × Q, and a maximal solution (x, q) of (1) in closed-loop with the hybrid feedback law IK = (Q, (Cq, Dq, ϕq)q=1,2). Let us assume, for the time-being, the following
+Lemma 5.1. There exists a hybrid time (t¯, ¯j) in dom(x, q) such that q(t¯, ¯j) = 1 and x(t¯, ¯j) in C1.
+Now, recalling (19) and using Assumption 1, the sets C1 is forward invariant for system (1) in closed-loop with ϕℓ. Thus with Lemma 5.1, we get that (1) in closed-loop with the hybrid feedback law IK is globally asymptotically stable (since system (1) in closed-loop with ϕℓ is locally asymptotically stable).
+Therefore to conclude the proof of Theorem 1, it remains to prove Lemma 5.1. Let us prove this result by assuming the converse and exhibiting a contradiction. More precisely, let us assume that, for all (t, j) in dom(x, q),
+
+x(t, j) ∈ C1 or q(t¯, ¯j) = 2 .
+
+(20)
+
+Thus, due to the expression of D2, for all (t, j) in dom(x, q), we have
+
+x(t, j) ∈ D2 \ C1 or q(t¯, ¯j) = 2 .
+
+(21)
+
+If there is a time such that x(t¯, ¯j) ∈ D2 \ C1 and q(t¯, ¯j) = 1, then a jump occurs for the q-variable and, due to the expression of G1, x(t¯, ¯j + 1) ∈ C1 and q(t¯, ¯j + 1) = 2, which is a contradiction with (20). Therefore, if x(t¯, ¯j) ∈ D2 \ C1, then q(t¯, ¯j) = 2. Thus we get with (21), for all (t, j) in dom(x, q),
+
+14
+
+x(t, j) ∈ D2 and q(t¯, ¯j) = 2. Therefore the x-component is a solution of (1) in closed-loop with ϕg with does not enter C1. Since, with (19), C1 strictly contains the set A, we get the existence of a solution of (1) in closed-loop with ϕg which does not converge to A + aB. This is a contradiction with the choice of the controller ϕg satisfying the conclusion of Proposition 3.1.
+This concludes the proof of Theorem 1.
+6 Conclusion
+A new design method has been suggested in this paper to combine a backstepping controller with a local feedback law. The class of designed controllers lies in the set of hybrid feedback laws. It allows us to deﬁne a stabilizing control law for nonlinear control systems for which there exist some structural obstacles to the existence of classical continuous stabilizing feedback laws. More precisely, it is studied systems for which the backstepping tool for the design of stabilizers can not be applied.
+References
+[1] V. Andrieu and C. Prieur, Uniting two control Lyapunov functions for aﬃne systems, IEEE Transactions on Automatic Control 55 (2010), no. 8, 1923–1927.
+[2] J.-P. Aubin and A. Cellina, Diﬀerential inclusions, Springer, 1984.
+[3] J.-P. Aubin, J. Lygeros, M. Quincampoix, S. S. Sastry, and N. Seube, Impulse diﬀerential inclusions: a viability approach to hybrid systems, IEEE Transactions on Automatic Control 47 (2002), no. 1, 2–20.
+[4] A. Bacciotti and L. Rosier, Liapunov functions and stability in control theory, 2nd ed., Communications and Control Engineering, Springer, Berlin Heidelberg, January 2010.
+[5] J. H. Braslavsky and R. H. Middleton, Global and semi-global stabilizability in certain cascade nonlinear systems, 41 (1996), no. 6, 876–880.
+[6] R.W. Brockett, Asymptotic stability and feedback stabilization, Diﬀerential geometric control theory (Richard S. Millman and Hector S. Sussmann, eds.), Birkhauser, 1983, pp. 181–191.
+[7] A. F. Filippov, Diﬀerential equations with discontinuous righthand sides, 1st ed., Mathematics and its Applications, Springer, September 1988.
+15
+
+[8] R. A. Freeman and P. V. Kokotovi´c, Robust nonlinear control design: State-space and lyapunov techniques, Modern Birkh¨auser Classics, Birkh¨auser, Boston, January 2008.
+
+[9] R. Goebel, J. Hespanha, A. R. Teel, C. Cai, and R. G. Sanfelice, Hybrid systems: generalized solutions and robust stability, Proc. 6th IFAC symposium in nonlinear control systems, Citeseer, 2004, pp. 1–12.
+
+[10] R. Goebel, C. Prieur, and A. R. Teel, Smooth patchy control Lyapunov functions, Automatica 45 (2009), no. 3, 675–683.
+
+[11] R. Goebel, R. G. Sanfelice, and A. R. Teel, Hybrid dynamical systems, IEEE Control Systems Magazine 29 (2009), no. 2, 28–93.
+
+[12] R. Goebel and A. R. Teel, Solutions to hybrid inclusions via set and graphical convergence with stability theory applications, Automatica 42 (2006), 573–587.
+
+[13] F. Grognard, R. Sepulchre, and G. Bastin, Global stabilization of feedforward systems with exponentially unstable Jacobian linearization, 37 (1999), no. 2, 107–115.
+
+[14] J. Hespanha, D. Liberzon, and A.S. Morse, Towards the supervisory control of uncertain nonholonomic systems, Proc 18th American Control Conf., San Diego, CA, 1999, pp. 3520–3524.
+
+[15]
+
+, Hysteresis-based switching algorithms for supervisory, Automat-
+
+ica 39 (2004), no. 2, 263–272.
+
+[16] J. Hespanha and A.S. Morse, Stabilization of nonholonomic integrators via logic-based switching, Automatica 35 (1999), no. 3, 385–393.
+
+[17] M. Jankovi´c, R. Sepulchre, and P. V. Kokotovi´c, Constructive Lyapunov stabilization of nonlinear cascade systems, 41 (1996), no. 12, 1723–1735.
+
+[18] H. K. Khalil, Nonlinear systems, 2nd ed., Macmillan Publishing Company, 1992.
+
+[19] P. V. Kokotovi´c, The joy of feedback: nonlinear and adaptative, IEEE Control Systems Magazine 12 (1992), no. 3, 7–17.
+
+[20] M. Krsti´c, I. Kanellakopoulos, and P. V. Kokotovi´c, Nonlinear and adaptive control design, Communications and Control Engineering Series, Wiley, New York, 1995.
+
+16
+
+[21] F. Mazenc and L. Praly, Adding integrations, saturated controls, and stabilization for feedforward systems, IEEE Transactions on Automatic Control 41 (1996), no. 11, 1559–1578.
+[22] P. Morin and C. Samson, Robust stabilization of driftless systems with hybrid open-loop/feedback control, Proc. 19th American Control Conference (Chicago, IL), 2000, pp. 3929–3933.
+[23] Z. Pan, K. Ezal, A.J. Krener, and P. V. Kokotovi´c, Backstepping design with local optimality matching, 46 (2001), no. 7, 1014–1027.
+[24] L. Praly, B. d’Andr´ea-Novel d’Andr´ea Novel, and J.-M. Coron, Lyapunov design of stabilizing controllers for cascaded systems, IEEE Transactions on Automatic Control 36 (1991), no. 10, 1177–1181.
+[25] C. Prieur, Uniting local and global controllers with robustness to vanishing noise, Mathematics of Control, Signals, and Systems 14 (2001), 143–172.
+[26] C. Prieur and A. Astolﬁ, Robust stabilization of chained systems via hybrid control, 48 (2003), no. 10, 1768–1772.
+[27] C. Prieur, R. Goebel, and A. R. Teel, Hybrid feedback control and robust stabilization of nonlinear systems, IEEE Transactions on Automatic Control 52 (2007), no. 11, 2103–2117.
+[28] A. Saberi, P. V. Kokotovi´c, and H. J. Sussmann, Global stabilization of partially linear composite systems, 28 (1990), 1491–1503.
+[29] R. Sepulchre, Slow peaking and low-gain designs for global stabilization of nonlinear systems, 45 (2000), no. 3, 453–461.
+[30] R. Sepulchre, M. Arcak, and A. R. Teel, Trading the stability of ﬁnite zeros for global stabilization of nonlinear cascade systems, 47 (2002), no. 3, 521–525.
+[31] R. Sepulchre, M. Jankovi´c, and P. V. Kokotovi´c, Constructive nonlinear control, Communications and Control Engineering Series, SpringerVerlag, Berlin, 1997.
+[32] H. J. Sussmann and P. V. Kokotovi´c, The peaking phenomenon and the global stabilization of nonlinear systems, 36 (1991), no. 4, 424–439.
+17
+

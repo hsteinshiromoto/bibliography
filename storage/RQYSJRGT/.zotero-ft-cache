@@ -1,0 +1,550 @@
+1
+Example Demonstrating the Application of Small-gain and Density Propagation Conditions for
+Interconnections
+Humberto Stein Shiromoto˚, Petro Feketa:, Sergey Dashkovskiy;
+˚ The Australian Centre for Field Robotics. The Rose Street Building J04, The University of Sydney, NSW 2006, Australia : Department of Civil Engineering, University of Applied Sciences Erfurt, Altonaer Str. 25, 99085 Erfurt, Germany ; Institute of Mathematics, University of Wu¨rzburg, Emil-Fischer-Str. 40, 97074 Wu¨rzburg, Germany
+
+arXiv:1606.02360v1 [cs.SY] 7 Jun 2016
+
+Abstract—This work provides an example that motivates and illustrates theoretical results related to a combination of small-gain and density propagation conditions. Namely, in case the small-gain fails to hold at certain points or intervals the density propagation condition can be applied to assure global stability properties. We repeat the theoretical results here and demonstrate how they can be applied in the proposed example.
+Index Terms—input-to-state stability; interconnection; smallgain condition; density propagation inequality.
+
+βp¨, tq is of class K for each ﬁxed t ě 0, and βpr, tq decreases to 0 as t Ñ 8 for each ﬁxed r ě 0.
+Consider the interconnection of two systems Σ1 and Σ2
+Σi : x9 i “ fipx1ptq, x2ptq, uiptqq, i “ 1, 2 (1)
+xiptq P Rni is the state of Σi and uiptq P Rmi is its external input, fi is assumed to be of class C1 and satisfy fip0, 0, 0q “ 0. This interconnection can be written as
+
+I. INTRODUCTION
+Here we will consider two nonlinear interconnected systems, each of them is ISS, and ask whether the interconnection is ISS as well. Typically one uses the so-called small-gain condition to assure this property. However in case this condition fails to hold at several points or intervals further conditions to assure global stability properties are necessary. This condition can be written in terms of a density propagation inequality [1]. Moreover if one tries to verify the small-gain condition numerically it can easily happen that this condition fails due to the unprecise computer calculations. Also in this case the density propagation condition can help to ﬁll such gaps.
+The example considered below demonstrates this kind of situations and illustrates how a combination of small-gain and density propagation conditions can be applied. First we recall the related theoretical results, that will be published elsewhere, then we will consider the example in detail.
+II. PRELIMINARIES AND NOTATION
+The notation N (resp. R) stands for the set N Y t8u (resp. R Y t8u). For a given a, b P R let Nra,bs “ ts P N : a ď s ď bu. Let S Ă Rn, its closure (resp. interior) is denoted as cltSu (resp. inttSu). We recall the following standard deﬁnitions: a function α : r0, 8q Ñ r0, 8q is of class K when α is continuous, strictly increasing, and αp0q “ 0. If α is also unbounded, then we say it is of class K8. A continuous function β : r0, 8q ˆ r0, 8q Ñ r0, 8q is of class KL, when
+This work was partially supported by the German Federal Ministry of Education and Research (BMBF) as a part of the research project “LadeRamProdukt”. Email addresses: humberto.shiromoto@ieee.org (Humberto Stein Shiromoto), petro.feketa@fh-erfurt.de (Petro Feketa), sergey.dashkovskiy@uniwuerzburg.de (Sergey Dashkovskiy).
+
+x9 “ f pxptq, uptqq
+
+(2)
+
+with the state x “ px1, x2q P Rn, n “ n1 ` n2, dynamics f “ pf1, f2q and input u “ pu1, u2q P Rm, m “ m1 ` m2.
+Deﬁnition 1 ([2]). The system (2) is called input-to-state stable (ISS) if there exist functions β P KL and γ˜u P K8 such that, for each initial condition xp0q and each measurable essentially bounded input up¨q, the solution xp¨q of (2) satisﬁes
+
+|xptq| ďβp|xp0q|, tq ` γ˜up|u|8q @t ě 0.
+
+ISS is equivalent to the existence of an ISS-Lyapunov function, which we deﬁne for each subsystem in (1):
+
+Deﬁnition 2. A function Vi P LiplocpRni , Rě0q is called storage function if for some αi, αi P K8 it holds that αip|xi|q ď Vipxiq ď αip|xi|q @xi P Rni .
+
+Deﬁnition 3. A storage function Vi is called ISS-Lyapunov function for (1) if for some γi,j, γi, αi P K8 the implication
+
+"
+
+*
+
+Vipxiq ě max γi,jpVjpxjqq, γip|ui|q
+
+(3a)
+
+ñ ∇Vipxiq ¨ fipxi, xj, uiq ď ´αip|xi|q.
+
+(3b)
+
+holds for each xi P Rni , xj P Rnj , and ui P Rmi . γi,j (resp. γi) is called interconnecting (resp. external) ISS-Lyapunov gain.
+
+Stability of the resulting interconnected system (2) can be deduced from the small-gain theorem [3]: if the interconnecting ISS-Lyapunov gains satisfy
+
+γ12 ˝ γ21psq ă s @s ą 0,
+
+(4)
+
+then system (2) is input-to-state stable.
+
+2
+
+In this paper we assume that the graphs of γ1´21 and γ21 have several points of intersection. It means that small-gain condition does not hold globally and the previously known results cannot be utilized to verify global stability properties of the interconnection. To guarantee the desired stability properties of the interconnection, the dual to Lyapunov’s techniques [1, 4] is employed in speciﬁc domains of the state space. Our approach extends the results of [5] to the case of arbitrary number of intersection points of γ1´21 and γ21 and allows for external inputs. Moreover our stability conditions are less restrictive then in [5].
+
+Assumption 1. Let for each i “ 1, 2 there exist an ISSLyapunov function Vi for Σi from (1) with the corresponding gain functions γi,j, γi P K8, and αi P K8.
+Assumption 2. Let the intersection points of the graphs of γ1´21 and γ21 be given. These points deﬁne a sequence of intervals Mk “ pM k, M kq where the small-gain condition (4) holds for any s P Mk, k P Nr1, s, P N.
+For a given δ P Rě0 let Lipδq “ txi P Rni : Vipxiq ď δu.
+Theorem 4. Let Assumptions 1 and 2 hold. Then there exists γ P K8 such that almost all solutions to system (2) starting in the set Bk converge to a neighborhood of the set Ak with radius γp|u|8q, where
+Ak “ tx P Rn : x1 P L1pmaxtM k, γ12pM kquq, (5) x2 P L2pmaxtγ21pM kq, γ21 ˝ γ21pM kququ,
+Bk “ tx P Rn : x1 P L1pM kq, x2 P L2pγ21pM kqqu. (6)
+
+If M ‰ 8 then the above mentioned convergence holds only for some bounded inputs u.
+
+The input-to-state stability of system (2) follows trivially when “ 1, M 1 “ 0, M 1 “ 8; then A1 “ t0u and B1 “ R2. However, when ą 1, solutions to (2) starting in the set Ak may converge to an ω-limit set [6, Birkhoff’s Theorem] that lies inside the set Ak and do not converge to a ball centred at the origin whose radius is proportional to the norm of the
+input. Due to this fact, the next assumption is needed to check the asymptotic behaviour of solutions inside the sets Ak. Let B0 “ H and A `1 “ Rn.
+Assumption 3. Let for each k P Nr1, `1s, there exist an open set Dk Ă Rn satisfying tAkzBk´1u Ĺ cltDku and
+‚ A differentiable function ρk : Dk Ñ Rą0; ‚ A continuous function qk : Dk Ñ Rě0 such that, for
+almost every x P Dk, qkpxq ą 0; ‚ A function γk P K such that, for every x P Dk and for
+every u P Rm, the following implication holds
+
+max Vipxiq ě γkp|u|q ñ
+
+(7a)
+
+i“1,2
+
+n
+
+divpρkf qpx, uq
+
+:“
+
+ÿ
+
+Bpρk fj Bxj
+
+q
+
+px,
+
+uq
+
+ě
+
+qk pxq
+
+(7b)
+
+j“1
+
+Deﬁnition 5. [1] The origin is called almost ISS for (2) if it is locally asymptotically stable and for some γ P K8
+
+lim sup |xpt, xp0q, uq| ď γp|u|8q
+tÑ8
+
+holds for every input u P L8locpRě0, Rmq and for almost every initial condition xp0q P Rn.
+Theorem 6. Under Assumptions 1, 2, and 3 system (2) is almost input-to-state stable.
+
+III. ILLUSTRATIVE EXAMPLE
+Let n P N Y t8u be a constant value. Deﬁne the value a “ p4π2n ` 3π2q{2 and the functions g : R Ñ R as
+n
+ÿ gprq “ tanhp2rq ` signprq
+i“1
+¨ p1 ` signprq tanhp2pr ´ signprq2π2iqqq,
+
+for every |r| ď a and gprq “ signprqpp2n ` 1q ` pr ´ signprqaq2q,
+
+for every |r| ą a, and h : R Ñ R as
+
+hprq
+
+“
+
+sin2
+
+´
+
+r 2π
+
+¯
+
+`
+
+n
+ÿ ptanhpr
+
+´
+
+2π2iq
+
+`
+
+1q
+
+sin2
+
+´r 2π
+
+¯
+
+.
+
+i“1
+
+Functions g and h are plotted in Figure 1.
+
+Elements of the vector ﬁeld
+
+800
+
+g(r)
+
+h(r)
+
+600
+
+Functions
+
+400
+
+200
+
+0
+
+0
+
+10
+
+20
+
+30
+
+40
+
+50
+
+r
+
+Figure 1. Plot of the functions g and h, for n “ 2, and on the interval r0, 1.1 ˆ 11π2{2s.
+
+Although the equation tanhprq ´ 1 “ 0 has no (ﬁnite) solution. For computer programs running with a minimum precision p for number representation there exist values r ą 0 such that, whenever the inequality | tanhprq ´ 1| ă p is true, this value is rounded to zero. This is denoted as roundptanhprq ´ 1q “ 0. The values where r satisﬁes the equation roundptanhprq´1q “ 0 are said to be regions where g is numerically constant.
+For each index i “ 1, 2, consider the system deﬁned by
+
+x9 i
+
+ˆ “ ´ 25 `
+
+|ui|8 a`1
+
+˙
+
+g
+
+pxiq
+
+`
+
+25hpx3´i
+
+q
+
+`
+
+ˆ
+
+|ui|8 a`1
+
+˙2
+
+.
+
+(9)
+
+Denote the vector ﬁeld describing the differential equation (9) by fi and let f “ pf1, f2qJ. This system is ISS, as shown below.
+
+3
+
+x2(t) x2(t)
+
+Letting either |ui|8 “ 0 or n “ 8, Equation (9) reduces to
+
+x9 i “ ´25gpxiq ` 25hpx3´iq.
+
+(10)
+
+For values of a that are big enough (even inﬁnite), due to numerical imprecision, the system resulting from the composition of (9) shows the presence of (possibliy inﬁnitely) pn`1q equilibrium points. These points are the maxima of the function h, namely, the points rk “ 2π2k ` π2, where k P Z.
+Figures 2 and 3 show a simulation of the system resulting interconnected system composed of (9) without inputs and with nonzero inputs, respectively.
+Note that the method presented in [5] can be employed to deduce the stability of the interconnected system, when the inputs are identically zero and n “ 0. However, when this is not the case, the method presented in this paper is needed.
+In the next paragraphs, the analysis is divided into two regions, according to whether the function g is numerically constant or not.
+
+Simulation with u = 0
+
+Simulation with u = 0 30 25 20 15 10 5 0
+
+0
+
+5 10 15 20 25 30
+
+x1(t)
+
+Figure 3. Simulation of the resulting interconnected system composed of (9) with |u1|8 “ 3 and |u2|8 “ 4. The small circles are initial conditions. The large black circumference is the set |px1, x2q| “ 5.
+
+30.5
+30
+29.5
+29
+28.5
+28 28 28.5 29 29.5 30 30.5 31 x1(t)
+Figure 2. Simulation of the resulting interconnected system composed of (10). The circles are initial conditions. The red one is the equilibrium, i.e., the point px1, x2q “ pr1, r1q.
+
+A. Proof that system (9) is ISS
+
+To see that system (9) is ISS, for each index i “ 1, 2, deﬁne for every xi P R, the function Vipxiq “ |xi|. The time derivative of this function along solutions to (9), for every
+
+px3´i, uiq P R ˆ R, the following inequality
+
+V9ipxiq ďsignpxiqx9 i
+
+ď ´ 25gpVipxiqq ` 25hpV3´ipx3´iqq
+
+`
+
+´
+
+|ui |8 a`1
+
+¯2
+
+.
+
+(11)
+
+From here, two cases are analyzed, according to n be ﬁnite or not.
+Let n be ﬁnite. Since the function |g| positive deﬁnite, there exist functions αi, αi,u P K such that, for every xi P R, the inequality
+
+V9ipxiq ď ´αipVipxiqq ` 25hpV3´ipx3´iqq ` αi,up|ui|q, (12)
+
+holds, for every pxi, x3´i, uiq P R ˆ R ˆ R. Thus, system (9) is ISS. Hence, Assumption 1 holds.
+
+B. Proof that it satisﬁes small-gain conditions in the region where g is not numerically constant
+
+Assume that n is ﬁnite. This implies that there exists n ` 2 regions where the function Rě0 Q r ÞÑ gprq is not numerically constant. These regions are intervals pM k, M kq of Rě0 where the function g is strictly numerically increasing, i.e., given
+two values r1, r2 P pM k, M kq with r1 ă r2, roundp|gpr1q ´ gpr2qq| ‰ 0 and gpr1q ă gpr2q. Consequently, g is invertible on these intervals.
+Fix δ P p0, 1q and let |ui|8 “ 0. Since id ă |g|, where id is the identity function, together with (11), the condition
+
+Vipxiq
+
+ě
+
+g´1
+
+ˆ
+
+hpV3´ipx3´iqq 1´δ
+
+˙
+
+“:
+
+γipV3´ipx3´iqq
+
+implies
+
+V9ipxiq ď ´δgpVipxiqq.
+
+Also, for every xi P pM k, M kq, the inequality
+
+γi ˝ γ3´ipVipxiqq ă Vipxiq
+
+When n is inﬁnite, the same analysis of item is employed. However, there are (countably many) intervals pM k, M kq. Thus, the small-gain condition holds, for the system resulting of the interconnection of (9) with |u|8 “ 0. Thus, Assumption 2 holds.
+
+C. Proof that it satisﬁes the dissipation inequality in the regions where g is numerically constant
+
+The regions where g is numerically constant correspond to
+
+the closed set
+
+ď Rz pM k, M kq.
+
+k
+
+For every xi in this set, roundp1 ´ tanhpxiqq “ 0. Since g is numerically constant, its derivative is zero. Consequently, the divergence of the vector ﬁeld describing the differential equation (9) is numerically constant and equals to zero, because it is the derivative of g.
+
+4
+
+Consider the function
+
+ρ : R ˆ R Ñ Rě0 px1, x2q ÞÑ e´px1`x2q.
+
+Since g is an odd function,
+
+divpρf qpxq
+
+:“
+
+Brρf1s Bx1
+
+pxq
+
+`
+
+Brρf2 Bx2
+
+s
+
+pxq
+
+“
+
+ρ1pxq
+
+¨ f pxq
+
+ˆ
+
+“ ´signpx1qρpx1, x2q
+
+´
+
+´ 25
+
+`
+
+|u1 |8 a`1
+
+¯
+
+signpx1q|gpx1q|
+
+`25hpx2q
+
+`
+
+´
+
+|u1 |8 a`1
+
+¯2
+
+˙
+
+ˆ
+
+´signpx2qρpx1, x2q
+
+´
+
+´ 25
+
+`
+
+|u2 |8 a`1
+
+¯
+
+signpx2q|gpx2q|
+
+`25hpx1q
+
+`
+
+´
+
+|u2 |8 a`1
+
+¯2
+
+˙ .
+
+Assuming n ﬁnite implies that, if 1) px1, x2q P R2ď0, then
+ˆ divpρf qpx1, x2q ě25ρpx1, x2q |gpx1q| ` |gpx2q|
+
+p0q “ ´50 and ρ1p0q ¨ f p0q “ 0. Consequently, divpρf qp0q “ ´50. From the continuity of the functions, there exists ε ą 0 such that, for every x1 and x2 P p´ε, εq, the inequality divpρf qpxq ď 0 holds. Using the same reasoning, and due to the “periodicity” of the vector ﬁeld f , the same conclusion can be obtained for every region where g is not numerically constant.
+IV. CONCLUSIONS AND DISCUSSION
+In this paper, the interconnection of two ISS system for which a single small-gain condition does not hold everywhere on the positive real semi-axis has been considered.
+Under the assumption that there are (inﬁnitely many) regions where the small-gain condition hold and, outside the union of these regions, the density propagation condition holds, the trajectories of solutions to the interconnected systems that do not converge to the origin have Lebesgue measure zero. An example illustrates the proposed approach.
+In a future work, the authors intend to generalize the methods for the interconnection of n ą 2 ISS systems.
+
+˙ ` hpx1q ` hpx2q
+
+REFERENCES [1] D. Angeli, “An Almost Global Notion of Input-to-State
+
+ą0
+
+Stability”, IEEE Trans. Autom. Control, vol. 49, no. 6,
+
+pp. 866–874, 2004.
+
+2) px1, x2q P R2ě0 and |u1|8 ¨ |u2|8 ‰ 0, then there exists [2] E. D. Sontag, “Smooth stabilization implies coprime
+
+ε ą 0 such that the inequality
+
+factorization”, IEEE Trans. Autom. Control, vol. 34, no.
+
+ˆ
+
+4, pp. 435–443, 1989.
+
+divpρf qpx1, x2q ě ρpx1, x2q p25 ` εq|gpx1q| ´ 25hpx1q [3] Z.-P. Jiang, I. M. Y. Mareels, and Y. Wang, “A Lyapunov
+
+´
+
+´
+
+|u1 |8 a`1
+
+¯2
+
+`
+
+p25
+
+`
+
+εq|gpx2q|
+
+´
+
+25hpx2q
+
+´
+
+´
+
+|u2 |8 a`1
+
+¯2
+
+˙
+
+formulation of the nonlinear small-gain theorem for interconnected ISS systems”, Automatica, vol. 32, no. 8, pp. 1211–1215, 1996.
+
+holds.
+
+[4] A. Rantzer, “A dual to Lyapunov’s stability theorem”,
+
+Since the function R Q xi ÞÑ mipxiq “ p25 ` εq|gpxiq| ´
+
+Syst. & Contr. Lett., vol. 42, pp. 161–168, 2001.
+
+25hpxiq is positive deﬁnite, for each index i “ 1, 2, there [5] H. Stein Shiromoto, V. Andrieu, and C. Prieur, “A
+
+exists a function γ´1 P K such that γ´1p¨q ď mip¨q.
+
+region-dependent gain condition for asymptotic stabil-
+
+Thus, for any δ P p0, 1q the condition
+
+ity”, Automatica, vol. 52, pp. 309–316, 2015.
+
+|xi|
+
+ě
+
+γ´1
+
+˜
+
+1
+
+1 ´
+
+δ
+
+ˆ
+
+|ui|8 ˙2¸ a`1
+
+,
+
+i
+
+“
+
+1,
+
+2
+
+[6] A. Isidori, Nonlinear Control Systems, ser. Communications and Control Engineering. Springer, 1995.
+
+implies
+
+divpρf qpx1, x2q ą 0.
+
+3) xi ă 0 and x3´i ą 0, then the situation is a combination of the two previous items.
+When n is inﬁnite or |u1|8 “ |u2|8 “ 0, the function divpρf q is positive almost for almost every xi in the region where g is numerically constant.
+Since the above inequalities are strict and hold in a closed set, there exist a suitable open set Dk and a function qk : Dk Ñ Rě0 satisfying Assumption 3.
+Therefore, from Theorem 6, system resulting from the interconnection of system (9) is almost input-to-state stable.
+Consider the region where g is not numerically constant. In this region, there exists a subset where divpρf q ď 0. To see this claim, without loss of generality let |u1|8 “ |u2|8 “ 0, and note that ρp0q div pf qp0q “ ´25g1p0q “ ´50 sech2
+

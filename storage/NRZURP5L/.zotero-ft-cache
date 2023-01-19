@@ -1,0 +1,767 @@
+Stable oscillation in spin torque oscillator excited by a small in-plane magnetic ﬁeld
+Tomohiro Taniguchi1, Takahiro Ito2, Yasuhiro Utsumi2, Sumito Tsunegi1, and Hitoshi Kubota1 1 National Institute of Advanced Industrial Science and Technology (AIST), Spintronics Research Center, Tsukuba 305-8568, Japan, 2Faculty of Engineering, Mie University, Tsu, Mi-e, 514-8507, Japan.
+(Dated: March 11, 2022)
+Theoretical conditions to excite self-oscillation in a spin torque oscillator consisting of a perpendicularly magnetized free layer and an in-plane magnetized pinned layer are investigated by analytically solving the Landau-Lifshitz-Gilbert equation. The analytical relation between the current and oscillation frequency is derived. It is found that a large amplitude oscillation can be excited by applying a small ﬁeld pointing to the direction anti-parallel to the magnetization of the pinned layer. The validity of the analytical results is conﬁrmed by comparing with numerical simulation, showing good agreement especially in a low current region.
+
+arXiv:1508.00601v1 [cond-mat.mes-hall] 3 Aug 2015
+
+I. INTRODUCTION
+High-frequency devices are in demand for practical applications such as communication devices, magnetic sensors, and measurement systems. Spin torque oscillator (STO) [1–12] is a promising candidate for such applications because high-frequency signal on the order of Gigahertz can be achieved through the giant magnetoresistance (GMR) or tunnel magnetoresistance (TMR) effect. A small size on the order of nano-meter, a wide frequency tunability over than one Gigahertz, and a narrow linewidth less than one Megahertz are also preferable features for device applications. In particular, an STO consisting of a perpendicularly magnetized free layer [13–15] and an in-plane magnetized pinned layer has attracted much attention recently [11] because the large relative angle of the magnetizations of the free and pinned layers results in a large emission power on the order of 1 µW [11]. Therefore, this type of STO is considered to be the model structure for practical applications.
+The self-oscillation of the magnetization in an STO is excited when several conditions, such as the direction and magnitude of an applied ﬁeld, are satisﬁed [16–24]. While general conditions to excite the self-oscillation had been formulated [16, 25, 26], the possibility to excite the self-oscillation has to be investigated for each problems by solving the Landau-Lifshitz-Gilbert (LLG) equation. The number of theoretical works studying the conditions of the self-oscillation is few because of the complexity arising from the nonlinearity of the LLG equation. For example, the oscillation properties of STO with the perpendicularly magnetized free layer and the in-plane magnetized pinned layer were theoretically studied only in the presence of a perpendicular ﬁeld [21], in which the axial symmetry of the system reduces the diﬃculty to solve the LLG equation. On the other hand, it is still unclear whether the self-oscillation can be excited when the ﬁeld direction is changed. It is practically important to investigate the possibility to excite self-oscillation in the presence of a ﬁeld in a diﬀerent direction due to the following reasons. For example in the sensor applications, an exter-
+
+nal magnetic ﬁeld to be detected points to an arbitrary direction. Thus, it is insuﬃcient to study the oscillation properties in the presence of a perpendicular ﬁeld only. Another reason relates to the low power consumption. Our previous work [21] showed that the zero-ﬁeld oscillation is impossible in this type of STO, and a relatively high ﬁeld is necessary to stabilize the self-oscillation by a perpendicular ﬁeld. Discovering a method to excite a stable oscillation by a small ﬁeld is therefore attractive from the viewpoint of reducing the power consumption of the STO. The change of the ﬁeld direction might open a new possibility to this problem.
+In this paper, we investigate the oscillation properties of the STO in the presence of an in-plane magnetic ﬁeld by solving the LLG equation analytically. We ﬁnd that an applied ﬁeld smaller than Eq. (16) pointing in the direction anti-parallel to the magnetization of the pinned layer enables to excite a stable self-oscillation. This is a preferable feature for practical applications, compared with the oscillation by a perpendicular ﬁeld in which relatively large ﬁeld is required to stabilize the oscillation [21]. The relation between the current density and the oscillation frequency is derived. The comparison with numerical simulation guarantees the validity of the theory in the low current region.
+The paper is organized as follows. In Sec. II, we derived the analytical formulas of the work done by spin torque and the dissipation due to damping, which are necessary to discuss the possibility to excite selfoscillation, by solving the LLG equation. Using these results, we discuss the theoretical conditions to excite the self-oscillation by an in-plane magnetic ﬁeld in Sec. III These analytical discussions are compared with the numerical simulation in Sec. IV Section V is devoted to the discussion. Section VI provides our conclusion.
+
+2
+
+m
+z
+
+Ht
+
+x
+
+p
+
+FIG. 1: Schematic views of STO under consideration. An applied magnetic ﬁeld points to the positive x-direction, whereas the magnetization of the pinned layer is parallel (p = +ex) or anti-parallel (p = −ex) to the applied ﬁeld.
+II. ANALYTICAL SOLUTION OF LLG EQUATION
+
+The system we consider is schematically shown in Fig. 1. The unit vectors pointing in the magnetization directions of the free and pinned layers are denoted as m and p. We assume that the applied magnetic ﬁeld points to the positive x-direction, whereas p is parallel or antiparallel to the ﬁeld. We use the macrospin model in this paper because its accuracy was conﬁrmed by recent experiment [11]. The LLG equation is given by
+
+dm dt
+
+=
+
+−γm
+
+×
+
+H
+
+−
+
+γHsm
+
+×
+
+(p
+
+×
+
+m)
+
++
+
+αm
+
+×
+
+dm dt
+
+,
+
+(1)
+
+where γ and α are the gyromagnetic ratio and the Gilbert damping constant, respectively. In the follow-
+ing, we neglect higher order terms of α by assuming that α ≪ 1, which was conﬁrmed experimentally [27–29]. The
+magnetic ﬁeld H consists of an eﬀective perpendicular anisotropy HKeﬀ and the in-plane magnetic ﬁeld Ht as
+
+H = Htex + HKeﬀ mzez.
+
+(2)
+
+The eﬀective anisotropy is deﬁned as HKeﬀ = HK − 4πM , where HK is a crystalline anisotropy while 4πM is a shape anisotropy. The magnitude of the applied ﬁeld is Ht(> 0). The magnetic ﬁeld is deﬁned as a gradient of energy density E as H = −∂E/∂(M m), where
+
+E
+
+=
+
+−M Htmx
+
+−
+
+M HKeﬀ 2
+
+m2z .
+
+(3)
+
+A spin torque strength Hs is given by [30, 31]
+
+Hs
+
+=
+
+2e(1
+
++
+
+ηj λm ·
+
+p)M d ,
+
+(4)
+
+where d is the thickness of the free layer. The spin polarization of the pinned layer is η. The parameter λ determines the dependence of the spin torque strength on the relative angle of the magnetizations, and is usually positive [30–32].
+
+The self-oscillation can be excited when the energy supplied by the spin torque balances the dissipation due to damping, and thereby, the magnetization precesses on a constant energy curve of E. This condition can be expressed as Ws + Wα = 0, where Ws(E) = γM dtHs[p · H − (m · p)(m · H)] and Wα(E) = −αγM dt[H2 − (m · H)2] are the work done by spin torque and the dissipation due to damping during a precession on the constant energy curve of E, respectively. This averaging technique over a constant energy curve was developed by several authors to investigate the magnetization switching rate in the thermally activated region and the oscillation properties in a ferromagnetic multilayer [16, 33–40]. In general, the magnetization dynamics in the macrospin model is described by two variables. The zenith and azimuth angles, or the three components in Cartesian coordinate with the constrain |m| = 1, are often used as the variables. Instead, energy E and an angle ψ can be chosen as the two variables, where ψ characterizes the angle of the magnetization on a constant energy curve of E [38]. The averaging technique over the constant energy curve integrates any quantity over 0 ≤ ψ ≤ 2π, and reduces the number of the variable to one, E. The reduction of the number of the variables makes it relatively easy to solve the LLG equation. However, there is still a technical diﬃculty to analytically investigate the possibility to excite self-oscillation arising from the calculations of Ws and Wα. To calculate these functions, the solution of the precession trajectory of the magnetization on a constant energy curve, which is described by dm/dt = −γm × H, should be derived. In the case of a perpendicular ﬁeld previously studied [21], such a trajectory is described by trigonometric functions, and the calculations of Ws and Wα become easy. On the other hand, in the case of an in-plane ﬁeld, the precession trajectory on the constant energy curve is described by elliptic functions. In this case, several mathematical formulas are necessary to derive the explicit forms of Ws and Wα. The details of the derivation of Ws and Wα in the present system are summarized in Appendix. Here, we show that the explicit forms of Ws and Wα are given by
+
+Ws(E) =
+
+ηj ed
+
+r1 HKeﬀ
+
+− r3 /(2Ht)
+
+Ns
+
+,
+
+(5)
+
+Wα(E)
+
+=
+
+−
+
+4αM 3
+
+r1 HKeﬀ
+
+− r3 /(2Ht)
+
+Hα.
+
+(6)
+
+The functions Ns and Hα are given by
+
+Ns = ∓
+
+(1 ± λ2(r1
+
+λr1) − r3)
+
+K(k)
+
+±
+
+1 λ
+
+E(k)
+
+−
+
+λ2
+
+1 + λ2 ± 2λr1 (r1 − r3)(1 ± λr3
+
+)
+
+Π(k,
+
+n)
+
+,
+
+(7)
+
+Hα =Ht
+
+1 − r12 r1 − r3
+
+K(k) +
+
+5E M
+
++
+
+3HKeﬀ
+
++
+
+2Ht2 HKeﬀ
+
+E(k), (8)
+
+3
+
+where rℓ (ℓ = 1, 2, 3) are given by Eqs. (A6), (A7), and (A8). The double sign in Eq. (7) means the upper when
+p is parallel to the applied ﬁeld (p = +ex) and the lower when p is anti-parallel to the applied ﬁeld (p = −ex). The ﬁrst, second, and third kind of complete elliptic integrals are denoted as K(k), E(k) and Π(k, n), respectively,
+where
+
+k=
+
+r2 r1
+
+− −
+
+r3 r3
+
+,
+
+(9)
+
+n
+
+=
+
+∓λ(r2 1±
+
+− r3 λr3
+
+)
+
+,
+
+(10)
+
+are the modulus and characteristic of the elliptic integral, respectively; see Appendix. Equation (5) is newly derived in this paper, while Eq. (6) was obtained in Ref. [24].
+Equations (5) and (6) are functions of the energy density. The range of the energy density is Emin < E < Esaddle, where Emin = −(M HK/2)[1 + (Ht/HK)2] and Esaddle = −M Ht are the minimum and saddle point energies, respectively. The minimum energy point and the saddle point locate at mmin =
+(Ht/HKeﬀ , 0, 1 − (Ht/HKeﬀ )2) and msaddle = (1, 0, 0).
+The precession period on the constant energy curve of E
+
+τ (E) = γ
+
+2K(k)
+
+HtHKeﬀ
+
+√ /2 r1
+
+−
+
+r3
+
+,
+
+(11)
+
+relates to the oscillation frequency f (E) via
+
+f (E)
+
+=
+
+τ
+
+1 (E)
+
+.
+
+(12)
+
+III. ANALYTICAL PREDICTION ON POSSIBILITY TO EXCITE SELF-OSCILLATION
+
+Let us discuss the possibility to excite the selfoscillation in this system. We denote the current density satisfying Ws(E) + Wα(E) = 0 as j(E),
+
+j(E)
+
+=
+
+4αeM 3η
+
+d
+
+Hα Ns
+
+.
+
+(13)
+
+The current j(E) in the limit of E → Emin is the critical current destabilizing the magnetization in equilibrium, which is obtained from the linearized LLG equation as
+
+jc
+
+=
+
+2αeM ηP
+
+d
+
+HKeﬀ
+
+1
+
+−
+
+1 2
+
+Ht HKeﬀ
+
+2
+
+,
+
+(14)
+
+where P is
+
+P=±
+
+1
+
+(Ht/HKeﬀ ) ± λ(Ht/HKeﬀ )
+
+±
+
+λ[1 − (Ht/HKeﬀ )2] 2[1 ± λ(Ht/HKeﬀ )]2
+
+. (15)
+
+(a)
+2.5 2.0
+
+j(E) (106 A/cm2)
+
+1.5
+
+1.0
+
+0.5 Ht=5, 50, 65 (Oe)
+
+00
+
+0.2 0.4 0.6 0.8 1.0
+
+energy
+
+j(E) (106 A/cm2)
+
+(b)
+50 40 30 20 10
+0
+-10 -20 -30 -40 -500
+
+Ht=5, 50, 65 (Oe)
+0.2 0.4 0.6 0.8 1.0
+energy
+
+FIG. 2: The dependence of j(E) on E for (a) p = +ex and (b) p = −ex. The values of the applied ﬁeld Ht are 5 (solid, red), 50 (dotted, green), and 65 (dashed, blue) Oe, respectively. The energy density in the horizontal axis E is normalized as (E − Emin)/(Esaddle − Emin) to make Emin = 0 and Esaddle = 1.
+
+The double sign in Eq. (15) means the upper for p =
+
++ex and lower for p = −ex. We note here for the later discussion that jc for p = −ex changes its sign when the applied ﬁeld magnitude Ht becomes
+
+√
+
+Ht = (1 −
+
+1 λ
+
+−
+
+λ2
+
+)
+
+HKeﬀ
+
+,
+
+(16)
+
+whereas jc for p = +ex does not. As discussed below, the oscillation properties of this type of STO is characterized solely by this critical current Ic. This is particularly diﬀerent from other type of STO consisting of an in-plane magnetized free layer, where two critical currents are necessary to distinguish the in-plane and outof-plane oscillations [23, 37, 39, 40]. The number of such critical currents, as well as their values, is determined by the symmetry of the magnetic anisotropy and angular dependence of the spin torque, and should be investigated for each system.
+Two conditions should be satisﬁed to excite selfoscillation on a constant energy curve of E [24]. The ﬁrst one is that j(E) is ﬁnite. More practically, j(E) should be experimentally available value, which is at maximum on the order of 107 − 108 A/cm2 in typical STOs [3–6, 9– 11]. The second is that j(E)/jc > 1. This condition
+
+4
+
+relates to the fact that a current larger than jc should be applied to excite any kind of magnetization dynamics because the magnetization initially stays at the minimum energy state. If this condition is not satisﬁed, the magnetization moves to the constant energy curve including Esaddle, and eventually stops its dynamics [24]. Let us study whether these conditions are satisﬁed for p = ±ex. The values of the parameters are taken from the experiments [11], where M = 1448 emu/c.c., HK = 18.6 kOe, d = 2 nm, η = 0.54, λ = η2, γ = 1.732 × 107 rad/(Oe·s), and α = 0.005. The value of H˜t is 61 Oe. The dependences of j(E) on E for p = +ex and p = −ex are shown in Figs. 2 (a) and (b), respectively. The values of Ht in Fig. 2 are chosen as 5, 50, and 65 Oe to show j(E) for
+both Ht < Ht and Ht > Ht. First, we discuss the possibility to excite self-oscillation
+when the magnetization of the pinned layer is parallel to the applied ﬁeld (p = +ex). The current j(E) shown in Fig. 2 (a) indicates that j(E)/jc < 1 for E > Emin, meaning that the second condition mentioned above is not satisﬁed. Therefore, a stable oscillation cannot be excited when p is parallel to the applied ﬁeld. This argument will be conﬁrmed in Fig. 3 (a) below.
+Next, we discuss the physical interpretation obtained from Fig. 2 (b), where the magnetization of the pinned layer is anti-parallel to the applied ﬁeld (p = −ex).
+When Ht < Ht(= 61 Oe), the condition j(E)/jc > 1 is satisﬁed for the region where E is less than a certain value, while |j(E)| diverges at this point. For example, j(E) in Fig. 2 (b) diverges at (E − Emin)/(Esaddle − Emin) ≃ 0.94 for Ht = 5 Oe and (E − Emin)/(Esaddle − Emin) ≃ 0.23 for Ht = 50 Oe, respectively. These results imply that the self-oscillation can be excited by applying an electric current larger than |jc|, in which the precession amplitude increases with the increase of the current, and ﬁnally, saturates to a value corresponding to the energy at the divergence. The oscillation frequency given by Eq. (12) also saturates to a ﬁnite value in the large current limit. Below, we show that this analytical prediction works well in the low current region, whereas a discrepancy between the analytical and numerical results appear in the large current region. This discrepancy is due to the breakdown of the assumption used in the averaged LLG equation. The divergence of j(E) at a certain E means that the net energy supplied by the spin torque during a precession, Ws, becomes zero when the magnetization arrives at this constant energy curve. Then, the spin torque cannot balance the dissipation due to damping even when a large current is applied, which means
+|j(E)| → ∞. When Ht > Ht, the condition j(E)/jc > 1 is not satisﬁed, and thus the self-oscillation cannot be excited.
+To summarize the above discussion, the self-oscillation can be excited when the magnetization of the pinned layer and the applied magnetic ﬁeld points to the opposite directions, and the ﬁeld magnitude is smaller than Eq. (16). When these conditions are satisﬁed, the analytical theory predicts that the oscillation frequency con-
+
+tinuously changes from f (Emin) by increasing the current density. Equations (12) and (13) give the relation between the current and oscillation frequency.
+IV. NUMERICAL SIMULATION
+We conﬁrm the validity of the above discussion by comparing with the numerical simulation. Figure 3 (a) shows an example of the time evolution of m when p = +ex obtained by numerically solving Eq. (1). The current density, 5.0 × 106 A/cm2, is larger than the critical current density, 2.2 × 106 A/cm2, estimated by Eq. (14). As shown, the magnetization ﬁnally stops at the ﬁlm-plane, and does not show self-oscillation. We conﬁrmed similar dynamics when p = −ex, Ht > Ht, and |j| > |jc|. These are consistent with the above discussions.
+On the other hand, a stable self-oscillation is excited when p = −ex and Ht(= 5 Oe) < Ht, as shown in Fig. 3 (b), where the current density is 5.0 × 106 A/cm2 while the critical current is 2.6×106 A/cm2. The dots in Fig. 3 (c) are the peak frequencies of the Fourier transformation of mx, which is measured in experiment [11]. The analytical estimation from Eqs. (12) and (13), shown by the solid line in Fig. 3 (c), works well in the relatively low current region, guaranteeing the validity of the theory. On the other hand, a discrepancy between the analytical and numerical results is found in the high current region due to the following reason. The theory assumes that the averaged work done by spin torque and dissipation due to damping during a precession are equal in the self-oscillation state. At each point on the constant energy curve however, the magnitudes of the spin torque and the damping torque are not equal because the spin torque and the damping torque have diﬀerent angular dependences. When the spin torque (current) magnitude or the damping constant is large, a shift from the constant energy curve becomes large, and thus the magnetization cannot return to the constant energy curve during a precession. Then, the assumption in the averaged LLG equation does not stand, and the analytical theory is no more applicable to reproduce the numerical results. In fact, when the current density is 10 × 106 A/cm2, the magnetization does not show self-oscillation. In stead, it moves to ex direction, and stops its dynamics because of the large spin torque strength. Therefore, the numerically obtained peak frequency in Fig. 3 (c) is zero.
+V. DISCUSSION
+The above analytical and numerical results show that a stable self-oscillation can be excited when a magnetic ﬁeld smaller than Eq. (16) is applied anti-parallel to the magnetization of the pinned layer. The oscillation frequency changes continuously by increasing the current magnitude. The analytical relation between the current and frequency, obtained from Eqs. (12) and (13), works
+
+5
+
+(a)
+1.0
+
+(b)
+1.0
+
+(c)1.5
+
+magnetization magnetization frequency (GHz)
+
+0
+-1.0 0
+
+0
+
+: mx
+: my : mz
+
+-1.0
+
+0.1
+
+0.2
+
+0.3
+
+0.4 0.5
+
+0
+
+time (μs)
+
+1.0
+1 mz
+
+0
+0.5
+
+mx
+
+my
+
+-1
+
+5 (ns)
+
+0
+
+jc
+
+0.1
+
+0.2
+
+0.3
+
+0.4 0.5
+
+0
+
+2
+
+4
+
+6
+
+8
+
+10
+
+time (μs)
+
+current density (106 A/cm2)
+
+FIG. 3: The time evolutions of m at j = 5.0 × 106 A/cm2 with Ht = 5 Oe for (a) p = +ex and (b) p = −ex. The inset
+in (b) is an enlarged view. (c) The dependence of the oscillation frequency for p = −ex on the current density. The dots are
+obtained by the numerical simulation, while the solid line is obtained from Eqs. (12) and (13). It should be noted that these equations provide the relation between f (E) and j(E) above jc, which is 2.6 × 106 A/cm2 for Ht = 5 Oe.
+
+well in the low current region. In a high current region, the magnetization eventually arrives at the ﬁlm-plane, and stops its dynamics. In this section, we compare these results with the previous works, and discuss the advantages to use the in-plane ﬁeld.
+Let us compare the present results with our previous work [21], where the oscillation properties in the presence of a perpendicular ﬁeld along the z-axis were studied. It was shown that, when the perpendicular ﬁeld is smaller than Hc = [3λ2/(2 − 3λ2)]HKeﬀ , the magnetization discontinuously moves from the perpendicular direction to a large cone angle by applying a current larger than the critical current. This discontinuous change of the cone angle signiﬁcantly reduces the range of oscillation frequency in the self-oscillation state, as conﬁrmed by experiment [41]. Thus, a ﬁeld larger than Hc should be applied to observe the oscillation in a wide range of the frequency [11, 21]. On the other hand, in the case of the in-plane ﬁeld studied here, the cone angle of the magnetization continuously changes with the increase of the current. Therefore, a wide range of the oscillation frequency can be used. Also, the self-oscillation can be
+excited by a small ﬁeld less than Ht in Eq. (16), which is preferable from the view point of a low-power consumption. Therefore, the use of an in-plane magnetic ﬁeld will be an important technical tool for piratical application.
+The system studied above looks similar to an STO with the ﬁeld-like torque [42–44], which was studied in Ref. [45], because both the ﬁeld-like torque and the torque due to the in-plane ﬁeld point to m × ex direction. However, there are important diﬀerences between these torques. The strength of the ﬁeld-like torque depends on the electric current, and thus, the spin torque and the ﬁeld-like torque cannot be manipulated independently. On the other hand, the magnitude of the in-plane ﬁeld can be controlled independently from the spin torque. The sign of the ﬁeld-like torque is determined by the material parameters and system size [42–44, 46–49], while the direction of the in-plane ﬁeld is controllable. Regarding these points, the in-plane ﬁeld is more convenient than the
+
+ﬁeld-like torque to control self-oscillation, although the use of the ﬁeld-like torque enables to excite self-oscillation without an external ﬁeld.
+Finally, we point out the importance of the parameter λ. The angular dependence of the spin torque, Eq. (7), characterized by λ, arises from the spin-dependent transport in a ferromagnetic multilayer. As can be seen from Eq. (7), the spin torque strength near the anti-parallel alignment of the magnetizations (m ≃ −p) is larger than that near the parallel alignment (m ≃ p). This is because, for example in a GMR system, the amount of the spin accumulation, which gives the spin torque on the magnetization, is large when the relative angle of the magnetizations is large. This parameter had been often neglected in previous works on, for example, an in-plane magnetized STO [23] because this angular dependence gives small corrections on the oscillation properties such as the critical current. However, the parameter λ plays the dominant role in STO in which the constant energy curve is symmetric with respect to an axis perpendicular to the pinned layer magnetization [22], as in the case of the present STO with a perpendicular ﬁeld [21]. Although the constant energy curve in the this paper is asymmetric due to the in-plane ﬁeld, this parameter still plays a key role to excite the oscillation. This is because the ﬁeld H˜t satisﬁes the following relation;
+
+lim H˜t = 0.
+
+(17)
+
+λ→0
+
+This indicates that the self-oscillation cannot be excited by an in-plane ﬁeld when λ = 0. In other words, a ﬁnite λ, which characterizes the asymmetry of the spin torque, is necessary to excite the self-oscillation. We notice that this conclusion is consistent with the previous study on an impossibility to excite self-oscillation by spin Hall effect [24], where the spin Hall system corresponds to the limit of λ → 0.
+
+6
+
+VI. CONCLUSION
+In summary, it was shown that a stable self-oscillation can be excited in an STO with a perpendicularly magnetized free layer and an in-plane magnetized pinned layer by applying a magnetic ﬁeld smaller than a critical value, Eq. (16), pointing in the direction anti-parallel to the magnetization in the pinned layer. This is a preferable feature compared with the self-oscillation by a perpendicular ﬁeld, in which relatively large ﬁeld is necessary to stabilize the self-oscillation. The analytical relation between the current and the oscillation frequency was derived by solving the LLG equation. The comparison with numerical simulation shows that the theory works well in a low current region.
+Acknowledgement
+The authors acknowledge Takehiko Yorozu for his great help on this work. The authors also express gratitude to Yoichi Shiota, Satoshi Iba, Hiroki Maehara, and Ai Emura for their kind encouragement. T. T. is supported by JSPS KAKENHI Grant-in-Aid for Young Scientists (B) 25790044. Y. U. acknowledges JSPS KAKENHI Grants No. 26400390 and No. 26220711.
+Appendix A: Derivation of Eqs. (5) and (6)
+The functions Ws(E) and Wα, generally deﬁned as
+Ws(E) = γM dtHs [p · H − (m · p) (m · H)] , (A1)
+
+Wα(E) = −αγM dt H2 − (m · H)2 ,
+
+(A2)
+
+are the work done by spin torque and the dissipation due to damping during a precession on a constant energy curve of E. The integral is over a precession period, given by Eq. (11), on the constant energy curve of E. Thus, the precession trajectory of the magnetization on the constant energy curve should be substituted into m in Eqs. (A1) and (A2). In the present system, such m is given by [24]
+
+mx(E) = r3 + (r2 − r3)sn2(u, k),
+
+(A3)
+
+my(E) = −(r2 − r3)sn(u, k)cn(u, k)
+
+(A4)
+
+mz(E) = 1 − r32 − (r22 − r32)sn2(u, k),
+
+(A5)
+
+where u = γ
+
+HtHKeﬀ
+
+√ /2 r1
+
+−
+
+r3t,
+
+and
+
+rℓ
+
+are
+
+given
+
+by
+
+r1(E)
+
+=
+
+−
+
+E M Ht
+
+,
+
+(A6)
+
+r2(E)
+
+=
+
+Ht HKeﬀ
+
++
+
+1+
+
+Ht HKeﬀ
+
+2
+
++
+
+2E M HKeﬀ
+
+,
+
+(A7)
+
+r3(E)
+
+=
+
+Ht HKeﬀ
+
+−
+
+1+
+
+Ht HKeﬀ
+
+2
+
++
+
+2E M HKeﬀ
+
+,
+
+(A8)
+
+The Jacobi elliptic functions, sn(u, k), cn(u, k), and
+dn(u, k) are useful to describe the precession trajectory. In the absence of the in-plane ﬁeld, Ht = 0, the sys-
+tem shows the axial symmetry along the z-axis. In this case, the modulus k becomes zero, and thus, the elliptic functions become trigonometric functions. Then, m in Eqs. (A3), (A4), and (A5) become mx = − sin θ cos ωt, my = − sin θ sin ωt, and mz = cos θ, where θ is a constant and ω = γHKeﬀ cos θ. This solution describes circular motion of the magnetization around the z-axis with the initial condition mx(0) = − sin θ.
+Substituting Eqs. (A3), (A4), and (A5) into Eqs. (A1)
+and (A2), we obtain Eqs. (5) and (6). The explicit form of the integral of Eq. (5) for p = +ex is given by
+
+Ws
+
+=
+
+γ ηj 2ed
+
+τ
+dt
+0
+
+Ht(1 − λr3) − HKeﬀ [r2 + r3 + λ(1 − r32)] λ2
+
+−
+
+Ht(r2
+
+−
+
+r3)
+
+− HKeﬀ (r22 λ
+
+−
+
+r32) sn2(u,
+
+k)
+
+−
+
+Ht(1 − λ2) − HKeﬀ [r2 + r3 + λ(1 + r2r3)] λ2[1 + λr3 + λ(r2 − r3)sn2(u, k)]
+
+,
+
+(A9)
+
+while that of Eq. (6) is shown in Ref. [24]. The explicit form of Ws for p = −ex is obtained by replacing λ with −λ and multiplying a minus sign in whole. Then, Eqs. (5) and (6) are derived by using the following integral formulas [50];
+
+u
+
+du′sn2(u′, k)
+
+=
+
+F[am(u,
+
+k),
+
+k]
+
+− k2
+
+E[am(u,
+
+k),
+
+k]
+
+,
+
+(A10)
+
+u
+
+du′sn4(u′,
+
+k)
+
+=
+
+sn(u,
+
+k)cn(u, k)dn(u, 3k2
+
+k)
+
++
+
+2 + k2 3k4
+
+F[am(u,
+
+k),
+
+k]
+
+−
+
+2(1 + k2 3k4
+
+)
+
+E[am(u,
+
+k),
+
+k],
+
+(A11)
+
+u
+
+b
+
++
+
+du′ asn2(u′, k)
+
+=
+
+1 b
+
+Π[am(u,
+
+k),
+
+k,
+
+−a/b],
+
+where
+
+ϕ
+F(ϕ, k) =
+
+dϕ′
+
+,
+
+0 1 − k2 sin2 ϕ′
+
+(A12) (A13)
+
+ϕ
+E(ϕ, k) = dϕ′ 1 − k2 sin2 ϕ′,
+0
+
+(A14)
+
+ϕ
+Π(ϕ, k, n) =
+
+dϕ′
+
+. (A15)
+
+0 (1 − n sin2 ϕ′) 1 − k2 sin2 ϕ′
+
+are the ﬁrst, second, and third kind of incomplete elliptic integrals, respectively. The Jacobi amplitude function is denoted as am(u, k). We note that F[am(u, k), k] = u,
+
+7
+E[am(K(k), k), k] = E(k), and Π[am(K(k), k), k, n] = Π(k, n), where the ﬁrst, second, and third kind of complete integrals are deﬁned as K(k) = F(π/2, k), E(k) = E(π/2, k), and Π(k, n) = Π(π/2, k, n), respectively.
+
+[1] J. C. Slonczewski, J. Magn. Magn. Mater. 159, L1 (1996).
+[2] L. Berger, Phys. Rev. B 54, 9353 (1996). [3] S. I. Kiselev, J. C. Sankey, I. N. Krivorotov, N. C. Em-
+ley, R. J. Schoelkopf, R. A. Buhrman, and D. C. Ralph, Nature 425, 380 (2003). [4] W. H. Rippard, M. R. Pufall, S. Kaka, S. E. Russek, and T. J. Silva, Phys. Rev. Lett. 92, 027201 (2004). [5] D. Houssameddine, U. Ebels, B. Dela¨et, B. Rodmacq, I. Firastrau, F. Ponthenier, M. Brunet, C. Thirion, J.-P. Michel, L. Prejbeanu-Buda, et al., Nat. Mater. 6, 447 (2007). [6] V. S. Pribiag, I. N. Krivorotov, G. D. Fuchs, P. M. Braganca, O. Ozatay, J. C. Sankey, D. C. Ralph, and R. A. Buhrman, Nat. Phys. 3, 498 (2007). [7] Q. Mistral, M. van Kampen, G. Hrkac, J.-V. Kim, T. Devolder, P. Crozat, C. Chappert, L. Lagae, and T. Schreﬂ, Phys. Rev. Lett. 100, 257201 (2008). [8] K. Kudo, T. Nagasawa, R. Sato, and K. Mizushima, Appl. Phys. Lett. 95, 022507 (2009). [9] A. Dussaux, B. Georges, J. Grollier, V. Cros, A. V. Khavalkovskiy, A. Fukushima, M. Konoto, H. Kubota, K. Yakushiji, S. Yuasa, et al., Nat. Commun. 1, 8 (2010). [10] Z. Zeng, P. K. Amiri, I. Krivorotov, H. Zhao, G. Finocchio, J.-P. Wang, J. A. Katine, Y. Huai, J. Langer, K. Galatsis, et al., ACS Nano 6, 6115 (2012). [11] H. Kubota, K. Yakushiji, A. Fukushima, S. Tamaru, M. Konoto, T. Nozaki, S. Ishibashi, T. Saruya, S. Yuasa, T. Taniguchi, et al., Appl. Phys. Express 6, 103003 (2013). [12] R. Lebrun, N. Locatelli, S. Tsunegi, J. Grollier, V. Cros, F. A. Araujo, H. Kubota, K. Yakushiji, A. Fukushima, and S. Yuasa, Phys. Rev. Applied 2, 061001 (2014). [13] S. Yakata, H. Kubota, Y. Suzuki, K. Yakushiji, A. Fukushima, S. Yuasa, and K. Ando, J. Appl. Phys. 105, 07D131 (2009). [14] S. Ikeda, K. Miura, H. Yamamoto, K. Mizunuma, H. D. Gan, M. Endo, S. Kanai, J. Hayakawa, F. Matsukura, and H. Ohno, Nat. Mater. 9, 721 (2010). [15] H. Kubota, S. Ishibashi, T. Saruya, T. Nozaki, A. Fukushima, K. Yakushiji, K. Ando, Y. Suzuki, and S. Yuasa, J. Appl. Phys. 111, 07C723 (2012). [16] G. Bertotti, I. Mayergoyz, and C. Serpico, Nonlinear magnetization Dynamics in Nanosystems (Elsevier, Oxford, 2009), chap. 9. [17] U. Ebels, D. Houssameddine, I. Firastrau, D. Gusakova, C. Thirion, B. Dieny, and L. D. Buda-Prejbeanu, Phys. Rev. B 78, 024436 (2008). [18] T. J. Silva and M. W. Keller, IEEE Trans. Magn. 46, 3555 (2010). [19] D. Gusakova, M. Quinsat, J. F. Sierra, U. Ebels, B. Dieny, and L. D. Buda-Prejbeanu, Appl. Phys. Lett. 99, 052501 (2011).
+
+[20] G. Khalsa, M. D. Stiles, and J. Grollier, Appl. Phys. Lett. 106, 242402 (2015).
+[21] T. Taniguchi, H. Arai, S. Tsunegi, S. Tamaru, H. Kubota, and H. Imamura, Appl. Phys. Express 6, 123003 (2013).
+[22] T. Taniguchi, Appl. Phys. Express 7, 053004 (2014). [23] D. Pinna, D. L. Stein, and A. D. Kent, Phys. Rev. B 90,
+174405 (2014). [24] T. Taniguchi, Phys. Rev. B 91, 104406 (2015). [25] A. Slavin and V. Tiberkevich, IEEE. Trans. Magn. 45,
+1875 (2009). [26] J.-V. Kim, Sol. Stat. Phys. 63, 217 (2012). [27] M. Oogane, T. Wakitani, S. Yakata, R. Yilgin, Y. Ando,
+A. Sakuma, and T. Miyazaki, Jpn. J. Appl. Phys. 45, 3889 (2006). [28] M. Konoto, H. Imamura, T. Taniguchi, K. Yakushiji, H. Kubota, A. Fukushima, K. Ando, and S. Yuasa, Appl. Phys. Express 6, 073002 (2013). [29] S. Iihama, S. Mizukami, H. Naganuma, M. Oogane, Y. Ando, and T. Miyazaki, Phys. Rev. B 89, 174416 (2014). [30] J. C. Slonczewski, Phys. Rev. B 39, 6995 (1989). [31] J. C. Slonczewski, Phys. Rev. B 71, 024411 (2005). [32] J. Xiao, A. Zhangwill, and M. D. Stiles, Phys. Rev. B 70, 172405 (2004). [33] G. Bertotti, I. D. Mayergoyz, and C. Serpico, J. Appl. Phys. 95, 6598 (2004). [34] G. Bertotti, I. D. Mayergoyz, and C. Serpico, J. Appl. Phys. 99, 08F301 (2006). [35] C. Serpico, M. d’Aquino, G. Bertotti, and I. D. Mayergoyz, J. Magn. Magn. Mater. 290, 502 (2005). [36] D. M. Apalkov and P. B. Visscher, Phys. Rev. B 72, 180405 (2005). [37] B. Hillebrands and A. Thiaville, eds., Spin Dynamics in Conﬁned Magnetic Structures III (Springer, Berlin, 2006). [38] M. Dykman, ed., Fluctuating Nonlinear Oscillators (Oxford University Press, Oxford, 2012), chap. 6. [39] K. A. Newhall and E. V. Eijnden, J. Appl. Phys. 113, 184105 (2013). [40] T. Taniguchi, Y. Utsumi, M. Marthaler, D. S. Golubev, and H. Imamura, Phys. Rev. B 87, 054406 (2013). [41] S. Tsunegi, T. Taniguchi, H. Kubota, H. Imamura, S. Tamaru, M. Konoto, K. Yakushiji, A. Fukushima, and S. Yuasa, Jpn. J. Appl. Phys. 53, 060307 (2014). [42] A. A. Tulapurkar, Y. Suzuki, A. Fukushima, H. Kubota, H. Maehara, K. Tsunekawa, D. D. Djayaprawira, N. Watanabe, and S. Yuasa, Nature 438, 339 (2005). [43] H. Kubota, A. Fukushima, K. Yakushiji, T. Nagahama, S. Yuasa, K. Ando, H. Maehara, Y. Nagamine, K. Tsunekawa, D. D. Djayaprawira, et al., Nat. Phys. 4, 37 (2008). [44] J. C. Sankey, Y.-T. Cui, J. Z. Sun, J. C. Slonczewski, R. A. Buhrman, and D. C. Ralph, Nat. Phys. 4, 67
+
+8
+
+(2008). [45] T. Taniguchi, S. Tsunegi, H. Kubota, and H. Imamura,
+Appl. Phys. Lett. 104, 152411 (2014). [46] S. Zhang, P. M. Levy, and A. Fert, Phys. Rev. Lett. 88,
+236601 (2002). [47] M. Zwierzycki, Y. Tserkovnyak, P. J. Kelly, A. Brataas,
+and G. E. W. Bauer, Phys. Rev. B 71, 064420 (2005).
+
+[48] I. Theodonis, N. Kioussis, A. Kalitsov, M. Chshiev, and W. H. Butler, Phys. Rev. Lett. 97, 237205 (2006).
+[49] J. Xiao and G. E. W. Bauer, Phys. Rev. B 77, 224419 (2008).
+[50] P. F. Byrd and M. D. Friedman, Handbook of Elliptic Integrals for Engineers and Scientists (Springer, 1971), 2nd ed.
+

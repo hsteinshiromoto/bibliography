@@ -1,0 +1,3133 @@
+Relaxed and Hybridized Backstepping
+Humberto Stein Shiromoto, Vincent Andrieu, Christophe Prieur
+To cite this version:
+Humberto Stein Shiromoto, Vincent Andrieu, Christophe Prieur. Relaxed and Hybridized Backstepping. IEEE Transactions on Automatic Control, 2013, 58 (12), pp.3236-3241. ￿10.1109/TAC.2013.2263613￿. ￿hal-00905460￿
+
+HAL Id: hal-00905460 https://hal.science/hal-00905460
+Submitted on 18 Nov 2013
+
+HAL is a multi-disciplinary open access archive for the deposit and dissemination of scientific research documents, whether they are published or not. The documents may come from teaching and research institutions in France or abroad, or from public or private research centers.
+
+L’archive ouverte pluridisciplinaire HAL, est destinée au dépôt et à la diffusion de documents scientifiques de niveau recherche, publiés ou non, émanant des établissements d’enseignement et de recherche français ou étrangers, des laboratoires publics ou privés.
+
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication.
+Limited circulation. For review only
+1
+
+Relaxed and hybridized backstepping
+Humberto Stein Shiromoto‡, Vincent Andrieu⇤, Christophe Prieur‡
+Abstract —In the present work, we consider nonlinear
+control systems for which there exist structural obstacles to the design of classical continuous backstepping feedback laws. We conceive feedback laws such that the origin of the closed-loop system is not globally asymptotically stable but a suitable attractor (strictly containing the origin) is practically asymptotically stable. A design method is suggested to build a hybrid feedback law combining a backstepping controller with a locally stabilizing controller. A constructive approach is also suggested employing a di↵erential inclusion representation of the nonlinear dynamics. The results are illustrated for a nonlinear system which, due to its structure, does not have a priori any globally stabilizing backstepping controller.
+
+controllers ([9] and [10]). In contrast to these works, for the class of systems considered in this paper,
+a priori no continuous globally stabilizing controller does exist. Note that we address a di↵erent problem than [11], where a synergistic Lyapunov function and a feedback law are designed by backstepping.
+In Section II, the stabilization problem under consideration is introduced, as well as the concepts on hybrid feedbacks and the set of assumptions. Based on this set of assumptions, a solution is given in Section III. In Section IV, su cient conditions are developped to verify the assumptions by using linear matrix inequalities. An illustration is given in Section V. Proofs of the results are presented in Section VI. Concluding remarks are given in Section VII.
+Notation. The boundary of a set S ⇢ Rn is denoted by
+¯ @S, its convex hull is denoted by co (S) and its closure by S.
+⇥ The identity matrix of order n is denoted In. The null m n
+matrix is denoted 0m⇥n. For two symmetric matrices, A and
+
+I. Introduction
+
+B, A > B (resp. A < B) means A B > 0 (resp. A B < 0).
+
+Over the years, research in control of nonlinear dynam- Given a continuously di↵erentiable function f : Rn 1⇥R ! Rn,
+
+ical systems has led to many di↵erent tools for the design of (globally) asymptotically stabilizing feedbacks. These techniques require particular structures on the systems. Depending on the assumptions, the designer may use di↵erent approaches such as high-gain [1], backstepping [2] or forwarding [3]. However, in the presence of unstructured dynamics, these classical design methods may fail.
+
+@xf (x¯, u¯) (resp. @uf (x¯, u¯)) stands for the partial derivative of
+
+f with respect to x (resp. to u) at (x¯, u¯) 2 Rn 1 ⇥ R. Let V :
+
+Rn 1 ! R be a continuously di↵erentiable function, Lf V (x¯, u¯)
+
+stands for the Lie derivative of V in the f -direction at (x¯, u¯) 2
+
+Rn
+
+1
+
+⇥ R,
+
+i.e.,
+
+Lf V (x¯, u¯)
+
+:=
+
+· @xV (x¯) f (x¯, u¯).
+
+Let
+
+c`
+
+2
+
+R>0
+
+be
+
+a
+
+constant,
+
+we
+
+denote
+
+sets
+
+⌦c` (V
+
+)
+
+=
+
+{x
+
+:
+
+V
+
+(x)
+
+<
+
+} c` .
+
+By
+
+rB1
+
+we denote an open ball with radius r and centered at x0 = 0.
+
+For systems where the classical backstepping technique
+
+can not be applied to render the origin globally asymp-
+
+totically stable, the approach presented in this work may
+
+solve the problem by utilizing a combination of a back-
+
+stepping feedback law that renders a suitable compact set
+
+globally attractive and a locally stabilizing controller. By
+
+assumption, this set is contained in the basin of attraction
+
+of the system in closed loop with the local controller. The
+
+main contribution of this work can be seen as a design of
+
+hybrid feedback laws for systems which
+
+do not
+
+a priori
+
+have a controller that globally stabilizes the origin. This
+
+methodology of hybrid stabilizers is by now well known [4]
+
+and it has been also applied for systems that do not satisfy
+
+the Brockett’s condition ([5] and [6]). Hybrid feedback
+
+laws can have the advantage of rendering the equilibrium
+
+of the closed-loop system robustly asymptotically stable
+
+with respect to measurement noise and actuators’ errors
+
+([7] and [8]). We also present a technique to design a
+
+continuous local controller satisfying constraints on the
+
+basin of attraction of the closed-loop system by using a
+
+di↵erential inclusion.
+
+To our best knowledge, this is the ﬁrst work suggesting
+
+a design method to adapt the backstepping technique to
+
+a given local controller in the context of hybrid feedback
+
+laws. Other works do exist in the context of continuous
+
+II. Problem statement
+
+A. Class of systems. In this work, we consider the class
+
+nonlinear systems deﬁned by
+
+⇢ x˙ 1 = f1(x1, x2) + h1(x1, x2, u) x˙ 2 = f2(x1, x2)u + h2(x1, x2, u),
+
+(1)
+
+where (x1, x2) 2 Rn 1 ⇥ R is the state and u 2 R is
+
+the input. Functions f1, f2, h1 and h2 are locally Lips-
+
+chitz continuous satisfying f1(0, 0) = 0, h1(0, 0, 0) = 0, h2(0, 0, 0) = 0 and, 8(x1, x2) 2 Rn 1 ⇥ R, f2(x1, x2) 6= 0. In a more compact notation, the vector (x1, x2) 2 Rn 1⇥R is denoted by x, the i-th component of x1 2 Rn 1 is
+
+denoted
+
+by
+
+x1,i
+
+and
+
+system
+
+(1)
+
+is
+
+denoted
+
+by
+
+x˙
+
+=
+
+f (x,
+h
+
+u).
+
+When h1(x1, x2, u) ⌘ 0 and h2(x1, x2, u) ⌘ 0, system (1)
+
+is denoted by x˙ = f (x, u).
+
+Consider system x˙ = f (x, u), assuming stabilizability
+
+of the x1-subsystem and applying backstepping, one may design a feedback law ' by solving an algebraic equation
+b
+in the input variable u. The solution of this algebraic equa-
+
+tion equation renders the origin globally asymptotically
+
+stable for x˙ = f (x, ' (x)) (e.g. [12]). However, because
+b
+functions h1 and h2 depend on u, the design of a feedback law for (1) leads to an implicit equation in this variable
+
+(see (21) below for an example). Thus, backstepping may
+
+be di cult (if not impossible) to apply for (1).
+
+This is the motivation to introduce the hybrid feedback
+
+The authors ‡ are with GIPSA-lab, Grenoble, France. Work partially supported by HYCON2 Network of Excellence HighlyComplex and Networked Control Systems, grant agreement 257462. The author ⇤ is with LAGEP, Lyon, France. E-mail: hum-
+berto.shiromoto@gmail.com
+
+law design problem ensuring global asymptotic stability of
+
+the origin for (1) in closed loop.
+
+In this section, we give a brief in-
+
+B. Preliminaries.
+
+troduction on
+
+K (see [7] for further
+
+hybrid feedback laws
+
+Preprint submitted to IEEE Transactions on Automatic Control. Received: May 13, 2013 12:56:21 PST
+
+Copyright (c) 2013 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication.
+Limited circulation. For review only
+2
+
+details). It consists of a ﬁnite discrete set Q, closed sets
+
+C , D ⇢ Rn such that, 8q 2 Q, C [ D = Rn, continuous
+
+qq
+
+qq
+
+functions ' : Rn ! R and outer semicontinuous set-
+
+q
+
+valued functions g : Rn ◆ Q. The system (1) in closed
+
+q
+
+loop with K leads to a system with mixed dynamics1
+
+⇢ x˙ = f (x, ' (x)), x 2 C ,
+
+h
+
+q
+
+q
+
+q+ 2 g (x),
+
+x2D ,
+
+(2)
+
+q
+
+q
+
+with state space given by Rn ⇥ Q.
+
+In this work, we consider the framework provided in
+
+[13]. A set S ⇢ R 0 ⇥ N is called a compact hybrid time domain ([13, Deﬁnition 2.3]) if S = [Jj=01([tj, tj+1], j) for some ﬁnite sequence of times 0 = t0  t1  · · ·  t .
+J
+It is a hybrid time domain if, 8(T, J) 2 S, S \ ([0, T ] ⇥
+
+{0, . . . , J}) is a compact hybrid time domain. A solution
+
+of (2) is a pair of functions (x, q) : S ⇥ S ! Rn ⇥ Q such
+
+that, during ﬂows, x evolves according to the di↵erential
+
+equation x˙ = f (x, ' (x)), while q remains constant, and
+
+h
+
+q
+
+the constraint x 2 C is satisﬁed. During jumps, q evolves
+
+q
+
+according to the di↵erence inclusion q+ 2 g (x), while x
+
+q
+
+remains constant, and before a jump the constraint x 2 D
+
+q
+
+is satisﬁed.
+
+Since, 8q 2 Q, each function ' is continuous and each
+q
+set-valued function g is outer semicontinuous and locally
+q
+bounded2, system (2) satisﬁes the basic assumptions of
+
+[14].3
+
+method. It also concerns the global stabilizability of the
+
+origin for
+
+x˙ 1 = f1(x1, x2),
+
+(6)
+
+when x2 is considered as an input.
+
+C1 Assumption 2: (Bounds) There exist a positive deﬁnite and proper function V1 : Rn 1 ! R 0, a C1 function 1 : Rn 1 ! R, a K1 and locally Lipschitz function ↵ : R 0 ! R 0 such that
+
+a)
+
+(Stabilizing
+
+feedback
+
+to
+
+(6) ):
+
+8x1
+
+2
+
+Rn
+
+1
+,
+
+Lf1 V1(x1, 1(x1))  ↵(V1(x1));
+
+In addition, there exist a continuous function : Rn ! R
+
+"<1 M
+
+and two positive constants,
+
+and , satisfying
+
+b) (Bound on h1): 8(x1, x2, u) 2 Rn 1 ⇥ R ⇥ R,
+
+||h1(x1, x2, u)||  (x1, x2) and Lh1 V1(x1, 1(x1), u) 
+
+(1
+
+")↵(V1
+
+(x1))
+
++
+
+"↵(M
+
+) ;
+
+c) (Bound on @x2 h1): 8(x1, x2, u) 2 Rn 1 ⇥ R ⇥ R,
+
+||@x2 h1(x1, x2, u)|| 
+
+(x1
+
+,
+
+x2
+
+) ;
+
+d) (Bound on h2): 8(x1, x2, u) 2 Rn 1 ⇥ R ⇥ R,
+
+||h2(x1, x2, u)||  (x1, x2).
+
+Before introducing the last assumption, let the set ⇢ A
+Rn be given by
+
+A = {(x1, x2) 2 Rn : V1(x1)  M, x2 = 1(x1)}. (7)
+
+Since function V1, given by Assumption 2, is proper, this set is compact. Moreover, we will prove in Proposition 1
+
+C. Assumptions
+
+Assumption 1: (Local hybrid controller)
+
+Let
+
+Qˆ
+
+⇢
+
+N
+
+be
+
+a
+
+ﬁnite
+
+discrete
+
+set,
+
+for
+
+each
+
+qˆ
+
+2
+
+Qˆ ,
+
+• the sets Cqˆ` ⇢ Rn and Dqˆ` ⇢ Rn are closed, and Cqˆ` [
+
+Dqˆ` = Rn; • '`qˆ : Rn
+
+!
+
+R
+
+is
+
+a
+
+continuous
+
+function
+
+and
+
+gq`ˆ
+
+:
+
+Rn
+
+◆
+
+Qˆ
+
+is an outer semicontinuous set-valued function;
+
+•
+
+V
+
+` ˆ
+
+:
+
+Rn
+
+!
+
+R
+
+0
+
+is
+
+a
+
+C1
+
+function
+
+satisfying,
+
+8x
+
+2
+
+q
+
+Rn,
+
+↵1(||x||)
+
+ Vqˆ`(x) c >0
+
+
+
+↵2(||x||),
+
+where
+
+↵1, ↵2 2 K1. 8qˆ 2 Qˆ
+
+Moreover, let ` be a constant, it also satisﬁes,
+
+,
+
+8x 2 (⌦c` (Vqˆ`) \ Cqˆ) \ {0}, Lfh Vqˆ`(x, '`qˆ(x)) < 0, (3)
+
+8x 2 (⌦c` (Vqˆ`) \ Dqˆ) \ {0},
+
+V
+
+` ˆ+
+
+(x)
+
+q
+
+Vqˆ`(x) < 0.
+
+(4)
+
+System (1) in closed loop with the local hybrid controller
+
+leads to the hybrid system
+
+⇢
+
+x˙
+
+=
+
+f (x,
+h
+
+'`qˆ(x)),
+
+x 2 Cqˆ`,
+
+qˆ+ 2 gq`ˆ(x),
+
+x 2 Dqˆ`.
+
+(5)
+
+Due to [14, Theorem 20], Assumption 1 implies that the
+
+set {0} ⇥ Qˆ (which will be called origin) is locally asymp-
+
+totically stable for (5). Whenever we are in a neighborhood
+
+of the origin, Equation (3) implies that the Lyapunov function Rn ⇥ Qˆ 3 (x, qˆ) 7! Vˆ(x) 2 R 0 is strictly
+q
+decreasing during a ﬂow. Equation (4) implies that, during
+
+a transition from a controller qˆ to a controller qˆ+, the value
+
+Vˆ(x)
+q
+
+strictly
+
+decreases
+
+to
+
+Vˆ+ (x).
+q
+
+The second assumption provides bounds for the terms
+
+that impeach the direct application of the backstepping
+
+that if Assumption 2 holds, then there exists a feedback
+
+law ' rendering globally practically stable for x˙ =
+
+g
+
+A
+
+f (x, ' (x)).
+
+h
+
+g
+
+Assumption 3: (Inclusion)
+
+For
+
+each
+
+qˆ
+
+2
+
+Qˆ ,
+
+each
+
+function
+
+Vqˆ`
+
+satisﬁes
+
+max
+2A
+
+Vqˆ`(x)
+
+<
+
+c.
+`
+
+x
+
+The ﬁrst and third assumptions together ensure that, for
+
+each qˆ 2 Qˆ, A is included in the basin of attraction of
+
+system (5). In the following section, it will be shown that
+
+the above assumptions are su cient to solve the problem
+
+under consideration.
+
+III. Results
+
+Before stating the ﬁrst result, we recall the concept
+
+of global practical asymptotical stability. A compact set
+
+S ⇢ Rn containing the origin is globally practically asymp-
+
+totically stabilizable for (1) if, 8a 2 R>0, there exists a
+
+controller
+
+'
+g
+
+such
+
+the
+
+set
+
+S + aB1
+
+contains
+
+a
+
+set
+
+that
+
+is
+
+globally asymptotically stable for x˙ = f (x, ' (x)) ([15]).
+
+h
+
+g
+
+Proposition 1: Under Assumption 2, A is globally (1)
+practically stabilizable for .
+The proof of Proposition 1 is provided in Section VI-A. We can now state the main result.
+
+Theorem 1: Under Assumptions 1, 2 and 3, there
+
+exists
+
+a
+
+continuous
+
+controller
+
+'
+g
+
+:
+
+Rn
+
+!
+
+R;
+
+a
+
+suitable
+
+c˜
+
+0 < c˜ < c
+
+choice
+
+of
+
+a
+
+constant
+
+value ` K
+
+satisfying Q
+
+:=
+
+`
+{1,
+
+2}
+
+`; ⇥
+
+a Qˆ
+
+hybrid state feedback law deﬁned by
+
+and,
+
+8qˆ
+
+2
+
+Qˆ ,
+
+subsets
+
+of
+
+Rn
+
+1Continuous and discrete dynamics.
+
+C1,qˆ
+
+=
+
+⌦c` (Vˆ`)
+q
+
+\
+
+Cqˆ`,
+
+C2,qˆ = Rn \ ⌦c˜` (Vˆ`),
+q
+
+2Because Qˆ is ﬁnite. 3The interested reader might also consult [7] and [13] for the su cient conditions for the existence of solutions and stability (of
+
+D2 ˆ
+,q
+
+=
+
+⌦c˜`
+
+(V
+
+` ˆ
+
+),
+
+(8)
+
+q
+
+the origin or subsets of Rn) concepts.
+
+Preprint submitted to IEEE Transactions on Automatic ControDl.1R,qˆe=ce(iv⌦ecd` (:VMqˆ`a) y\1D3qˆ`,)2[01(3Rn12\:⌦56c`:2(V1qˆ`P))ST
+
+Copyright (c) 2013 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication.
+Limited circulation. For review only
+3
+
+and functions
+
+'1,qˆ : C1,qˆ x
+
+!R 7! '`ˆ(x)
+q
+g2,qˆ : D2,qˆ
+x
+
+'2,qˆ : C2,qˆ ! x 7!
+◆Q 7! {(1, qˆ)}
+
+R ' (x)
+g
+
+g1 ˆ : D1 ˆ ◆ Q
+
+,q
+
+,q
+
+8
+> <
+
+{(1, g`ˆ(x))},
+q
+
+x
+
+2
+
+(⌦c`
+
+(V ˆ`
+q
+
+)
+
+\
+
+D ˆ` )
+q
+
+x 7!
+
+{(2, qˆ)},
+
+x
+
+2
+
+(Rn
+
+\
+
+⌦c`
+
+(V ˆ`
+q
+
+))
+
+> :
+
+{(1, gq`ˆ(x)), (2, qˆ)},
+
+x 2 (@⌦c` (Vqˆ`) \ Dqˆ`)
+
+(9)
+
+such that the origin is globally asymptotically stable for
+
+(1)
+
+K
+
+system in closed loop with .
+
+Theorem 1 is more than an existence result since its
+
+proof allows one to design a hybrid feedback law that glob-
+
+ally stabilizes the origin. The complete proof of Theorem
+
+1 is presented in Section VI-B.
+
+c+
+ij
+
+=
+
+max
+x2Vµ ,|u|µu
+
+@xj
+
+f˜
+h,i
+
+(x,
+
+u)
+
+or
+
+c
+ij
+
+=
+
+min
+x2Vµ ,|u|µu
+
+@xj
+
+f˜
+h,i
+
+(x,
+
+u).
+
+(13)
+
+For each m 2 M := {m 2 N : 1  m  2n}, let D 2
+m
+Rn⇥1 be a vector with components given by either
+
+d+ = max @ f˜ (x, u) or
+
+i
+
+x2Vµ,|u|µu u h,i
+
+d = min @ f˜ (x, u).
+
+(14)
+
+i
+
+x2Vµ,|u|µu u h,i
+
+For each i 2 I := {i 2 N : 1  i  n}, the mean value
+
+theorem ensures, for all x 2 and |u|  µ , the existence
+
+of points x and u satisfyingVfµ˜
+
+(x, u)
+
+=
+
+u
+@
+
+f˜
+
+(x, u)x +
+
+@ f˜
+
+h,i
+
+x h,i
+
+i
+
+(x, u)u. This implies that, for all x 2 , |u|  µ ,
+
+u h,i
+
+Vµ
+
+u
+
+l 2 L and m 2 M , (1) may be over-approximated by
+
+x˙ 2 {(F + C )x + (G + D )u}.
+
+(15)
+
+co
+
+l
+
+m
+
+Remark 2: This linear di↵erential inclusion allows us to
+
+Remark 1: These results are useful for systems that do
+
+(12)
+
+go further than the linearization because we take into
+
+not satisfy the Brockett necessary condition for the exisaccount the gradient of the nonlinear terms. The precision
+
+tence of a continuous stabilizing controller and for which of this over-approximation method depends basically on two
+
+there exists a locally stabilizing hybrid feedback law (see e.g.
+[14, Example 38] and [16]). The problems concerning the design of a feedback law
+by backstepping to (1) that renders globally practically A
+stable and blends di↵erent feedback laws according to each basin of attraction is solved. In the next section,
+
+aspects: the size of the neighborhood Vµf˜considered and the rate of change of the nonlinear terms h.
+Let us consider the canonical basis in Rn, i.e., the set of vectors {es}ns=1, where the components are all 0 except the s-th one which is equals to 1.
+
+under Assumption 2, a local continuous feedback law satisfying Assumptions 1 and 3 is designed using an overapproximation of (1).
+
+IV. A method to design a local stabilizing
+
+controller Based on the approach presented on [17], we formulate
+
+the nonlinear dynamics of (1) in terms of a Linear Di↵erential Inclusion. Let Qˆ be a singleton, we start by deﬁning
+
+a neighborhood of the origin such that: a) there exist
+
+Vµ
+
+a continuous feedback law '`ˆ and a Lyapunov function
+
+q
+
+V ˆ`
+q
+
+satisfying,
+
+8x
+
+2
+
+Vµ
+
+\ {0},
+
+Lfh
+
+V ˆ`
+q
+
+(x,
+
+'`ˆ(x))
+q
+
+<
+
+0;
+
+b)
+
+it
+
+strictly contains an estimation of the basin of attraction
+
+of
+
+x˙
+
+=
+
+f (x,
+h
+
+'`qˆ(x))
+
+and
+
+a
+
+convex
+
+set
+
+containing
+
+. A
+
+These
+
+two set inclusions follow from two over-approximations of
+
+. A
+
+Under Assumption 2, there exist4 a ﬁnite set P ⇢ N of
+
+indexes and {xp}p2P vectors of Rn such that
+
+A
+
+⇢
+
+co
+
+({x
+p
+
+}p2P
+
+).
+
+(10)
+
+Let
+
+µ
+u
+
+>
+
+0
+
+be
+
+a
+
+constant
+
+and
+
+µ
+
+=
+
+[µ1,
+
+µ2, .
+
+.
+
+.,
+
+µ]
+n
+
+2
+
+Rn
+
+be a vector of positive values such that co ({xp}p2P) ⇢
+
+= {x : |x |  µ , i = 1, 2, . . . , n}.
+
+Vµ
+
+i
+
+i
+
+Consider the function
+
+f˜ (x, u) = f (x, u) F x Gu,
+
+(11)
+
+h
+
+h
+
+where F and G are the linearization of (1) around the
+
+origin:
+
+x˙ = F x + Gu := @ f (0)x + @ f (0)u. (12)
+
+xh
+
+uh
+
+Since f is C1, f˜ is also C1. In the following, an elemen-
+
+h
+
+h
+
+twise over-approximation is made of the matrices in (12).
+
+For each l 2 L := {l 2 N : 1  l  2n2 }, let C 2 Rn⇥n
+
+l
+
+be a matrix with components given by either
+
+4Because A is a compact set.
+
+Proposition 2: Assume that there exist a symmetric
+
+positive deﬁnite matrix W 2 Rn⇥n and a matrix H 2 Rn⇥1
+
+satisfying, for all l 2 L and m 2 M ,
+
+W (F + C )T + H(G + D )T + (F + C )W
+
+l
+
+m
+
+l
+
+(16)
+
++(G + D )HT < 0,
+
+m
+
+µ2W W e
+
+s
+
+s
+
+⇤
+
+1
+
+0, s = 1, 2, . . . , n,
+
+(17)
+
+1 xT
+p
+⇤W
+
+0, p 2 P,
+
+(18)
+
+and
+
+µ2 W H
+u
+⇤1
+
+0.
+
+(19)
+
+Then,
+
+Qˆ by letting
+
+=
+
+{1} ,
+
+V1`(x)
+
+=
+
+xT P x ,
+
+where
+
+P
+
+=
+
+W
+
+1
+,
+
+c
+`
+
+=
+
+1,
+
+C1`
+
+=
+
+⌦1(V1`),
+
+D1`
+
+=
+
+Rn
+
+\
+
+C1`,
+
+g1` (x)
+
+⌘
+
+1
+
+and
+
+'`1(x)
+
+=
+
+Kx ,
+
+where
+
+K
+
+=
+
+HT P ,
+
+Assumptions
+
+1
+
+and
+
+3
+
+hold.
+
+The proof of Proposition 2 is provided in Section VI-C.
+
+V. Illustration
+
+Let us consider a class of systems given by
+
+⇢ x˙ 1 = x1 + x2 + ✓[x21 + (1 + x1) sin(u)] x˙ 2 = u,
+
+(20)
+
+where ✓ 2 R 0 is a constant. We will show in the following
+>
+that, due to the presence of the term ✓(1 + x1) sin(u)
+
+in the time-derivative of x1, it is not possible to apply
+
+the backstepping technique to design a feedback law. Let
+
+f1(x1, x2) = x1 + x2 + ✓x21, f2(x1, x2) ⌘ 1, h1(x1, x2, u) = ✓(1 + x1) sin(u) and h2(x1, x2, u) ⌘ 0. Before applying
+
+Proposition 1 and Theorem 1, we check their assumptions.
+
+A. Checking assumptions for (20)
+It is possible to check that item a) 1) Assumption 2: holds with V1(x1) = x21/2, 1(x1) = (1 + K1)x1 ✓x21,
+
+Preprint submitted to IEEE Transactions on Automatic Control. Received: May 13, 2013 12:56:21 PST
+
+Copyright (c) 2013 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication.
+Limited circulation. For review only
+4
+
+2
+
+1.5
+
+and ↵(s) = 2K1s, where K1 2 R>0 is constant. Items b)d) hold with (x1, x2) = ✓(1 + |x1|), "  1 3✓/(2K1)
+
+1
+
+and5 M ✓/(4K1").
+
+0.5
+
+x2 x2
+
+Since Assumption 2a) holds, we could try to apply 0
+the backstepping technique directly in (20). Following
+
+this procedure, we intend to use V (x1, x2) = V1(x1) +
+
+-0.5
+
+(x2 1(x1))2/2 as a control Lyapunov function for (20).
+
+-1
+
+Taking its Lie derivative, algebraic computations yield,
+
+8(x1, x2, u) 2 Rn 1 ⇥ R ⇥ R,
+
+Lfh V (x1, x2, u)  K1x21 + x1✓(1 + x1) · sin(u) +(x2 1(x1))(u + x1/2 + (1 + K1 + 2✓K1x1)
+
+(21)
+
+·(x1 + x2 + ✓[x21 + (1 + x1) · sin(u)])).
+
+In order to have a term proportional to (x2 1(x1))2
+
+in the right-hand side of (21), we should solve an im-
+
+plicit equation in the variable u deﬁned as E(x1, x2, u) =
+K1x21 + L(x2 1(x1))2, where E is the right-hand side of (21) and L > 0 is a constant. Since this seems to
+
+be di cult (if not impossible), it motivates the design a
+
+hybrid feedback by applying Theorem 1.
+
+2) Assumptions 1 and 3: From the previouspdeﬁnitions
+
+of V1 and 1, we get A = {(x1, x2) : |x1| < 2M , x2 =
+
+(1 + K1)x1 ✓x21}.
+
+Let us ﬁrst establish sets P and {xp}p2P such that (10)
+
+holds.
+
+Deﬁne
+
+constantps a+
+
+=
+
+max|x1
+
+p |2 <M
+
+(1 + K1)
+
+2✓x1 =
+
+(1 + K1) + 2✓
+
+2M and pa
+
+=
+
+min|x1
+
+p |< 2M
+
+(1 +
+
+K1) 2✓x1 = (1 + K1) 2✓ 2M by computing the
+
+derivatives of 1 and let P = {1, 2, 3, 4}. From the mean
+
+value theorem we have, 8x 2 , a A
+
+· x1  x2  a+ · x1.
+
+This implies thpat A ✓ co (({ 2M } [({
+
+⇥p{x+2 ,<0, 2M } ⇥
+
+x2 ,<0}) {x+2 ,>0,x2
+
+,>0
+
+})),
+
+(22)
+
+where
+
+x+2 ,>0 =
+
+x2
+
+0 ,>
+
+=
+
+p a+p2M , a 2M ,
+
+x+2 ,<0
+
+x2
+
+0 ,<
+
+= =
+
+p a+p2M , a 2M .
+
+(23)
+
+Figure 1 shows this inclusion.
+
+-1.5
+
+-2
+
+-1
+
+-0.5
+
+0
+
+0.5
+
+1
+
+x1
+
+FIGURE
+
+2:
+
+The
+
+sets
+
+Vµ
+
+(in
+
+red),
+
+@⌦1
+
+T
+(x
+
+P
+
+x)
+
+(in
+
+blue),
+
+and
+
+the
+
+inclusion (22) (in red) at the center. Initial conditions are points
+
+given in a ball of radius 0.5 and centered at the origin.
+
+A necessary condition for feasibility of the Linear Matrix
+
+Inequalites of Prpoposition 2 is A ⇢ Vpµ. This follows from the inequalities 2M < µ1 and |a± 2M | < µ2. These
+
+inequalities imply that K1 must satisfy
+
+⇣⌘
+
+✓ 2
+
+1
+2
+
++3
+
+µ1
+
+<
+
+K1
+
+<
+
+µ2 µ1
+
+2✓µ1
+
+1.
+
+(24)
+
+Remark 3: Equation (24) imposes a limitation on the
+speed of response, since K1 is lower and upper bounded. Let ✓ = 0.1, applying the technique presented in Section
+
+IV we deﬁne µ = [1, 2], Vµ = {(x1, x2) : |x1| < 1, |x2| < 2} and |u| < 2⇡. Moreover, letting K1 = 0.5 we get that (24) holds. From Assumption 2 and with this choice for K1, we let M = 0.0714, and " = 0.7.
+
+The matrices F and G deﬁned in (12) are given by
+
+F
+
+=
+
+1 0
+
+1 0
+
+and
+
+G
+
+=
+
+0.1 1
+
+while the matrices {Cl}2l=1 and
+
+{D
+m
+
+}2 =1
+m
+
+trices that
+
+have elements deﬁned by (13) are not null are given by C1
+
+and (14). The ma-
+
+=
+
+0.3 0
+
+0 0
+
+, C2 =
+
+ 0.3 0
+
+0 0
+
+, D1
+
+=
+
+0.1 1
+
+,
+
+and D2
+
+=
+
+
+
+0.3 1
+
+.
+
+Apply-
+
+ing Proposition 2 and using SeDuMi 1.3, we get P =
+
+16.1210 7.8345
+
+7.8345 4.9138
+
+and K = ⇥ 11.2361
+
+6.6087⇤.
+
+Figure 2 shows some solutions of system (20) in closed
+
+0.5 0.4
+
+loop
+
+with
+
+the
+
+feedback
+
+law
+
+'
+`
+
+,
+
+the
+
+inclusions
+
+A
+
+⇢
+
+⌦1(V1`)
+
+0.3
+
+and
+
+⌦1(V1`)
+
+⇢
+
+. Vµ
+
+From
+
+Proposition
+
+2,
+
+Assumptions
+
+1
+
+and
+
+0.2
+
+3 hold with c = 1.
+
+`
+
+0.1
+
+B. Construction of the hybrid feedback law
+
+0
+
+Since Assumption 2 holds, we get from the proof of
+
+-0.1 -0.2 -0.3 -0.4 -0.5
+
+-0.3 -0.2 -0.1
+
+0
+
+0.1
+
+0.2
+
+0.3
+
+x1
+
+FIGURE 1: The sets A (in red) and the convex set deﬁned in
+
+(22) (in blue) are presented in solid line. The circles are the
+
+vertexes of this set. The dashed straight lines which bound A
+
+are
+
+given
+
+by
+
+functions
+
+x1
+
+7!
+
++
+a x1
+
+and
+
+x1
+
+7!
+
+a
+
+x1.
+
+Proposition
+
+1
+
+that
+
+the
+
+feedback
+
+law
+
+given
+
+by
+
+'
+g
+
+(x1,
+
+x2)
+
+=
+
+(1 + K1 + 2✓x1)(x1 + ✓x21 + x2) x1/(2KV )
+
+(x1 1(x1))[c + c (x1, x2)2/4]/K , where (x1, x2) =
+V
+
+|x1|✓(1 + |x1|) + K ✓(1 + |x1|)(1 + |1 + K1 + 2✓x1|),
+V
+
+a = 0.01, c = 10 and K = 1.6286 ⇥ 103, the set
+
+V
+
+A + aB1 contains a set that is globally asymptotically
+
+stable for x˙ = f (x, ' (x)). Now applying Theorem 1, we
+
+h
+
+g
+
+may design a hybrid feedback law K. Let c˜ = 0.75 the
+
+`
+
+hybrid controller K deﬁned by (8)-(9) in Theorem 1 is
+
+such that the origin is globally asymptotically stable for
+
+(20) in closed loop.
+
+5With "  1 3✓/(2K1) and the condition " > 0, we get the lower
+
+Consider a simulation with initial condition (x1, x2, q) =
+
+bound
+
+for
+
+K1
+
+>
+
+3✓ 2
+
+.
+
+(2, 0, 1). Figure 3 shows the time evolution of the x1,
+
+Preprint submitted to IEEE Transactions on Automatic Control. Received: May 13, 2013 12:56:21 PST
+
+Copyright (c) 2013 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication.
+Limited circulation. For review only
+5
+
+2
+
+x1
+
+1
+
+x2
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+time
+
+0
+
+-1
+
+-2
+
+-3
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+time
+
+2
+
+q
+
+1.5
+
+1
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+time
+
+FIGURE 3
+
+x2 and q components6 of the solution of (20) in closed
+
+loop with K. Firstly, (20) is in closed loop with ' (for
+g
+t 2 [0, 3.9]), then (20) is in closed loop with ' , and the
+`
+solution converges to the origin.
+
+VI. Proofs
+
+A. Proof of Proposition 1
+
+In order to prove Proposition 1, the following lemma is
+
+required:
+
+a0
+
+K
+
+Lemma 3: There exist positive constants and V
+
+and a function
+
+V : Rn 1 ⇥ R ! R
+
+(25)
+
+(x1, x2) 7! V1(x1) + K (x2 '1(x1))2
+
+V
+
+⌦ 0 (V )
+
+such that the set a satisﬁes the inclusion
+
+⌦ 0 (V
+a
+
+)
+
+⇢
+
+A
+
++
+
+aB1.
+
+(26)
+
+Consider the sequence of functions
+
+Proof:
+
+V
+k
+
+(x1
+
+,
+
+x2
+
+)
+
+=
+
+V1(x1) + k(x1
+
+'1(x1))2 and of values
+
+a0 = 1/k. To prove this lemma by contradiction, assume
+
+k
+that, 8k > 0, inclusion (26) does not hold. In this case,
+
+r1(x1, x2, u) r1(x1, 1(x1), u) = (x2
+
+1(x1)) ·
+
+R1
+0
+
+@x2
+
+r1
+
+(x1
+
+,
+
+⌘x1
+
+,x2
+
+(s),
+
+u)
+
+ds.
+
+Hence,
+
+Equation
+
+(28)
+
+becomes @x1 V1(x1
+
+Lr1 )(x2
+
+V1
+
+(x1, x2, 1(x1))
+
+u)
+
+·
+
+R1
+0
+
+ @x2
+
+"[↵(M ) r1(x1, ⌘x1
+
+,x2
+
+↵(V1(x1))] (s), u) ds.
+
++
+
+Let ˜ be the feedback law deﬁned, 8(x1, x2, u¯) 2 Rn 1 ⇥
+
+R ⇥ R, by
+
+˜(x1, x2, u¯) =
+
+h
+
+1
+
+¯
+
+u
+
+f2(x1,x2) KV
+
++ Lf1
+
+1(x1, x2)
+
+1 KV
+
+@x1 V1(x1)
+
+·
+
+R1
+0
+
+@x2 f1(x1,
+
+⌘x1,x2 (s))
+
+i ds
+
+,
+
+(29)
+
+where K is given by Lemma 3. Letting u = ˜(x1, x2, u¯),
+
+V
+Equation (25)
+
+implies
+
+that
+
+Lfh V (x1, x2, ˜(x1, x2, u¯))
+
+
+
+"[↵(M )
+
+↵(V1(x1))] + (x2
+
+1(x1))[u¯ +
+
+⌥(x1, x2, ˜(x1, x2, u¯))], with ⌥(x1, x2, ˜(x1, x2, u¯)) =
+
+@x1 V1(x1)
+
+K
+V
+
+h2
+
+(x1
+
+,
+
+· x2,
+
+˜(Rx011,@xx22,hu¯1)()x1
+
+, ⌘x1,x2 (s), ˜(x1, x2, u¯))
+
+K
+V
+
+Lh1
+
+1(x1, x2, ˜(x1,
+
+ds x2
+
+,
+
++ u¯)).
+
+From Items b)-d) of Assumption 2, ⌥ satisﬁes
+
+|⌥(x1, x2, ˜(x1, x2, u¯))|  (x1, x2), where
+
+(x1,
+
+x2)
+
+=
+
+||@x1 V1(x1)||
+
+R1
+0
+
+(x1, ⌘x1,x2 (s)) ds
+
+(30)
+
++K
+V
+
+(x1, x2)(1 + ||@x1 1(x1)||).
+
+From Cauchy-Schwartz inequality we get, for each
+
+positive constant c and 8(x1, x2, u¯) 2 Rn 1 ⇥ R ⇥ R,
+
+(x2
+
+1(x1))⌥(x1, x2, u¯)
+
+
+
+1
+
++
+
+c 4
+
+(x2
+
+1(x1))2 (x1, x2)2.
+
+Taking
+
+c
+
+u¯ = u˜ := (x2
+
+1(x1))
+
+⇥c
+
++
+
+c 4
+
+(x1, x2)2⇤
+
+(31)
+
+it yields, for all (x1, x2) 2 Rn 1 ⇥ R and c 1,
+
+Lfh V (x1, x2, ˜(x1, x2))  "[↵(M ) ↵(V1(x1))] + 1 c(x2 1(x1))2,
+
+(32)
+
+c
+
+where, in order to simplify the presentation, we denoted ˜(x1, x2, u˜) by ˜(x1, x2).
+
+for each k > 0, there exists a sequence (x1 , x2 ) such
+
+,k ,k
+
+that
+
+Vk(x1,k, x2,k)
+
+
+
+a0
+k
+
+and
+
+(x1,k, x2,k)
+
+2/
+
+A
+
++
+
+aB1.
+
+Note
+
+that, we have
+
+⇢
+
+V1(x1 ) < M + 1 < 2M
+
+,k
+
+(x2,k
+
+'1 (x1,k ))2
+
+<
+
+M
+
++
+
+k1
+2
+
+< 2M.
+
+(27)
+
+The
+
+function
+
+V1,
+
+being
+
+k
+proper,
+
+k
+yields
+
+the
+
+sequence
+
+(x1,k, x2,k)k2N belongs to a compact subset. Hence, we
+
+can extract a converging subsequence (x1 , x2 ) with
+
+,l ,l
+
+lim !1
+l
+
+(x1,l,
+
+x2,l)
+
+=
+
+(x⇤1,
+
+x⇤2).
+
+We
+
+have,
+
+with
+
+(27),
+
+V1 (x⇤1 )
+
+
+
+M and x⇤2
+
+'1 (x⇤1 )
+
+=
+
+0.
+
+Hence
+
+(x⇤1, x⇤2)
+
+2
+
+. A
+
+This
+
+con-
+
+tradicts
+
+the
+
+fact
+
+that
+
+(x1 ,
+,l
+
+x2 )
+,l
+
+2/
+
+A
+
++
+
+aB1.
+
+Consequently,
+
+9a0 and K such that (26) holds.
+
+V
+
+We are now able to prove Proposition 1.
+
+Proof: Let a 2 R>0 be a constant. We will show that
+
+there
+
+exists
+
+a
+
+continuous
+
+controller
+
+'
+g
+
+rendering
+
+A + aB1
+
+globally asymptotically stable for x˙ = f (x, ' (x)).
+
+h
+
+g
+
+Deﬁne r1(x1, x2, u) := f1(x1, x2) + h1(x1, x2, u). From
+
+items a) and b) of Assumption 2 we get, 8(x1, x2, u) 2
+
+Rn 1 ⇥ R ⇥ R,
+
+Lr1 V1(x1, x2, u)  "[↵(M ) ↵(V1(x1))]
+
+(28)
+
++Lr1 V1(x1, x2, u) Lr1 V1(x1, 1(x1), u).
+
+Deﬁning, 8s 2 [0, 1], ⌘x1,x2 (s) = sx2 +
+
+(1
+
+s) 1(x1),
+
+we
+
+have
+
+@
+s
+
+r1
+
+(x1
+
+,
+
+⌘x1
+
+,x2
+
+(s),
+
+u)
+
+=
+
+@x2 r1(x1, ⌘x1,x2 (s), u)(x2
+
+1(x1)). This implies that
+
+6Regarding q, here it is shown only its ﬁrst component, because the second one does not change.
+
+Since V1 is proper, the set (x1, x2) 2 Rn 1 ⇥ Rn : "↵(V1(x1)) + (x2 "↵(M ) + 1}, is compact. Let
+
+A0
+
+=
+
+1(x1))2 
+
+⇣
+
+=
+
+max(x1,x2)2A 0 {V (x1, x2)}, for all c > 1 and
+
+(x1,
+
+x2)
+
+2
+
+Rn
+
+\
+
+⌦ (V
+⇣
+
+),
+
+we
+
+get
+
+Lfh V
+
+(x1,
+
+x2,
+
+(x1, x2)) < 0.
+
+In other words, ⌦ (V ) is globally asymptotically stable
+
+⇣
+
+for x˙ = f (x, (x)).
+
+h
+
+Let K > 0 be the Lipschitz constant of ↵ in
+
+↵
+
+the compact set [0, ⇣]. Hence, 8(x1, x2) 2 ⌦ (V ),
+
+⇣
+
+|↵(V1(x1))
+
+↵(V (x1, x2))|
+
+
+
+KV K↵ 2
+
+(x2
+
+1(x1))2.
+
+From (32) we get, for all c > 1 and (x1, x2) 2 ⌦ (V ),
+
+Lfh V (x1, x2, ˜(x1, x2))  "[↵(M )
+
+⇣
+↵(V (x1, x2))] + 1
+
+c
+
+"
+
+KV K↵ 2
+
+(x2
+
+1(x1))2.
+
+c
+
+Consider a0 given by Lemma 3 and let c =
+
+g
+
+n
+
+o
+
+max
+
+1 [ ( 0)
+
+(
+
+)]
+
+,
+
+"
+
+KV K↵ 2
+
+,
+
+1
+
+it gives, for all c >
+
+"↵ a ↵ M
+
+c
+g
+
+and (x1, x2)
+
+2
+
+⌦ (V ),
+⇣
+
+Lfh V (x1, x2, ˜(x1, x2))
+
+
+
+" [↵(a0) ↵(V (x1, x2 Rn \ ⌦ 0 (V ), we get
+a
+fore, the set ⌦ 0 (V )
+
+))] . Thus, with c > c ,
+
+Lfh V (x1, x2,
+
+˜(x1,
+
+x2
+
+g
+))
+
+is an attractor for x˙ =
+
+8(x1, x2) 2 < 0. Theref (x, ˜(x)).
+
+a
+
+h
+
+Together with (26), we conclude that A + aB1 contains
+
+⌦ 0 (V ) which is globally asymptotically stable with the
+
+a
+control ' (x) =
+
+˜(x) and c > c
+
+given by (29) and
+
+g
+
+g
+
+(31),
+
+that
+
+is
+
+' (x1, x2)
+g
+
+=
+
+KV
+
+1 f2 (x1 ,x2 )
+
+[K
+V
+
+Lf1
+
+1(x1, x2)
+
+@x1
+
+V1
+
+(x1
+
+)
+
+·
+
+R1
+0
+
+@x2
+
+f1
+
+(x1
+
+,
+
+⌘x1
+
+,x2
+
+(s))
+
+ds
+
+(x2
+
+1(x1)) · (c +
+
+c 4
+
+2(x1, x2))].This concludes the proof of Proposition 1.
+
+Preprint submitted to IEEE Transactions on Automatic Control. Received: May 13, 2013 12:56:21 PST
+
+Copyright (c) 2013 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+This article has been accepted for publication in a future issue of this journal, but has not been fully edited. Content may change prior to final publication.
+Limited circulation. For review only
+6
+
+B. Proof of Theorem 1
+
+Under Assumption 2, Proposition 1 can be Proof: applied. This allows one to consider a constant a and also
+
+choose two constant values7 0 < c˜ < c such that, for
+
+each qˆ 2 Qˆ,
+
+`
+
+`
+
+max
+x2A+aB1
+
+V
+
+` ˆ
+
+q
+
+(x)
+
+<
+
+c˜
+`
+
+.
+
+(33)
+
+Let us consider the controller ' given by the proof of
+
+g
+
+Proposition 1 and use it to design a hybrid feedback law
+
+K
+
+building
+
+an
+
+hysteresis
+
+of
+
+local
+
+controllers
+
+'`qˆ
+
+and
+
+'
+g
+
+on appropriate domains (see also [14, Page 51] or [4] for
+
+similar concepts applied to di↵erent control problems). Deﬁne Q = {1, 2} ⇥ Qˆ. Consider the subsets (8) and the
+
+functions deﬁned in (9). The state of system (1) in closed
+
+loop with K is (x, q) 2 Rn ⇥ Q.
+
+Assume that q = (2, qˆ).
+
+Case 1.
+
+i.
+
+If
+
+x
+
+2
+
+C2,qˆ.
+
+Then
+
+from
+
+(9),
+
+we
+
+have
+
+'2,qˆ(x)
+
+=
+
+' (x).
+g
+
+From Assumptions 2 and Proposition 1, is globally A
+
+practically asymptotically stable for x˙ = f (x, ' (x)) and
+
+h
+
+g
+
+A ⇢ D2,qˆ. Moreover, the solution will not jump until the
+
+x component enters in D2,qˆ;
+
+ii. If x 2 D2,qˆ. Then from (9), we have g2,qˆ(x) = {(1, qˆ)}
+
+and, after the jump, the local hybrid controller is selected.
+
+Since the value of x does not change during a jump and
+
+D2,qˆ ⇢ ⌦c` (Vqˆ`), it follows from Assumption 1, that the origin is locally asymptotically stable for (5).
+
+Assume that q = (1, qˆ). Case 2.
+i. If x 2 D1 ˆ. Then from (8) and (9), we have either
+,q
+i.a. q+ = (2, qˆ) and, after the jump, the global controller
+
+' is selected. Since before this jump, the x component
+
+g
+
+must be inside Rn \ x component does
+
+⌦c` (Vqˆ`), Rn \ ⌦c` (Vqˆ`) ⇢ change after the jump,
+
+C2 ˆ
+,q
+the
+
+and the solution
+
+follows the behavior prescribed by Case 1.i., after the
+
+jump; or i.b. q+ local controller is
+
+= (1, gq`ˆ(x)) and, after the jump, selected. Since before this jump, the
+
+a x
+
+component
+
+must
+
+be
+
+inside
+
+x
+
+2
+
+⌦c` (Vqˆ`)
+
+\
+
+D
+
+` ˆ
+
+q
+
+and
+
+the
+
+x
+
+component does change after the jump, it follows from
+
+Assumption 1 that the solution converges to the origin;
+
+ii.
+
+If
+
+x
+
+2
+
+C1 ˆ.
+,q
+
+Then
+
+from
+
+(9),
+
+we
+
+have
+
+'1 ˆ(x)
+,q
+
+=
+
+'`qˆ(x).
+
+From Assumption 1, the origin is locally asymptotically
+
+stable for (5). Thus, the origin is locally stable and globally
+
+attractive. This concludes the proof.
+
+C. Proof of Proposition 2
+
+Equation (16) may be rewritten in terms of a Proof: Linear Matrix Inequality in the matrix variables (2) and
+
+W given by W (F + C )T + H(G + D )T + (F + C )W +
+
+l
+
+m
+
+l
+
+(G + D )HT < 0. Multiplying this equation at left by
+
+m
+
+and right by a symmetric positive deﬁnite matrix P we
+
+get,
+
+8l
+
+2
+
+L
+
+,
+
+8m
+
+2
+
+M,
+
+and
+
+8x
+
+2
+
+, Vµ
+
+x
+
+6=
+
+0,
+
+xT
+
+(F
+
++
+
+C
+l
+
++
+
+(G + D )K)T P x + xT P (F + C + (G + D )K)x < 0.
+
+m
+
+l
+
+m
+
+Equation (17) is equivalent to µ2W W e eT W T > 0,
+
+s
+
+ss
+
+8s = 1, 2, . . . , n. For each s = 1, 2, . . . , n, this inequality
+
+implies
+
+that
+
+xT
+
+e eT
+ss
+
+x
+
+<
+
+µ2xT
+s
+
+P
+
+x
+
+
+
+µ2,
+s
+
+8x
+
+2
+
+⌦1(Vqˆ`).
+
+Since
+
+e
+s
+
+·
+
+x
+
+=
+
+x,
+s
+
+we
+
+get
+
+x2
+s
+
+<
+
+µ2,
+s
+
+8x
+
+2
+
+⌦1(Vqˆ`),
+
+s
+
+=
+
+1, 2, . . . , n.
+
+In
+
+other
+
+words,
+
+⌦1(Vqˆ`)
+
+⇢
+
+. Vµ
+
+Equation
+
+(18)
+
+implies
+
+that
+
+7Such
+
+values
+
+exist
+
+since
+
+Assumptions
+
+2
+
+and
+
+3
+
+hold,
+
+and
+
+since
+
+V
+
+` ˆ
+
+is a proper function.
+
+q
+
+xT P x 
+pp
+By Schur
+
+1, 8p 2 P and thus complement, (19) is
+
+co
+
+({x
+p
+
+}p2P
+
+)
+
+⇢
+
+⌦1(xT
+
+P
+
+x).
+
+equivalent to µ2 W HHT
+
+u
+
+0. This implies µ2 W T
+u
+xT KT Kx  µ2 xT P x 
+
+KT K. Then, 8x 2 µ2 . It concludes the
+
+⌦1(Vqˆ`), proof of
+
+u
+
+u
+
+Proposition 2.
+
+VII. Conclusion
+A design of hybrid feedback laws method has been presented in this paper to combine a backstepping controller with a local feedback law. This allows us to deﬁne a stabilizing control law for nonlinear control systems for which the backstepping design procedure can not be applied to globally stabilize the origin. We have also developed conditions to check the assumptions needed for the presented results. In a future work, the authors intend to use these techniques for other classes of nonlinear systems (e.g., cascade systems or in forwarding form).
+
+References
+[1] F. Grognard, R. Sepulchre, and G. Bastin, “Global stabilization of feedforward systems with exponentially unstable Jacobian linearization,” System & Control Letters, vol. 37, no. 2, pp. 107– 115, June 1999.
+[2] R. A. Freeman and P. V. Kokotovi´c, Robust Nonlinear Control Design: State-Space and Lyapunov Techniques. Boston: Birkh¨auser, 2008.
+[3] F. Mazenc and L. Praly, “Adding integrations, saturated controls, and stabilization for feedforward systems,” IEEE T. Automat. Contr., vol. 41, no. 11, pp. 1559–1578, 1996.
+[4] C. Prieur, “Uniting local and global controllers with robustness to vanishing noise,” Mathematics of Control, Signals, and Systems, vol. 14, pp. 143–172, 2001.
+[5] R. Goebel, C. Prieur, and A. R. Teel, “Smooth patchy control Lyapunov functions,” Automatica, vol. 45, no. 3, pp. 675–683, Jul. 2009.
+[6] J. Hespanha, D. Liberzon, and A. Morse, “Hysteresis-based switching algorithms for supervisory control of uncertain systems,” Automatica, vol. 39, no. 2, pp. 263–272, 2004.
+[7] C. Prieur, R. Goebel, and A. Teel, “Hybrid feedback control and robust stabilization of nonlinear systems,” IEEE T. Automat. Contr., vol. 52, no. 11, pp. 2103–2117, nov. 2007.
+[8] R. Goebel and A. R. Teel, “Solutions to hybrid inclusions via set and graphical convergence with stability theory applications,” Automatica, vol. 42, pp. 573–587, 2006.
+[9] V. Andrieu and C. Prieur, “Uniting two control Lyapunov functions for a ne systems,” IEEE T. Automat. Contr., vol. 55, no. 8, pp. 1923–1927, 2010.
+[10] Z. Pan, K. Ezal, A. Krener, and P. V. Kokotovic, “Backstepping design with local optimality matching,” IEEE T. Automat. Contr., vol. 46, no. 7, pp. 1014–1027, 2001.
+[11] C. G. Mayhew, R. G. Sanfelice, and A. R. Teel, “Further results on synergistic Lyapunov functions and hybrid feedback design through backstepping,” in Joint Conference on Decision and Control and European Control Conference (CDC-ECC), Orlando, Florida, December 2011, pp. 7428–7433.
+[12] M. Krsti´c, I. Kanellakopoulos, and P. V. Kokotovi´c, Nonlinear and Adaptive Control Design. New York: Wiley, 1995.
+[13] R. Goebel, R. Sanfelice, and A. Teel, Hybrid Dynamical Systems: Modeling, Stability, and Robustness. Princeton University Press, 2012.
+[14] ——, “Hybrid dynamical systems,” IEEE Contr. Syst. Mag., vol. 29, no. 2, pp. 28–93, April 2009.
+[15] A. R. Teel, J. Peuteman, and D. Aeyels, “Semi-global practical asymptotic stability and averaging,” Systems & Control Letters, vol. 37, pp. 329–334, 1999.
+[16] J. Hespanha and A. Morse, “Stabilization of nonholonomic integrators via logic-based switching,” Automatica, vol. 35, no. 3, pp. 385–393, 1999.
+[17] V. Andrieu and S. Tarbouriech, “Global asymptotic stabilization of some bilinear systems by hybrid state and output feedback,” IEEE T. Automat. Contr., to appear, 2012.
+
+Preprint submitted to IEEE Transactions on Automatic Control. Received: May 13, 2013 12:56:21 PST
+Copyright (c) 2013 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
