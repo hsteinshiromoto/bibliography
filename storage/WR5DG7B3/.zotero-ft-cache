@@ -1,0 +1,151 @@
+Springer Texts in Statistics
+Advisors: George Casella Stephen Fienberg Ingram Olkin
+Springer Science+Business Media, LLC
+
+Springer Texts in Statistics
+Alfred: Elements of Statistics for the Life and Social Sciences Berger: An Introduction to Probability and Stochastic Processes Bilodeau and Brenner: Theory of Multivariate Statistics Blom: Probability and Statistics: Theory and Applications Brockwell and Davis: An Introduction to Times Series and Forecasting Chow and Teicher: Probability Theory: Independence, Interchangeability,
+Martingales, Third Edition Christensen: Plane Answers to Complex Questions: The Theory of Linear
+Models, Second Edition Christensen: Linear Models for Multivariate, Time Series, and Spatial Data Christensen: Log-Linear Models and Logistic Regression, Second Edition Creighton: A First Course in Probability Models and Statistical Inference Dean and Voss: Design and Analysis of Experiments du Toit, Steyn, and Stumpf Graphical Exploratory Data Analysis Durrett: Essentials of Stochastic Processes Edwards: Introduction to Graphical Modelling Finkelstein and Levin: Statistics for Lawyers Flury: A First Course in Multivariate Statistics Jobson: Applied Multivariate Data Analysis, Volume 1: Regression and
+Experimental Design Jobson: Applied Multivariate Data Analysis, Volume II: Categorical and
+Multivariate Methods Kalbfleisch: Probability and Statistical Inference, Volume 1: Probability,
+Second Edition Kalbfleisch: Probability and Statistical Inference, Volume II: Statistical
+Inference, Second Edition Karr: Probability Keyfitz: Applied Mathematical Demography, Second Edition Kiefer: Introduction to Statistical Inference Kokoska and Nevison: Statistical Tables and Formulae Kulkarni: Modeling, Analysis, Design, and Control of Stochastic Systems Lehmann: Elements of Large-Sample Theory Lehmann: Testing Statistical Hypotheses, Second Edition Lehmann and Casella: Theory of Point Estimation, Second Edition Lindman: Analysis of Variance in Experimental Design Lindsey: Applying Generalized Linear Models Madansky: Prescriptions for Working Statisticians McPherson: Statistics in Scientific Investigation: Its Basis, Application, and
+Interpretation Mueller: Basic Principles of Structural Equation Modeling: An Introduction to
+LISREL and EQS
+(continued after index)
+
+Robert H. Shumway David S. Stoffer
+Time Series Analysis and Its Applications
+With 152 Figures
+'Springer
+
+Robert H. Shumway
+Division of Statistics University of Califomia, Davis Davis, CA 95616 USA
+Editorial Board
+George Casella Department of Biometrics ComeII University Ithaca, NY 14853-780 I USA
+
+David S. Stoffer Department of Statistics University of Pittsburgh Pittsburg, PA 15260 USA
+Stephen Fienberg Department of Statistics Camegie Mellon University Pinsburgh, PA 15213-3890 USA
+
+Ingram Olkin Department of Statistics Stanford University Stanford, CA 94305 USA
+
+Library of Congress Cataloging-in-Publication Data
+
+Shumway, Robert H.
+
+Time series analysis and its applications I Robert H. Shumway, David S. Stoffer.
+
+p. cm. - (Springer texts in statistics)
+
+Includes bibliographical references and index.
+
+ISBN 978-1-4757-3263-4
+
+ISBN 978-1-4757-3261-0 (eBook)
+
+DOI 10.1007/978-1-4757-3261-0
+
+I. Time-series analysis. I. Stoffer, David S. 11. Titie. III . Series.
+
+QA280.S585 2000
+
+519.5'5--<1c21
+
+99-046583
+
+Printed on acid-free paper.
+
+© 2000 Springer Science+Business Media New York Originally published by Springer-Verlag New York, Inc. in 2000 Softcover reprint of the hardcover Ist edition 2000
+All rights reserved. This work may not be translated or copied in whole or in part without the written permission of the publisher Springer Science+Business Media, LLC , except for brief excerpts in connection with reviews or scholarly analysis. Use in connection with any form of information storage and retrievaI, electronic adaptation, computer software, or by similar or dissimilar methodology now known or hereafter developed is forbidden . The use of general descriptive names, trade names, trademarks, etc., in this publication, even if the former are not especially identified, is not to be taken as a sign that such names, as understood by the Trade Marks and Merchandise Marks Act, may accordingly be used freely by anyone.
+Production coordinated by Robert Wexler and managed by MaryAnn Brickner; manufacturing supervised by Jacqui Ashri. Photocomposed copy prepared from the authors' LaTex files.
+
+9 8 7 6 5 432 I ISBN 978-1-4757-3263-4
+
+SPIN 10746200
+
+To my wife, Ruth, for her good-humored support and encouragement, and to my teacher, Solomon Kullback, for his guidance and enduring wisdom. R.H.S.
+To my family, Janice, Matthew and Lauren for laughing when I walked into walls, and to my parents, Benjamin and Rose for not laughing when I walked
+into walls. D.S.S.
+
+PREFACE
+The goals of this book are to develop an appreciation for the richness and versatility of modern time series analysis as a tool for analyzing data, and still maintain a commitment to theoretical integrity, as exemplified by the seminal works of Brillinger (1981) and Hannan (1970) and the texts by Brockwell and Davis (1991) and Fuller (1995). The advent of more powerful computing, especially in the last three years, has provided both real data and new software that can take one considerably beyond the fitting of·simple time domain models, such as have been elegantly described in the landmark work of Box and Jenkins (1970). The present book is designed to be useful as a text for courses in time series on several different levels and as a reference work for practitioners facing the analysis of time-correlated data in the physical, biological, and social sciences.
+We believe the book will be useful as a text at both the undergraduate and graduate levels. An undergraduate course can be accessible to students with a background in regression analysis and might include Sections 1.1-1.8, 2.1-2.9, and 3.1-3.8. Similar courses have been taught at the University of California (Berkeley and Davis) in the past using the earlier book on applied time series analysis by Shumway (1988). Such a course is taken by undergraduate students in mathematics, economics, and statistics and attracts graduate students from the agricultural, biological, and environmental sciences. At the masters' degree level, it can be useful to students in mathematics, environmental science, economics, statistics, and engineering by adding Sections 1.9, 2.10-2.14, 3.9, 3.10, and 4.1-4.5, to those proposed above. Finally, a two-semester upper-level graduate course for mathematics, statistics and engineering graduate students
+
+viii
+
+Preface
+
+can be crafted by adding selected theoretical sections from the last sections of Chapters 1, 2, and 3 for mathematics and statistics students and some advanced applications from Chapters 4 and 5. For the upper-level graduate course, we should mention that we are striving for a less rigorous level of coverage than that which is attained by Brockwell and Davis {1991), the classic entry at this level.
+A useful feature of the presentation is the inclusion of data illustrating the richness of potential applications to medicine and in the biological, physical, and social sciences. We include data analysis in both the text examples and in the problem sets. All data sets are posted on the World Wide Web at the following URLs: http: I /www. stat. ucdavis. edu;-shumway/tsa. html and http://www.stat.pitt.edu;-stoffer/tsa.html, making them easily accessible to students and general researchers. In addition, an exploratory data analysis program written by McQuarrie and Shumway (1994) can be downloaded (as Freeware) from these websites to provide easy access to all of the techniques required for courses through the masters' level.
+Advances in modern computing have made multivariate techniques in the time and frequency domain, anticipated by the theoretical developments in Brillinger (1981) and Hannan (1970), routinely accessible using higher level languages, such as MATLAB and S-PLUS. Extremely large data sets driven by periodic phenomena, such as the functional magnetic resonance imaging series or the earthquake and explosion data, can now be handled using extensions to time series of classical methods, like multivariate regression, analysis of variance, principal components, factor analysis, and discriminant or cluster analysis. Chapters 4 and 5 illustrate some of the immense potential that methods have for analyzing high-dimensional data sets.
+The many practical data sets are the results of collaborations with research workers in the medical, physical, and biological sciences. Some deserve special mention as a result of the pervasive use we have made of them in the text. The predominance of applications in seismology and geophysics is a result of joint work of the first author with Dr. Robert R. Blandford of the Center for Monitoring Research and Dr. Zoltan Der of Ensco, Inc. We have also made extensive use of the El Nifio and Recruitment series contributed by Dr. Roy Mendelssohn of the Pacific Fisheries Environmental Group of the National Marine Fisheries. In addition, Professor Nancy Day of the University of Pittsburgh provided the data used in Chapter 4 in a longitudinal analysis of the effects of prenatal smoking on growth, as well as some of the categorical sleep-state data posted on the World Wide Web. A large magnetic imaging data set that was developed during joint research on pain perception with Dr. Elizabeth Disbrow of the University of San Francisco Medical Center forms the basis for illustrating a number of multivariate techniques in Chapter 5. We are especially indebted to Professor Allan D.R. McQuarrie of North Dakota State University, who incorporated subroutines in Shumway (1988) into ASTSA for Windows.
+
+Preface
+
+ix
+
+Finally, we are grateful to John Kimmel, Executive Editor, Statistics, for his patience, enthusiasm, and encouragement in guiding the preparation and production of this book. Three anonymous reviewers made numerous helpful comments, and Dr. Rahman Azari and Dr. Mitchell Watnik of the University of California, Davis, Division of Statistics, read portions of the draft. Any remaining errors are solely our responsibility.
+Robert H. Shumway Davis, CA
+David S. Stoffer Pittsburgh, PA
+August, 1999
+
+Contents
+
+Preface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .v.ii . . . . . . . . .
+
+CHAPTER 1: Characteristics of Time Series
+
+1.1 Introduction ................... . ... . . .. ............... .... ... ... ... 1
+
+1.2 The Nature of Time Series Data............... . .................... 4
+
+1.3 Time Series Statistical Models. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+1.4 Measures of Dependence: Auto and Cross Correlation. . . . . . . . . .1.5 . .
+
+1.5 Stationary Time Series . . . . . . . . . . . . . . . . . . . . . . . . . . . . .19. . . . . . . .
+
+1.6 Estimation of Correlation . . . . . . . . . . . . . . . . . . . . . . . . . . 2.5. . . . . . . .
+
+1.7 Exploratory Data Analysis . . . . . . . . . . . . . . . . . . . . . . .
+
+. . . . 3. 1 . . . . . . .
+
+1.8 Classical Regression and Smoothing in the Time Series Context . . . 38
+
+1.9 Vector Valued and Multidimensional Series ............ . .. . ..... . .. 51
+
+Tl.lO Convergence Modes ... . ..... .. ... . . . ...... ... .... . ............... 56
+
+Tl.ll Central Limit Theorems ... . ... . .... .. .. .. ... .. .................. . 65
+
+Tl.l2 The Mean and Autocorrelation Functions . ..... . ...... . .. ....... .. 69
+
+Problems .. .... . ... . .. .. ... .. .. .. ........ . .. .. ........ . ..... .. ..... 78
+
+Chapter 2: Time Series Regression and ARIMA Models 2.1 Introduction .... . ...... .. . .... .. ....... .. ... . .. . . .. ........ .... ... 89 2.2 Autoregressive Moving Average Models . . . . . . . . . . . . . . . . . . 9.0. . . . . . . .
+
+xii
+
+Contents
+
+2.3 Homogeneous Difference Equations ....... . .. . .... ........... . ... . 102 2.4 Autocorrelation and Partial Autocorrelation Functions . . . . . . . .1.07. . 2.5 Forecasting ...... . .... . ....... . .......... . .. . .... . .. .. ....... .. .. 114 2.6 Estimation ........ . ....... . ... . ... . ................ . .... . ........ 125 2.7 Integrated Models for Nonstationary Data ............. . ... ... ... 142 2.8 Building ARIMA Models .... . .. . ... . ............... .... ... . .... . 144 2.9 Multiplicative Seasonal ARIMA Models .. . . ................... . . . 155 2.10 Long Memory ARMA and Fractional Differencing . ............... 166
+2.11 Threshold Models ............. .. ... . .. ... .. ... .. ....... ... . ... .. 171 2.12 Regression with Autocorrelated Errors ............. .. . ... . ....... 175 2.13 Lagged Regression: Transfer Function Modeling .. . .. ... ... . ..... 178 2.14 ARCH Models ......... .... .. ..... ... . ......... . .... . ... . ..... .. 184 T2.14 Hilbert Spaces and the Projection Theorem ...... . .. . . . . . ...... .. 190 T2.16 Causal Conditions for ARMA Models ............................ 195 T2.17 Large Sample Distribution of AR Estimators . . . . .. ... . ... . ... .... 197
+Problems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .20.1. . . . . . . .
+Chapter 3: Spectral Analysis and Filtering 3.1 Introduction .................. . .... . ... ................ .. .. ..... 213 3.2 Cyclical Behavior and Periodicity . . . . . . . . . . . . . . . . . . . . .21. 5. . . . . . . . 3.3 Power Spectrum and Cross Spectrum . . . . . . . . . . . . . . . . . . . 21. .8 . . . . . . . 3.4 Linear Filters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .2.2.7. . . . . . . . 3.5 Discrete Fourier Transform, Periodogram . . . . . . . . . . . . . . . . . .2.3.4. . . . 3.6 Nonparametric Spectral Estimation . . . . . . . . . . . . . . . . . . . .24.2. . . . . . . . 3. 7 Parametric Spectral Estimation . .... . ... ...... . ............. .. .. 251 3.8 Lagged Regression Models . . . . . . . . . . . . . . . . . . . . . . . . . .25. 8. . . . . . . . 3.9 Signal Extraction and Optimum Filtering . . . . . . . . . . . . . . . . . .2.63 . . . . . 3.10 Spectral Analysis of Multidimensional Series . ..... . .. . ..... . .... 268 T3.11 Spectral Representation Theorem . . .... . . . ............. ... .. ... . 270 T3.12 Large Sample Distribution of Discrete Fourier Transform .... ..... 275 T3.13 Complex Multivariate Normal Distribution . ..... . ............. .. . 284
+Problems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .2.8.9 . . . . . . .
+Chapter 4: State-Space and Multivariate ARMAX Models 4.1 Introduction .......................... .. ...... ........ . . ........ 301 4.2 Filtering, Smoothing, and Forecasting .. .... . .. ........ ... .. .. .... 312 4.3 Maximum Likelihood Estimation . . . . . . . . . . . . . . . . . . . . . 3.2.1. . . . . . . .
+
+Contents
+
+xiii
+
+4.4 Missing Data Modifications . . . . . . . . . . . . . . . . . . . . . . . . 3. .29. . . . . . . . 4.5 Structural Models: Signal Extraction and Forecasting . . . . . . . . .33.3. . 4.6 ARMAX Models in State-Space Form . . . . . . . . . . . . . . . . . . 3.3.6. . . . . . . 4. 7 Bootstrapping State-Space Models . . . . . . . . . . . . . . . . . . . . .33.9. . . . . . . . . 4.8 Dynamic Linear Models with Switching . . . . . . . . . . . . . . . . . 3. 4.5. . . . . . . 4.9 Nonlinear and Nonnormal State-Space Models Using
+Monte Carlo Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3. .5.8. . . . . . . . 4.10 Stochastic Volatility .. .. . .... . .. .. . .. .. .. . ... . . ... .. ....... .. ... 370 4.11 State-Space and ARMAX Models for
+Longitudinal Data Analysis . . . .. .. .. . .. .. ...... . ..... . . . .. . . . .. . 372 4.12 Further Aspects of Multivariate ARMA and ARMAX Models . . . 383
+Problems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 404. . . . . . . . . . .
+Chapter 5: Statistical Methods in the Frequency Domain 5.1 Introduction . . .. .. ....... . ......... . ... . ... . ......... . .... .. . .. .. 413 5.2 Spectral Matrices and Likelihood Functions . .... . . . . . . ... ..... .. . 417 5.3 Regression for Jointly Stationary Series . . . . . . . . . . . . . . . . . 4. .1.8. . . . . . 5.4 Regression with Deterministic Inputs . . ... ..... . . ...... . . . ... . . .. 427 5.5 Random Coefficient Regression . . .. .. . .. . ... . . . . .. . . ...... ... .. . .. 435 5.6 Analysis of Designed Experiments . . . .. .... . . . ............ . ....... 440 5. 7 Discrimination and Cluster Analysis . . . . . . . . . . . . . . . . . . . . 4. 50. . . . . . . . 5.8 Principal Components, Canonical, and Factor Analysis . ... . .. .. .. 465 5.9 The Spectral Envelope .... ... .. . ... . . . ... . ....... .. . . . .. . ... . . .. . 483 5.10 Dynamic Fourier Analysis and Wavelets .... . .... . ...... . .. . . . .. . 507
+Problems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .52.1. . . . . . . .
+References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5.2.9. . . . . . . .
+Index .. . ..... ........ ............. . .. . .. . . .. . . . . . .. . .. . . ... .. . ..... . . . . 543
+
